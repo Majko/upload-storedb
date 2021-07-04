@@ -1,0 +1,33 @@
+{
+  "auth": {
+    "uploadstoredb5ce5bad7": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "api": {
+    "uploadstoredb": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authuploadstoredb5ce5bad7"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
+  },
+  "storage": {
+    "testUploadStor": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

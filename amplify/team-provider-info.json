@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uploadstoredb-dev-172637-authRole",
+      "UnauthRoleArn": "arn:aws:iam::515270216214:role/amplify-uploadstoredb-dev-172637-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::515270216214:role/amplify-uploadstoredb-dev-172637-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-uploadstoredb-dev-172637-deployment",
+      "UnauthRoleName": "amplify-uploadstoredb-dev-172637-unauthRole",
+      "StackName": "amplify-uploadstoredb-dev-172637",
+      "StackId": "arn:aws:cloudformation:eu-central-1:515270216214:stack/amplify-uploadstoredb-dev-172637/c05a84a0-cc5b-11eb-86a4-0ac31c9bb5d8",
+      "AmplifyAppId": "d1xp0dooqurr4b"
+    },
+    "categories": {
+      "auth": {
+        "uploadstoredb5ce5bad7": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "uploadstoredb",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authuploadstoredb5ce5bad7",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
