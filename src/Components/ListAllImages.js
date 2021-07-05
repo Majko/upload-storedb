@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Storage, Auth } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import { listPictures } from "../graphql/queries";
 
 function ListAllImages(props) {
   const [images, setImages] = useState([]);
@@ -21,8 +23,20 @@ function ListAllImages(props) {
     // setImages(imageKeys);
   };
 
+  const readImages = async () => {
+    console.log("reading from db");
+    try {
+      const myimgs = await API.graphql(graphqlOperation(listPictures, {}));
+      setImages(myimgs.data.listPictures.items)
+      console.log(images);
+      return images
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    fetchFiles();
+    readImages()
   }, []);
 
   return (
@@ -33,7 +47,7 @@ function ListAllImages(props) {
           <img
             src={image}
             alt="myimage"
-            key={image}
+            key={image.id}
             style={{ width: 300, height: 300 }}
           />
         );
