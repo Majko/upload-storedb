@@ -1,11 +1,22 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { createPicture } from "../graphql/mutations";
 import { Storage } from "aws-amplify";
-import awsconfig from '../aws-exports'
+import awsconfig from "../aws-exports";
 
 function UploadImage(props) {
-  const userIdentity = props.userIdentity
-  // const sub = props.cognitoUser.attributes.sub
+  const userIdentity = props.userIdentity;
+  const userSession = props.userSession;
+  // get the tenant from the top of the cognito groups list
+  const cognitogroups = userSession.payload["cognito:groups"];
+  // const tenant = cognitogroups[0];
+  // each company is formed from "company:" + real_comapny_name, e.g "company:IBM"
+  const tenant =  cognitogroups.find(element => element.startsWith("company:"))
+  if (tenant === undefined) {
+    console.log('Tenant is undefined!!!');
+    return
+  }
+  console.log(tenant);
+
   console.log(props);
 
   const addImageToDB = async (image) => {
@@ -21,9 +32,8 @@ function UploadImage(props) {
   const onChange = async (e) => {
     let result = "";
     const file = e.target.files[0];
-    // const prefix = 'protected/';
     try {
-        result = await Storage.put( file.name, file, {
+      result = await Storage.put(file.name, file, {
         level: "protected",
         contentType: "image/png",
         // with `tagging` the parameters must be URL encoded
@@ -32,6 +42,7 @@ function UploadImage(props) {
       console.log(result);
 
       const image = {
+        tenant:tenant,
         file: {
           bucket: awsconfig.aws_user_files_s3_bucket,
           region: awsconfig.aws_user_files_s3_bucket_region,
