@@ -5,7 +5,10 @@ type S3Object {
   key: String!
 }
 
-type Picture @model @auth(rules:[{allow:owner},{allow: groups, groupsField: "tenant", operations: [read]}]) {
+type Picture @model @auth(rules:[
+{allow:owner},
+{allow: groups, groupsField: "tenant", operations: [read]}
+]) {
   id: ID!
   name: String
   owner: String
