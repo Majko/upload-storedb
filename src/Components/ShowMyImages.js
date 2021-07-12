@@ -9,13 +9,13 @@ function ShowMyImages(props) {
     let imageKeys = await Storage.list("");
     console.log(imageKeys);
 
-    // imageKeys = await Promise.all(
-    //   imageKeys.map(async (k) => {
-    //     const signedUrl = await Storage.get(k.key);
-    //     return signedUrl;
-    //   })
-    // );
-    // setImages(imageKeys);
+    imageKeys = await Promise.all(
+      imageKeys.map(async (k) => {
+        const signedUrl = await Storage.get(k.key);
+        return signedUrl;
+      })
+    );
+    setImages(imageKeys);
   };
 
   useEffect(() => {
