@@ -8,7 +8,6 @@ function UploadImage(props) {
   const userSession = props.userSession;
   // get the tenant from the top of the cognito groups list
   const cognitogroups = userSession.payload["cognito:groups"];
-  // const tenant = cognitogroups[0];
   // each company is formed from "company:" + real_comapny_name, e.g "company:IBM"
   const tenant =  cognitogroups.find(element => element.startsWith("company:"))
   if (tenant === undefined) {
