@@ -45,7 +45,7 @@ function App() {
       <header className="App-header">
         {/* render only if userIdentity & userSession not empty  */}
         {(userIdentity && userSession) ? <UploadImage userIdentity={userIdentity}  userSession={userSession}/> : <h3>Loading...</h3>}
-        {(userIdentity) ? <ListAllImages userIdentity={userIdentity} /> : <h3>Loading...</h3>}
+        {(userIdentity && userSession) ? <ListAllImages userIdentity={userIdentity} userSession={userSession}/> : <h3>Loading...</h3>}
         <ShowMyImages  />
       </header>
     </div>
