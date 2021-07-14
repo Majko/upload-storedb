@@ -7,7 +7,7 @@ function ShowMyImages(props) {
   const fetchFiles = async () => {
     Storage.configure({ level: "protected" });
     let imageKeys = await Storage.list("");
-    console.log(imageKeys);
+    // console.log(imageKeys);
 
     imageKeys = await Promise.all(
       imageKeys.map(async (k) => {

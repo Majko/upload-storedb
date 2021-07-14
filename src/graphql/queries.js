@@ -44,3 +44,34 @@ export const listPictures = /* GraphQL */ `
     }
   }
 `;
+export const getUserIdentity = /* GraphQL */ `
+  query GetUserIdentity($id: ID!) {
+    getUserIdentity(id: $id) {
+      id
+      owner
+      tenant
+      identityID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUserIdentitys = /* GraphQL */ `
+  query ListUserIdentitys(
+    $filter: ModelUserIdentityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserIdentitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        owner
+        tenant
+        identityID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

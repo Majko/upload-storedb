@@ -15,3 +15,13 @@ type Picture @model @auth(rules:[
   tenant: String
   file: S3Object
 }
+
+type UserIdentity @model @auth(rules:[
+{allow:owner},
+{allow: groups, groupsField: "tenant", operations: [read]}
+]) {
+  id: ID!
+  owner: String
+  tenant: String
+  identityID: String
+}

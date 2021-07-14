@@ -64,3 +64,48 @@ export const deletePicture = /* GraphQL */ `
     }
   }
 `;
+export const createUserIdentity = /* GraphQL */ `
+  mutation CreateUserIdentity(
+    $input: CreateUserIdentityInput!
+    $condition: ModelUserIdentityConditionInput
+  ) {
+    createUserIdentity(input: $input, condition: $condition) {
+      id
+      owner
+      tenant
+      identityID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUserIdentity = /* GraphQL */ `
+  mutation UpdateUserIdentity(
+    $input: UpdateUserIdentityInput!
+    $condition: ModelUserIdentityConditionInput
+  ) {
+    updateUserIdentity(input: $input, condition: $condition) {
+      id
+      owner
+      tenant
+      identityID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUserIdentity = /* GraphQL */ `
+  mutation DeleteUserIdentity(
+    $input: DeleteUserIdentityInput!
+    $condition: ModelUserIdentityConditionInput
+  ) {
+    deleteUserIdentity(input: $input, condition: $condition) {
+      id
+      owner
+      tenant
+      identityID
+      createdAt
+      updatedAt
+    }
+  }
+`;

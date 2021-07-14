@@ -55,3 +55,39 @@ export const onDeletePicture = /* GraphQL */ `
     }
   }
 `;
+export const onCreateUserIdentity = /* GraphQL */ `
+  subscription OnCreateUserIdentity($owner: String!) {
+    onCreateUserIdentity(owner: $owner) {
+      id
+      owner
+      tenant
+      identityID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUserIdentity = /* GraphQL */ `
+  subscription OnUpdateUserIdentity($owner: String!) {
+    onUpdateUserIdentity(owner: $owner) {
+      id
+      owner
+      tenant
+      identityID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUserIdentity = /* GraphQL */ `
+  subscription OnDeleteUserIdentity($owner: String!) {
+    onDeleteUserIdentity(owner: $owner) {
+      id
+      owner
+      tenant
+      identityID
+      createdAt
+      updatedAt
+    }
+  }
+`;
