@@ -43,6 +43,7 @@ function App() {
     <div className="App">
       <AmplifySignOut />
       <header className="App-header">
+        <h3>Logged in user: <b>{ (userIdentity) ? userIdentity.username : 'Loading...'}</b></h3>
         {/* render only if userIdentity & userSession not empty  */}
         {(userIdentity && userSession) ? <UploadImage userIdentity={userIdentity}  userSession={userSession}/> : <h3>Loading...</h3>}
         {(userIdentity && userSession) ? <ListAllImages userIdentity={userIdentity} userSession={userSession}/> : <h3>Loading...</h3>}
