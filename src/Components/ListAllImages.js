@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Storage } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
-import { listPictures } from "../graphql/queries";
 import { listUserIdentitys } from "../graphql/queries";
 import { createUserIdentity } from "../graphql/mutations";
 
@@ -10,7 +9,6 @@ function ListAllImages(props) {
   const [identityIDs, setIdentityIDs] = useState([]);
   const userIdentity = props.userIdentity;
   const userSession = props.userSession;
-  // console.log(userSession);
   // get the tenant from the top of the cognito groups list
   const cognitogroups = userSession.payload["cognito:groups"];
   // each company is formed from "company:" + real_comapny_name, e.g "company:IBM"
@@ -38,45 +36,32 @@ function ListAllImages(props) {
     //     },
     //   }
     // );
-    console.log(groupUserIDs.data.listUserIdentitys.items);
+    // console.log(groupUserIDs.data.listUserIdentitys.items);
     // check if my identiy already exists
     const groupIdentityIDs = groupUserIDs.data.listUserIdentitys.items.map(
       (item) => {
         return item.identityID;
       }
     );
+    setIdentityIDs(groupIdentityIDs);
+    console.log(groupIdentityIDs);
     //my ID not in the array
     if (groupIdentityIDs.indexOf(userIdentity.id) === -1) {
       // if it doesnt, enter it into the db
-      console.log("addimage to db");
+      console.log("add userto db");
       const user = {
         tenant: tenant,
         identityID: userIdentity.id,
       };
 
       try {
-        await API.graphql(graphqlOperation(createUserIdentity, { input: user }));
+        await API.graphql(
+          graphqlOperation(createUserIdentity, { input: user })
+        );
       } catch (error) {
         console.log(error);
       }
     }
-  };
-
-
-  const fetchFiles = async (identityID) => {
-    let imageKeys = await Storage.list("", {
-      level: "protected",
-      identityId: identityID, // moj vlastny identity ID len na test
-    });
-
-    console.log(imageKeys);
-    imageKeys = await Promise.all(
-      imageKeys.map(async (k) => {
-        const signedUrl = await Storage.get(k.key);
-        return signedUrl;
-      })
-    );
-    setImages(imageKeys);
   };
 
   const getImageKeys = async (identityID) => {
@@ -84,42 +69,33 @@ function ListAllImages(props) {
       level: "protected",
       identityId: identityID,
     });
-    console.log(imageKeys);
+
+    imageKeys = await Promise.all(
+      imageKeys.map(async (k) => {
+        const signedUrl = await Storage.get(k.key, {
+          identityId: identityID
+        });
+        return signedUrl;
+      })
+    );
     return imageKeys;
   };
 
-  const getAllImageKeys = async (allIdentityIDs) => {
+  const getAllImageKeys = async () => {
     let allKeys = await Promise.all(
-      allIdentityIDs.map(async (identity) => {
-        return await getImageKeys(identity);
+      identityIDs.map(async (identity) => {
+        return await getImageKeys(identity); //vrati pole s polami pictures pre kazdu IdentityID
       })
     );
-    console.log(allKeys);
-  };
-
-  const readImages = async () => {
-    console.log();
-    try {
-      const myimgs = await API.graphql(graphqlOperation(listPictures, {}));
-      // setImages(myimgs.data.listPictures.items)
-      console.log("reading from db:", myimgs.data.listPictures.items);
-      const groupsIdentiyIDs = myimgs.data.listPictures.items.map((item) => {
-        return item.file.identityID;
-      });
-      console.log("files only: ", groupsIdentiyIDs);
-      const uniqueIdentityIDs = new Set(groupsIdentiyIDs);
-      const arrayUniqueIdentityIDs = Array(uniqueIdentityIDs);
-      setIdentityIDs(uniqueIdentityIDs);
-      console.log("unique files only: ", uniqueIdentityIDs);
-      getAllImageKeys(arrayUniqueIdentityIDs);
-      return myimgs.data.listPictures.items;
-    } catch (error) {
-      console.log(error);
-    }
+    let finalKeyArray = [];
+    allKeys.forEach((keyArray) => {
+      finalKeyArray = finalKeyArray.concat(keyArray);
+    });
+    setImages(finalKeyArray);
+    console.log("Merged List output: ", finalKeyArray);
   };
 
   useEffect(() => {
-    // readImages();
     registerMyIdentityId();
   }, []);
 
@@ -133,13 +109,13 @@ function ListAllImages(props) {
             // src={image.file.key}
             src={image}
             alt="myimage"
-            key={image.id}
+            key={image}
             style={{ width: 300, height: 300 }}
           />
         );
       })}
       <br />
-      <input type="button" value="nacitaj" onClick={readImages} />
+      <input type="button" value="nacitaj" onClick={getAllImageKeys} />
     </div>
   );
 }

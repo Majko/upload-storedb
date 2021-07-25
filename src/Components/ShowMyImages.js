@@ -16,34 +16,10 @@ function ShowMyImages(props) {
       })
     );
     setImages(imageKeys);
+    console.log("Only my list output: ", imageKeys);
   };
 
   useEffect(() => {
-    // set the user attributes to state variable cognitoUser
-    // const fetchAndSaveAccessToken = async () => {
-    // const user = await Auth.currentAuthenticatedUser();
-    // setCognitoUser(user);
-    // console.log(user);
-    // //subscribe for changes in images
-    // let subscription;
-    // subscription = API.graphql(
-    //   // musim pridat owner, je to hack, inak dava Amplify chybu
-    //   graphqlOperation(subscriptions.onCreatePicture, {
-    //     owner: user.username,
-    //   })
-    // ).subscribe({
-    //   // upon each new file fetch the files again
-    //   next: ({ provider, value }) => {
-    //     fetchFiles();
-    //   },
-    //   error: (error) => console.log(error),
-    // });
-    // //returns function that will run when the component dies
-    // return function cleanup() {
-    //   subscription.unsubscribe();
-    // };
-    // };
-    // fetchAndSaveAccessToken();
     fetchFiles();
   }, []);
 
