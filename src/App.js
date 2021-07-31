@@ -18,7 +18,7 @@ function App() {
   let userDataDetail = {
     myIdentityId: "",
     groupIdentityIds: "",
-    tetant: "",
+    tenant: "",
     myGroups: [],
     username: "",
   };
@@ -40,7 +40,6 @@ function App() {
       ...prevState,
       groupIdentityIds: groupIdentityIDs,
     }));
-    console.log(groupIdentityIDs);
     //my ID not in the array
     if (groupIdentityIDs.indexOf(myUserIdentityId) === -1) {
       // if it doesnt, enter it into the db
@@ -97,6 +96,7 @@ function App() {
       registerMyIdentityId(userInfo.id, tenant);
     };
     fetchUserIdentity();
+    console.log(userData);
   }, []);
 
   return (

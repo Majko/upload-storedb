@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Storage } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
-import { listPictures, listUserIdentitys } from "../graphql/queries";
-import { createUserIdentity } from "../graphql/mutations";
+import { listPictures } from "../graphql/queries";
 
 function ListAllImages(props) {
   const userData = props.userData;
