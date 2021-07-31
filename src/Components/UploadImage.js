@@ -4,20 +4,8 @@ import { Storage } from "aws-amplify";
 import awsconfig from "../aws-exports";
 
 function UploadImage(props) {
-  const userIdentity = props.userIdentity;
-  const userSession = props.userSession;
-  // get the tenant from the top of the cognito groups list
-  const cognitogroups = userSession.payload["cognito:groups"];
-  // each company is formed from "company:" + real_comapny_name, e.g "company:IBM"
-  const tenant =  cognitogroups.find(element => element.startsWith("company:"))
-  if (tenant === undefined) {
-    console.log('Tenant is undefined!!!');
-    return
-  }
-  console.log(tenant);
-
-  console.log(props);
-
+  const userData = props.userData;
+  
   const addImageToDB = async (image) => {
     console.log("addimage to db");
     console.log(image);
@@ -41,11 +29,11 @@ function UploadImage(props) {
       console.log(result);
 
       const image = {
-        tenant:tenant,
+        tenant:userData.tenant,
         file: {
           bucket: awsconfig.aws_user_files_s3_bucket,
           region: awsconfig.aws_user_files_s3_bucket_region,
-          identityID: userIdentity.id,
+          identityID: userData.myIdentityId,
           key: file.name,
         },
       };
