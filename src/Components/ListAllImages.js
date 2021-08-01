@@ -6,6 +6,7 @@ import { listPictures } from "../graphql/queries";
 function ListAllImages(props) {
   const userData = props.userData;
   const [images, setImages] = useState([]);
+  console.log(userData);
   
   const getImageKeys = async (identityID) => {
     let imageKeys = await Storage.list("", {

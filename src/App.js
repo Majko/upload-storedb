@@ -22,6 +22,14 @@ function App() {
     myGroups: [],
     username: "",
   };
+  //   groupIdentityIds: Array(2)
+  //    0: "eu-central-1:cb51182d-37e5-4e28-a469-67e333d4608e"
+  //    1: "eu-central-1:31abecf5-89a3-4d0c-9129-fb9301639a7b"
+  //  myGroups: Array(1)
+  //    0: "company:IBM"
+  //  myIdentityId: "eu-central-1:cb51182d-37e5-4e28-a469-67e333d4608e"
+  //  tenant: "company:IBM"
+  //  username: "uptest2"
   const [userData, setUserData] = useState(userDataDetail);
 
   const registerMyIdentityId = async (myUserIdentityId, tenant) => {
@@ -92,11 +100,11 @@ function App() {
         username: userInfo.username,
         myIdentityId:userInfo.id,
         tenant:tenant,
+        myGroups: cognitogroups
       }));
       registerMyIdentityId(userInfo.id, tenant);
     };
     fetchUserIdentity();
-    console.log(userData);
   }, []);
 
   return (
