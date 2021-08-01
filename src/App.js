@@ -32,26 +32,15 @@ function App() {
   //  username: "uptest2"
   const [userData, setUserData] = useState(userDataDetail);
 
-  const registerMyIdentityId = async (myUserIdentityId, tenant) => {
-    // load all group's IdentityIDs (all having same tenant)
-    const groupUserIDs = await API.graphql(
-      graphqlOperation(listUserIdentitys),
-      {}
-    );
-    // check if my identiy already exists
-    const groupIdentityIDs = groupUserIDs.data.listUserIdentitys.items.map(
-      (item) => {
-        return item.identityID;
-      }
-    );
-    setUserData((prevState) => ({
-      ...prevState,
-      groupIdentityIds: groupIdentityIDs,
-    }));
-    //my ID not in the array
+  const registerMyIdentityId = async (
+    myUserIdentityId,
+    groupIdentityIDs,
+    tenant
+  ) => {
+    // check if my identiy already exists in the DB
     if (groupIdentityIDs.indexOf(myUserIdentityId) === -1) {
       // if it doesnt, enter it into the db
-      console.log("add userto db");
+      console.log("add user to db");
       const user = {
         tenant: tenant,
         identityID: myUserIdentityId,
@@ -68,7 +57,7 @@ function App() {
   };
 
   useEffect(() => {
-    // set the user attributes to state variable userIdentity
+    // set the user attributes to state variable userData
     const fetchUserIdentity = async () => {
       const userInfo = await Auth.currentUserInfo();
       // Idnetity object:
@@ -81,28 +70,36 @@ function App() {
       //       "email": "hornik.marian@gmail.com"
       //   }
       // }
-      // setUserIdentity(userInfo);
       // get the access token of the signed in user
       const { accessToken } = await Auth.currentSession();
       // get the tenant from the top of the cognito groups list
       const cognitogroups = accessToken.payload["cognito:groups"];
       // each company is formed from "company:" + real_comapny_name, e.g "company:IBM"
       const tenant = cognitogroups.find((element) =>
-      element.startsWith("company:")
+        element.startsWith("company:")
       );
-      if (tenant === undefined) {
-        console.log("Tenant is undefined!!!");
-        // return;
-      } else console.log("Tenant is: ", tenant);
-      // setUserSession(accessToken);
+      // load all group's IdentityIDs (all having same tenant)
+      const groupUserIDs = await API.graphql(
+        graphqlOperation(listUserIdentitys),
+        {}
+      );
+      // check if my identiy already exists
+      const groupIdentityIDs = groupUserIDs.data.listUserIdentitys.items.map(
+        (item) => {
+          return item.identityID;
+        }
+      );
+
       setUserData((prevState) => ({
         ...prevState,
         username: userInfo.username,
-        myIdentityId:userInfo.id,
-        tenant:tenant,
-        myGroups: cognitogroups
+        myIdentityId: userInfo.id,
+        groupIdentityIds: groupIdentityIDs,
+        tenant: tenant,
+        myGroups: cognitogroups,
       }));
-      registerMyIdentityId(userInfo.id, tenant);
+      // check if my IdentityID is already in DB, if not, enter it
+      registerMyIdentityId(userInfo.id, groupIdentityIDs, tenant);
     };
     fetchUserIdentity();
   }, []);
@@ -115,16 +112,8 @@ function App() {
           Logged in user: <b>{userData ? userData.username : "Loading..."}</b>
         </h3>
         {/* render only if userIdentity & userSession not empty  */}
-        {userData ? (
-          <UploadImage userData={userData}/>
-        ) : (
-          <h3>Loading...</h3>
-        )}
-        {userData? (
-          <ListAllImages userData={userData} />
-        ) : (
-          <h3>Loading...</h3>
-        )}
+        {userData ? <UploadImage userData={userData} /> : <h3>Loading...</h3>}
+        {userData ? <ListAllImages userData={userData} /> : <h3>Loading...</h3>}
         <ShowMyImages />
       </header>
     </div>
