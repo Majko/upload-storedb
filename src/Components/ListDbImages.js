@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listPictures } from "../graphql/queries";
-import ShowImage from "./ShowImage";
+import ShowS3Image from "./ShowS3Image";
 
 function ListDbImages(props) {
   const [dbFiles, setDbFiles] = useState([]);
@@ -32,7 +32,7 @@ function ListDbImages(props) {
       })}
 
       {selectedFile && (
-        <ShowImage
+        <ShowS3Image
           identityID={selectedFile.file.identityID}
           filekey={selectedFile.file.key}
         />

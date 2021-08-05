@@ -3,7 +3,7 @@ import { toPng } from "html-to-image";
 import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listPictures } from "../graphql/queries";
-import ShowImage from "./ShowImage";
+import ShowS3Image from "./ShowS3Image";
 
 function BigImage(props) {
   const [dbFiles, setDbFiles] = useState([]);
@@ -32,30 +32,33 @@ function BigImage(props) {
   };
 
   return (
-    <div className="nieco" id="picture">
-      <h1>Group's Images from Db :</h1>
-      <ul>
-        {!compositeImage &&
-          dbFiles.map((file) => {
-            return (
-              <li key={file.id}>
-                <a href={file.id}>{file.file.key} </a>
-                {
-                  <ShowImage
-                    identityID={file.file.identityID}
-                    filekey={file.file.key}
-                  />
-                }
-              </li>
-            );
-          })}
-      </ul>
-      <input type="button" value="Uloz" onClick={exportAsPicture} />
-
-      {compositeImage ? (
-        <img src={compositeImage.src} alt="comp" />
+    <div>
+      {!compositeImage ? (
+        <div className="nieco" id="picture">
+          <h1>Group's Images from Db :</h1>
+          <ul>
+            {dbFiles.map((file) => {
+              return (
+                <li key={file.id}>
+                  <a href={file.id}>{file.file.key} </a>
+                  {
+                    <ShowS3Image
+                      identityID={file.file.identityID}
+                      filekey={file.file.key}
+                    />
+                  }
+                </li>
+              );
+            })}
+          </ul>
+          <input type="button" value="Uloz" onClick={exportAsPicture} />
+        </div>
       ) : (
-        "No composite imge generatred yet!"
+        <div>
+          <h1>Generated multipage</h1>
+          <img src={compositeImage.src} alt="comp" />) : (
+          <h3>"No composite imge generatred yet!"</h3>
+        </div>
       )}
     </div>
   );
