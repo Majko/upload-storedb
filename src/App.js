@@ -7,6 +7,7 @@ import UploadImage from "./Components/UploadImage";
 import ListAllImages from "./Components/ListAllImages";
 import ListDbImages from "./Components/ListDbImages";
 import ShowMyImages from "./Components/ShowMyImages";
+import BigImage from './Components/BigImage'
 
 import { API, graphqlOperation } from "aws-amplify";
 import { listUserIdentitys } from "./graphql/queries";
@@ -116,7 +117,8 @@ function App() {
           Logged in user: <b>{userData ? userData.username : "Loading..."}</b>
         </h3>
         {/* render only if userIdentity & userSession not empty  */}
-        {userData ? <ListDbImages userData={userData} /> : <h3>Loading...</h3>}
+        {userData ? <BigImage userData={userData} /> : <h3>Loading...</h3>}
+        {/* {userData ? <ListDbImages userData={userData} /> : <h3>Loading...</h3>} */}
         {/* {userData ? <UploadImage userData={userData} /> : <h3>Loading...</h3>} */}
         {/* {userData ? <ListAllImages userData={userData} /> : <h3>Loading...</h3>} */}
         {/* <ShowMyImages /> */}
