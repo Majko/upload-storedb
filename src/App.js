@@ -12,6 +12,7 @@ import BigImage from './Components/BigImage'
 import { API, graphqlOperation } from "aws-amplify";
 import { listUserIdentitys } from "./graphql/queries";
 import { createUserIdentity } from "./graphql/mutations";
+import MultiPageImage from "./Components/MultiPageImage";
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
@@ -117,7 +118,7 @@ function App() {
           Logged in user: <b>{userData ? userData.username : "Loading..."}</b>
         </h3>
         {/* render only if userIdentity & userSession not empty  */}
-        {userData ? <BigImage userData={userData} /> : <h3>Loading...</h3>}
+        {userData ? <MultiPageImage userData={userData} /> : <h3>Loading...</h3>}
         {/* {userData ? <ListDbImages userData={userData} /> : <h3>Loading...</h3>} */}
         {/* {userData ? <UploadImage userData={userData} /> : <h3>Loading...</h3>} */}
         {/* {userData ? <ListAllImages userData={userData} /> : <h3>Loading...</h3>} */}
