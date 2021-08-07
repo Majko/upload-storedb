@@ -7,7 +7,6 @@ import UploadImage from "./Components/UploadImage";
 import ListAllImages from "./Components/ListAllImages";
 import ListDbImages from "./Components/ListDbImages";
 import ShowMyImages from "./Components/ShowMyImages";
-import BigImage from './Components/BigImage'
 
 import { API, graphqlOperation } from "aws-amplify";
 import { listUserIdentitys } from "./graphql/queries";
