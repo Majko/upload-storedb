@@ -3,31 +3,33 @@ import { createPicture } from "../graphql/mutations";
 import { Storage } from "aws-amplify";
 import awsconfig from "../aws-exports";
 
+/**
+ * @description Component uploading file to AWS
+ * @param {Object} props userData - data needed to identification, here we need: tenant, IdentityID
+ * @returns 
+ */
 function UploadImage(props) {
   const userData = props.userData;
   
+  // function to stored the file info to DB
   const addImageToDB = async (image) => {
-    console.log("addimage to db");
-    console.log(image);
     try {
       await API.graphql(graphqlOperation(createPicture, { input: image }));
     } catch (error) {
       console.log(error);
     }
   };
-  // "The variables input contains a field name 'identityID' that is not defined for input object type 'S3ObjectInput' "
+  // function that on button click sotres the file to AWS storage and saves info to DB as well
   const onChange = async (e) => {
-    let result = "";
     const file = e.target.files[0];
     try {
-      result = await Storage.put(file.name, file, {
+      const result = await Storage.put(file.name, file, {
         level: "protected",
         contentType: "image/png",
         // with `tagging` the parameters must be URL encoded
         // tagging: new URLSearchParams({ file }).toString(),
       });
-      console.log(result);
-
+      // Info we want to store to DB
       const image = {
         tenant:userData.tenant,
         file: {
