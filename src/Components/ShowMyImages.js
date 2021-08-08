@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Storage } from "aws-amplify";
+import ShowS3Image from './ShowS3Image'
 
 /**
  * @description Shows all my files on my bucket
@@ -32,12 +33,14 @@ function ShowMyImages(props) {
       <h1>My (only)S3 Images :</h1>
       {images.map((image) => {
         return (
-          <img
-            src={image}
-            alt="myimage"
-            key={image}
-            style={{ width: 300, height: 300 }}
-          />
+          // TODO nefunguje, posielam Url a ta nema file name... 
+          <ShowS3Image file={image} /> 
+          // <img
+          //   src={image}
+          //   alt="myimage"
+          //   key={image}
+          //   style={{ width: 300, height: 300 }}
+          // />
         );
       })}
     </div>
