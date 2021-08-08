@@ -1,6 +1,6 @@
 import { useFetchFile } from "./useFetchFile";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 /**
@@ -13,6 +13,10 @@ function ShowImage(props) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
+  useEffect(()=>{
+    setPageNumber(1) //"vynulovanie"
+  },[])
+
   // check the type of document
   const docType = (filename) => {
     const lastDot = filename.lastIndexOf(".");
@@ -22,11 +26,12 @@ function ShowImage(props) {
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
+    setPageNumber(1)
   };
 
   const nextPage = (e)=>{
     e.preventDefault()
-    setPageNumber((prev)=>{return (prev +1) })
+    setPageNumber((prev)=>{return ( prev < numPages ? prev +1 : prev) })
   }
 
   // uses useFetchFile hook
@@ -45,7 +50,7 @@ function ShowImage(props) {
         <p>
           Page {pageNumber} of {numPages}
         </p>
-        <button onChange={nextPage}>Next page</button>
+        <button onClick={nextPage}>Next page</button>
       </div>
     );
   } else {
