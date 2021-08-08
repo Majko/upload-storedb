@@ -3,11 +3,16 @@ import { Storage } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 import { listPictures } from "../graphql/queries";
 
+/**
+ * @description Reads lists of all identity IDs under surrent tenant, shows all images
+ * @param {Object} props UserData - data needed for identification, here we need:groupIdentityIds
+ * @returns None
+ */
 function ListAllImages(props) {
   const userData = props.userData;
   const [images, setImages] = useState([]);
-  console.log(userData);
-  
+
+  // function returns list of all SignedUrls for given IdentityID
   const getImageKeys = async (identityID) => {
     let imageKeys = await Storage.list("", {
       level: "protected",
@@ -24,15 +29,8 @@ function ListAllImages(props) {
     );
     return imageKeys;
   };
-
+  // Function that returns list of all group Identity IDs
   const getAllImageKeys = async () => {
-    // take list from db
-    const listMyPictures = await API.graphql(
-      graphqlOperation(listPictures),
-      {}
-    );
-    console.log(listMyPictures.data.listPictures.items);
-
     let allKeys = await Promise.all(
       userData.groupIdentityIds.map(async (identity) => {
         return await getImageKeys(identity); //vrati pole s polami pictures pre kazdu IdentityID

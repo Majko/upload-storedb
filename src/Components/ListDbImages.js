@@ -3,10 +3,16 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listPictures } from "../graphql/queries";
 import ShowS3Image from "./ShowS3Image";
 
+/**
+ * @description Shows list of all tenants image names from db and renders image for a selected one
+ * @param {*} None
+ * @returns None
+ */
 function ListDbImages(props) {
   const [dbFiles, setDbFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
 
+  // Get list of all tenant files from DB
   const getDbFiles = async () => {
     // load all group's IdentityIDs (all having same tenant)
     const myFiles = await API.graphql(graphqlOperation(listPictures), {});
@@ -20,6 +26,7 @@ function ListDbImages(props) {
 
   return (
     <div className="Nieco">
+      {/* show list of all files as link */}
       <h1>Group's Images from Db :</h1>
       {dbFiles.map((file) => {
         return (
@@ -30,7 +37,7 @@ function ListDbImages(props) {
           </ul>
         );
       })}
-
+      {/* if a select a file, renders the picture */}
       {selectedFile && (
         <ShowS3Image
           identityID={selectedFile.file.identityID}

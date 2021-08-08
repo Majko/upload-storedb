@@ -2,10 +2,10 @@ import { Storage } from "aws-amplify";
 import { useState } from "react";
 
 /**
- *
+ * @description Custom hook which fetches file from AWS
  * @param {String} identityID AWS Identity ID, collected from token
  * @param {String} key File name (key)
- * @returns {Url} Signed Url for  the file returned
+ * @returns {Url, Error} Signed Url for  the file returned, error in case if any
  */
 export const useFetchFile = (identityID, key) => {
   const [signedUrl, setSignedUrl] = useState(null);

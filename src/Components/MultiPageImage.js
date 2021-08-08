@@ -38,6 +38,7 @@ function MultiPageImage(props) {
     <div className="App">
       {!compositeImageUrl ? ( //check if export of big image exists, if not show file selector
         <div id="select">
+          <h1>Pick few images and genererate onle file</h1>
           <input
             type="file"
             onChange={(e) => handleFileSelect(e.target.files[0])}
