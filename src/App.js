@@ -7,12 +7,11 @@ import UploadImage from "./Components/UploadImage";
 import ListAllImages from "./Components/ListAllImages";
 import ListDbImages from "./Components/ListDbImages";
 import ShowMyImages from "./Components/ShowMyImages";
-
-import { API, graphqlOperation } from "aws-amplify";
-import { listUserIdentitys } from "./graphql/queries";
-import { createUserIdentity } from "./graphql/mutations";
 import MultiPageImage from "./Components/MultiPageImage";
+
+
 import useFetchUserIdentity from "./useFetchUserIdentity"
+import useRegisterMyIdentityID from "./useRegisterMyIdentityID";
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
@@ -20,37 +19,32 @@ Auth.configure(awsconfig);
 function App() {
 
   const [userData, setUserData] = useState({});
-  const [error, setError] = useState(null);
-  const ret = useFetchUserIdentity()
+  // fetch all necessary user data 
+  const {
+    username,
+    myIdentityId,
+    groupIdentityIds ,
+    tenant,
+    myGroups,
+  } = useFetchUserIdentity()
+  // Make sure my ID is registered in DB
+  useRegisterMyIdentityID(userData.myIdentityId,userData.groupIdentityIds, userData.tenant )
   
   useEffect(()=>{
-    setUserData(ret[0])
-    setError(ret[1])
-  },[ret])
-
-  const registerMyIdentityId = async (
-    myUserIdentityId,
-    groupIdentityIDs,
-    tenant
-  ) => {
-    // check if my identiy already exists in the DB
-    if (groupIdentityIDs.indexOf(myUserIdentityId) === -1) {
-      // if it doesnt, enter it into the db
-      console.log("add user to db");
-      const user = {
-        tenant: tenant,
-        identityID: myUserIdentityId,
-      };
-
-      try {
-        await API.graphql(
-          graphqlOperation(createUserIdentity, { input: user })
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+    setUserData({
+      username,
+      myIdentityId,
+      groupIdentityIds ,
+      tenant,
+      myGroups,
+    })
+  },[
+    username,
+    myIdentityId,
+    groupIdentityIds ,
+    tenant,
+    myGroups,
+  ])
 
   return (
     <div className="App">
@@ -65,7 +59,6 @@ function App() {
         {userData ? <UploadImage userData={userData} /> : <h3>Loading...</h3>}
         {userData ? <ListAllImages userData={userData} /> : <h3>Loading...</h3>}
         <ShowMyImages />
-        {error && <h1>{error}</h1>}
       </header>
     </div>
   );
