@@ -24,14 +24,12 @@ import { listUserIdentitys } from "./graphql/queries";
  */
 
 const useFetchUserIdentity = () => {
-  const [data, setData] = useState({});
-  const [error, setError] = useState(null);
+  const [identityData, setData] = useState({});
 
   useEffect(() => {
     // set the user attributes to state variable userData
     const fetchUserIdentity = async () => {
 
-      try {
         const userInfo = await Auth.currentUserInfo();
         // Vrati Idnetity object:
         // {
@@ -73,16 +71,11 @@ const useFetchUserIdentity = () => {
         setData((prevdata) => {
           return { ...prevdata, ...userData };
         });
-      } catch (err) {
-        console.log(err);
-        setError(err)
-      }
     };
     //call the async function
     fetchUserIdentity();
     }, []);
     
-    
-    return [data, error];
+    return identityData;
   };
 export default useFetchUserIdentity;
