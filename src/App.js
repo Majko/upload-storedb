@@ -12,78 +12,21 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listUserIdentitys } from "./graphql/queries";
 import { createUserIdentity } from "./graphql/mutations";
 import MultiPageImage from "./Components/MultiPageImage";
+import useFetchUserIdentity from "./useFetchUserIdentity"
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
 function App() {
-  let userDataDetail = {
-    myIdentityId: "",
-    groupIdentityIds: "",
-    tenant: "",
-    myGroups: [],
-    username: "",
-  };
-  //  Po naplneni to bude nieco ako: 
-  //  groupIdentityIds: Array(2)
-  //    0: "eu-central-1:cb51182d-37e5-4e28-a469-67e333d4608e"
-  //    1: "eu-central-1:31abecf5-89a3-4d0c-9129-fb9301639a7b"
-  //  myGroups: Array(1)
-  //    0: "company:IBM"
-  //  myIdentityId: "eu-central-1:cb51182d-37e5-4e28-a469-67e333d4608e"
-  //  tenant: "company:IBM"
-  //  username: "uptest2"
-  const [userData, setUserData] = useState(userDataDetail);
 
-
-  useEffect(() => {
-    // set the user attributes to state variable userData
-    const fetchUserIdentity = async () => {
-      const userInfo = await Auth.currentUserInfo();
-      // Idnetity object:
-      // {
-      //   "id": "eu-central-1:31abecf5-89a3-4d0c-9129-fb9301639a7b",
-      //   "username": "uptest",
-      //   "attributes": {
-      //       "sub": "aecb732a-cf99-4702-9a1d-4a658cfba499",
-      //       "email_verified": true,
-      //       "email": "hornik.marian@gmail.com"
-      //   }
-      // }
-      // get the access token of the signed in user
-      const { accessToken } = await Auth.currentSession();
-      // get the tenant from the top of the cognito groups list
-      const cognitogroups = accessToken.payload["cognito:groups"];
-      // each company is formed from "company:" + real_comapny_name, e.g "company:IBM"
-      const tenant = cognitogroups.find((element) =>
-        element.startsWith("company:")
-      );
-      // load all group's IdentityIDs (all having same tenant)
-      const groupUserIDs = await API.graphql(
-        graphqlOperation(listUserIdentitys),
-        {}
-      );
-      // check if my identiy already exists
-      const groupIdentityIDs = groupUserIDs.data.listUserIdentitys.items.map(
-        (item) => {
-          return item.identityID;
-        }
-      );
-
-      setUserData((prevState) => ({
-        ...prevState,
-        username: userInfo.username,
-        myIdentityId: userInfo.id,
-        groupIdentityIds: groupIdentityIDs,
-        tenant: tenant,
-        myGroups: cognitogroups,
-      }));
-      // check if my IdentityID is already in DB, if not, enter it
-      registerMyIdentityId(userInfo.id, groupIdentityIDs, tenant);
-    };
-    fetchUserIdentity();
-  }, []);
-
+  const [userData, setUserData] = useState({});
+  const [error, setError] = useState(null);
+  const ret = useFetchUserIdentity()
+  
+  useEffect(()=>{
+    setUserData(ret[0])
+    setError(ret[1])
+  },[ret])
 
   const registerMyIdentityId = async (
     myUserIdentityId,
@@ -118,10 +61,11 @@ function App() {
         </h3>
         {/* render only if userIdentity & userSession not empty  */}
         {userData ? <MultiPageImage userData={userData} /> : <h3>Loading...</h3>}
-        {/* {userData ? <ListDbImages userData={userData} /> : <h3>Loading...</h3>} */}
-        {/* {userData ? <UploadImage userData={userData} /> : <h3>Loading...</h3>} */}
-        {/* {userData ? <ListAllImages userData={userData} /> : <h3>Loading...</h3>} */}
-        {/* <ShowMyImages /> */}
+        {userData ? <ListDbImages userData={userData} /> : <h3>Loading...</h3>}
+        {userData ? <UploadImage userData={userData} /> : <h3>Loading...</h3>}
+        {userData ? <ListAllImages userData={userData} /> : <h3>Loading...</h3>}
+        <ShowMyImages />
+        {error && <h1>{error}</h1>}
       </header>
     </div>
   );
