@@ -7,23 +7,20 @@ import { useState } from "react";
  * @param {String} key File name (key)
  * @returns {Url, Error} Signed Url for  the file returned, error in case if any
  */
-export const useFetchFile = (identityID, key) => {
-  const [signedUrl, setSignedUrl] = useState(null);
-  const [error, setError] = useState(null);
-
+export const useFetchFile = () => {
   //"protected" conf means that only owner can write, but everybody (who has Url) can read
   Storage.configure({ level: "protected" });
-  const fetchFile = async () => {
+
+  const fetchFile = async (identityID, key) => {
     try {
       const signedUrl = await Storage.get(key, {
         identityId: identityID,
       });
-      setSignedUrl(signedUrl);
+      return { signedUrl, key };
     } catch (error) {
-      setError(error);
       console.error(error);
     }
   };
-  fetchFile();
-  return { signedUrl, error };
-};
+
+  return { fetchFile };
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Storage } from "aws-amplify";
-import ShowS3Image from './ShowS3Image'
+import VisDocument from "./Visualize/VisDocument";
 
 /**
  * @description Shows all my files on my bucket
@@ -18,7 +18,8 @@ function ShowMyImages(props) {
     imageKeys = await Promise.all(
       imageKeys.map(async (k) => {
         const signedUrl = await Storage.get(k.key);
-        return signedUrl;
+        const name = k.key;
+        return { fileName: name, signedUrl: signedUrl };
       })
     );
     setImages(imageKeys);
@@ -33,14 +34,11 @@ function ShowMyImages(props) {
       <h1>My (only)S3 Images :</h1>
       {images.map((image) => {
         return (
-          // TODO nefunguje, posielam Url a ta nema file name... 
-          <ShowS3Image file={image} /> 
-          // <img
-          //   src={image}
-          //   alt="myimage"
-          //   key={image}
-          //   style={{ width: 300, height: 300 }}
-          // />
+          <VisDocument
+            fileName={image.fileName}
+            fileUrl={image.signedUrl}
+            key={image.id}
+          />
         );
       })}
     </div>

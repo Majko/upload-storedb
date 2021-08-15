@@ -3,8 +3,8 @@ import PdfDocument from './PdfDocument'
 
 /**
  * @description Component renders content of both pdf and image files (png, jpeg, ...)
- * @param {String} param0 fileName - name/key of the file to be presented. 
- * @param {String} param0 fileUrl - url of the image file to be presented. In case of local file
+ * @param {String} fileName fileName - name/key of the file to be presented. 
+ * @param {String} fileUrl  - url of the image file to be presented. In case of local file
  * the valus submitted should be created by URL.createObjectURL(file)
  * @returns none
  */

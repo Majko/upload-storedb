@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listPictures } from "../graphql/queries";
-import ShowS3Image from "./ShowS3Image";
+import { useFetchFile } from "./AWS/useFetchFile";
+import VisDocument from "./Visualize/VisDocument";
+
+import { Button, SIZE, SHAPE } from "baseui/button";
 
 /**
  * @description Shows list of all tenants image names from db and renders image for a selected one
@@ -10,7 +13,8 @@ import ShowS3Image from "./ShowS3Image";
  */
 function ListDbImages(props) {
   const [dbFiles, setDbFiles] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileprops, setFileprops] = useState(null);
+  const { fetchFile } = useFetchFile();
 
   // Get list of all tenant files from DB
   const getDbFiles = async () => {
@@ -19,9 +23,13 @@ function ListDbImages(props) {
     setDbFiles(myFiles.data.listPictures.items);
   };
 
-  const selectImage = (e, file) => {
+  const selectImage = async (e, file) => {
     e.preventDefault();
-    setSelectedFile(file);
+    const { signedUrl, key } = await fetchFile(
+      file.file.identityID,
+      file.file.key
+    );
+    setFileprops({ signedUrl, key });
   };
 
   return (
@@ -38,13 +46,13 @@ function ListDbImages(props) {
         );
       })}
       {/* if a select a file, renders the picture */}
-      {selectedFile && (
-        <ShowS3Image
-          identityID={selectedFile.file.identityID}
-          filekey={selectedFile.file.key}
-        />
+      {fileprops && (
+        <VisDocument fileName={fileprops.key} fileUrl={fileprops.signedUrl} />
       )}
-      <input type="button" value="nacitaj" onClick={getDbFiles} />
+      {/* <input type="button" value="nacitaj" onClick={getDbFiles} /> */}
+      <Button onClick={getDbFiles} size={SIZE.compact} >
+        Nacitaj moje files from db
+      </Button>
     </div>
   );
 }

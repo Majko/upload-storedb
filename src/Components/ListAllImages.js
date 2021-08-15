@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Storage } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 import { listPictures } from "../graphql/queries";
+import VisDocument from "./Visualize/VisDocument";
 
 /**
  * @description Reads lists of all identity IDs under surrent tenant, shows all images
@@ -22,9 +23,11 @@ function ListAllImages(props) {
     imageKeys = await Promise.all(
       imageKeys.map(async (k) => {
         const signedUrl = await Storage.get(k.key, {
-          identityId: identityID
+          level: "protected",
+          identityId: identityID,
         });
-        return signedUrl;
+        const fileName = k.key;
+        return { fileName: fileName, fileUrl: signedUrl };
       })
     );
     return imageKeys;
@@ -46,14 +49,14 @@ function ListAllImages(props) {
 
   return (
     <div className="Nieco">
-      <h1>Group's  Images :</h1>
+      <h1>Group's Images :</h1>
       {images.map((image) => {
+        console.log(image);
         return (
-          <img
-            src={image}
-            alt="myimage"
-            key={image}
-            style={{ width: 300, height: 300 }}
+          <VisDocument
+            fileUrl={image.fileUrl}
+            fileName={image.fileName}
+            key={image.fileName}
           />
         );
       })}

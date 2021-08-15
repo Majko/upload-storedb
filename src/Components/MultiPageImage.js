@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toPng } from "html-to-image";
-import ShowLocalImage from "./ShowLocalImage";
+import VisDocument from "./Visualize/VisDocument";
 
 /**
  * @description Component that reds image files one by one, after which 
@@ -46,7 +46,7 @@ function MultiPageImage(props) {
           <button onClick={exportAsPicture}>Generuj dokument</button>
           <div id="multipage">
             {multiFiles.map((file) => (
-              <ShowLocalImage file={file} key={file.name} />
+              <VisDocument fileName={file.name} fileUrl={URL.createObjectURL(file)} />
             ))}
           </div>
         </div>
