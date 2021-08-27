@@ -11,6 +11,7 @@ export const createPicture = /* GraphQL */ `
       name
       owner
       tenant
+      description
       file {
         bucket
         region
@@ -32,6 +33,7 @@ export const updatePicture = /* GraphQL */ `
       name
       owner
       tenant
+      description
       file {
         bucket
         region
@@ -53,6 +55,7 @@ export const deletePicture = /* GraphQL */ `
       name
       owner
       tenant
+      description
       file {
         bucket
         region

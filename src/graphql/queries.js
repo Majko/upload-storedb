@@ -8,6 +8,7 @@ export const getPicture = /* GraphQL */ `
       name
       owner
       tenant
+      description
       file {
         bucket
         region
@@ -31,6 +32,7 @@ export const listPictures = /* GraphQL */ `
         name
         owner
         tenant
+        description
         file {
           bucket
           region
