@@ -10,6 +10,7 @@ import UploadImage from "./Components/UploadImage";
 import ListAllImages from "./Components/ListAllImages";
 import ListDbImages from "./Components/ListDbImages";
 import ShowMyImages from "./Components/ShowMyImages";
+import ListMyImages from "./Components/ListMyImages";
 import MultiPageImage from "./Components/MultiPageImage";
 
 import useFetchUserIdentity from "./useFetchUserIdentity";
@@ -84,6 +85,9 @@ function App() {
                       <li>
                         <Link to="/showmyimgs">Show my Images</Link>
                       </li>
+                      <li>
+                        <Link to="/listmyimgs">List my Images</Link>
+                      </li>
                     </ul>
                   </nav>
 
@@ -120,6 +124,9 @@ function App() {
                     </Route>
                     <Route path="/showmyimgs">
                       <ShowMyImages />
+                    </Route>
+                    <Route path="/listmyimgs">
+                      <ListMyImages />
                     </Route>
                   </Switch>
                 </div>
