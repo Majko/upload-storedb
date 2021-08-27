@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
  * the valus submitted should be created by URL.createObjectURL(file)
  * @returns none
  */
-function PdfDocument({ fileUrl }) {
+function PdfDocument({ fileUrl, width }) {
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -31,14 +31,14 @@ function PdfDocument({ fileUrl }) {
 
     return (
         <div className="image">
-            <Document file={fileUrl} onLoadSuccess={onDocumentLoadSuccess}>
-                <Page pageNumber={pageNumber} />
+            <Document file={fileUrl} onLoadSuccess={onDocumentLoadSuccess} >
+                <Page pageNumber={pageNumber} width={width} />
             </Document>
             <p>
                 Page {pageNumber} of {numPages}
             </p>
-            {(pageNumber < numPages) && <button onClick={nextPage} >Next page</button>}
             {(pageNumber > 1) && <button onClick={previousPage} >Previous page</button>}
+            {(pageNumber < numPages) && <button onClick={nextPage} >Next page</button>}
         </div>
     );
 }

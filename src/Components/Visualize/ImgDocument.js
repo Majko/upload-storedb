@@ -4,13 +4,14 @@
  * the valus submitted should be created by URL.createObjectURL(file)
  * @returns none
  */
- function ImgDocument({fileUrl}) {
+ function ImgDocument({fileUrl, width}) {
 
     return (
         <div className="image">
           <img
             src={fileUrl}
             alt="visualizedimage"
+            width={width}
           />
         </div>
       );

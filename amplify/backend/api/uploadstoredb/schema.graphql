@@ -13,6 +13,7 @@ type Picture @model @auth(rules:[
   name: String
   owner: String
   tenant: String
+  description:String
   file: S3Object
 }
 
