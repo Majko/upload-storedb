@@ -1,5 +1,4 @@
 import { Storage } from "aws-amplify";
-import { useState } from "react";
 
 /**
  * @description Custom hook which fetches file from AWS
