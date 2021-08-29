@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Storage } from "aws-amplify";
-import { API, graphqlOperation } from "aws-amplify";
-import { listPictures } from "../graphql/queries";
 import VisDocument from "./Visualize/VisDocument";
 
 /**

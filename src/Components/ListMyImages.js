@@ -3,7 +3,7 @@ import { Storage } from "aws-amplify";
 import VisDocument from "./Visualize/VisDocument";
 import { useRemoveFile } from "./AWS/removeFile";
 import { useFetchFile } from "./AWS/useFetchFile";
-import { Button, SIZE, SHAPE } from "baseui/button";
+import { Button } from "baseui/button";
 
 /**
  * @description Shows all my files on my bucket
@@ -56,7 +56,7 @@ function ListMyImages(props) {
       const indexToRemove = images.findIndex((element)=>{ return (element.fileName === filename)})
       let newImages = images
       newImages.splice(indexToRemove,1)
-      setImages(newImages)
+      setImages([...newImages])
     } catch (err) {
       console.log(err);
     }

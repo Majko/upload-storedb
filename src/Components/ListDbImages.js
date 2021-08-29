@@ -6,8 +6,8 @@ import { deletePicture} from "../graphql/mutations";
 import { useFetchFile } from "./AWS/useFetchFile";
 import VisDocument from "./Visualize/VisDocument";
 
-import { Button, SIZE, SHAPE } from "baseui/button";
-import { useRemoveFile } from "./AWS/removeFile";
+import { Button, SIZE } from "baseui/button";
+// import { useRemoveFile } from "./AWS/removeFile";
 
 /**
  * @description Shows list of all tenants image names from db and renders image for a selected one
@@ -18,7 +18,7 @@ function ListDbImages(props) {
   const [dbFiles, setDbFiles] = useState([]);
   const [fileprops, setFileprops] = useState(null);
   const { fetchFile } = useFetchFile();
-  const { removeFile } = useRemoveFile();
+  // const { removeFile } = useRemoveFile();
 
   // Get list of all tenant files from DB
   const getDbFiles = async () => {
@@ -56,7 +56,12 @@ function ListDbImages(props) {
       // }
       deleteImageFromDB(id)
       const indexToRemove = dbFiles.findIndex((element)=>{ return (element.id === id)})
-      dbFiles.splice(indexToRemove,1)
+      if (indexToRemove > -1) {
+      let newDbFiles = dbFiles
+      newDbFiles.splice(indexToRemove,1)
+      setDbFiles([...newDbFiles])
+      }
+
     } catch (err) {
       console.log(err);
     }
@@ -84,7 +89,6 @@ function ListDbImages(props) {
       {fileprops && (
         <VisDocument fileName={fileprops.key} fileUrl={fileprops.signedUrl} />
       )}
-      {/* <input type="button" value="nacitaj" onClick={getDbFiles} /> */}
       <Button onClick={getDbFiles} size={SIZE.compact}>
         Nacitaj moje files from db
       </Button>
