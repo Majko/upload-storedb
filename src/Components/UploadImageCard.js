@@ -40,7 +40,6 @@ function UploadImageCard({ userData, file, removeHandler }) {
   const { uploadFile } = useUploadFile();
   const [docPurpose, setDocPurpose] = useState("1");
   const [description, setDescription] = useState("");
-  // const [css, theme] = useStyletron();
 
   const classes = useStyles();
 

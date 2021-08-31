@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { FileUploader } from "baseui/file-uploader";
+// import { FileUploader } from "baseui/file-uploader";
 import { useStyletron } from "baseui";
 import UploadImageCard from "./UploadImageCard";
-import { Label4, Paragraph4 } from "baseui/typography";
+// import { Label4, Paragraph4 } from "baseui/typography";
+import Typography from "@material-ui/core/Typography";
+
 import { Button } from "@material-ui/core";
 
 /**
@@ -35,10 +37,10 @@ function UploadImage({ userData }) {
 
   return (
     <div className={css({ padding: theme.sizing.scale500 })}>
-      <Label4>Upload súboru</Label4>
-      <Paragraph4 className={css({ padding: theme.sizing.scale500 })}>
+      <Typography variant="h6" >Upload súboru</Typography>
+      <Typography variant="body2" >
         Potiahni súbory sem, alebo vyber pomocou tlačítka, pripadne odfoť
-      </Paragraph4>
+      </Typography>
 
       <input
         style={{ display: "none" }}
