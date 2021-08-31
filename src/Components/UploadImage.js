@@ -3,6 +3,7 @@ import { FileUploader } from "baseui/file-uploader";
 import { useStyletron } from "baseui";
 import UploadImageCard from "./UploadImageCard";
 import { Label4, Paragraph4 } from "baseui/typography";
+import { Button } from "@material-ui/core";
 
 /**
  * @description Component uploading file to AWS
@@ -38,14 +39,27 @@ function UploadImage({ userData }) {
       <Paragraph4 className={css({ padding: theme.sizing.scale500 })}>
         Potiahni súbory sem, alebo vyber pomocou tlačítka, pripadne odfoť
       </Paragraph4>
-      <FileUploader
+
+      <input
+        style={{ display: "none" }}
+        id="contained-button-file"
+        type="file"
+        accept="image/*"
+        multiple
+      />
+      <label htmlFor="contained-button-file">
+        <Button variant="contained" color="primary" component="span" >
+          Upload
+        </Button>
+      </label>
+      {/* <FileUploader
         accept="image/*"
         multiple
         // errorMessage="Chyba pri uploade"
         onDrop={(acceptedFiles, rejectedFiles) => {
           acceptedFileHandler(acceptedFiles);
         }}
-      />
+      /> */}
 
       {files &&
         files.map((file) => {

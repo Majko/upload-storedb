@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import AppMenu  from "./Components/AppMenu";
+import AppMenu from "./Components/AppMenu";
 
 import Amplify from "aws-amplify";
 import { Auth } from "aws-amplify";
@@ -9,9 +9,8 @@ import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 import useFetchUserIdentity from "./useFetchUserIdentity";
 import useRegisterMyIdentityID from "./useRegisterMyIdentityID";
 
-import { Client as Styletron } from "styletron-engine-atomic";
-import { Provider as StyletronProvider } from "styletron-react";
-import { LightTheme, BaseProvider } from "baseui";
+import Typography from "@material-ui/core/Typography";
+import { Container } from "@material-ui/core";
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
@@ -43,27 +42,21 @@ function App() {
     });
   }, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
 
-  const engine = new Styletron();
-
-
   return (
-    <StyletronProvider value={engine}>
-      <BaseProvider theme={LightTheme}>
-        <div className="App">
+    <div className="App">
+      <header className="App-header">
+        <Container>
+          <Typography variant="body2">
+            Logged in user:{" "}
+            <b>
+              {userData ? userData.username : "Loading..."} ({userData.tenant})
+            </b>
+          </Typography>
           <AmplifySignOut />
-          <header className="App-header">
-            <div>
-              Logged in user:{" "}
-              <b>
-                {userData ? userData.username : "Loading..."} from :
-                {userData.tenant}
-              </b>
-            </div>
-            <AppMenu userData={userData}/>
-          </header>
-        </div>
-      </BaseProvider>
-    </StyletronProvider>
+          <AppMenu userData={userData} />
+        </Container>
+      </header>
+    </div>
   );
 }
 

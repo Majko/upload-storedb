@@ -6,11 +6,29 @@ import VisDocument from "./Visualize/VisDocument";
 import { useUploadFile } from "./AWS/useUploadFile";
 import useDocumentType from "./Visualize/useDocumentType";
 
-import { Card, StyledBody, StyledAction } from "baseui/card";
-import { Button, KIND } from "baseui/button";
-import { Input } from "baseui/input";
-import { RadioGroup, Radio, ALIGN } from "baseui/radio";
-import { useStyletron } from "baseui";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import TextField from '@material-ui/core/TextField';
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+});
 
 /**
  * @description Component uploading file to AWS
@@ -22,7 +40,9 @@ function UploadImageCard({ userData, file, removeHandler }) {
   const { uploadFile } = useUploadFile();
   const [docPurpose, setDocPurpose] = useState("1");
   const [description, setDescription] = useState("");
-  const [css, theme] = useStyletron();
+  // const [css, theme] = useStyletron();
+
+  const classes = useStyles();
 
   const docType = useDocumentType();
 
@@ -82,56 +102,72 @@ function UploadImageCard({ userData, file, removeHandler }) {
   };
 
   return (
-      <div key={file.name} className={css({ padding: theme.sizing.scale500 })}>
-        <Card className={css({ width: "100%" })} title="Nasnimany orbazok">
-          <div>
-            <VisDocument
-              className={css({ width: "100%" })}
-              fileName={file.name}
-              fileUrl={URL.createObjectURL(file)}
-            />
-          </div>
-          <StyledBody>
-            <RadioGroup
-              value={docPurpose}
-              onChange={(e) => setDocPurpose(e.currentTarget.value)}
-              name="number"
-              align={ALIGN.horizontal}
-            >
-              <Radio value="1">Fakrúra</Radio>
-              <Radio value="2">Interný doklad</Radio>
-              <Radio value="3">Iné</Radio>
-            </RadioGroup>
-            <Input
-              value={description}
-              onChange={(event) => setDescription(event.currentTarget.value)}
-              clearable
-            />
-          </StyledBody>
-          <StyledAction>
-            <div className={css({  padding: "5px", display:"inline-block"  })}>
-              <Button
-                kind={KIND.primary}
-                onClick={() => {
-                  uploadFileToS3(file);
-                }}
+    <div>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <VisDocument
+            className={classes.media}
+            fileName={file.name}
+            fileUrl={URL.createObjectURL(file)}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              Lizard
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Zadajte použitie dokumentu a popis, ktorý Vám pomúče s jeho ďalšou identifikáciou
+            </Typography>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Použitie</FormLabel>
+              <RadioGroup
+                aria-label="Použitie"
+                name="purpose"
+                value={docPurpose}
+                onChange={(e) => setDocPurpose(e.currentTarget.value)}
               >
-                Odoslat na spracovanie
-              </Button>
-            </div>
-            <div className={css({  padding: "5px", display:"inline-block"  })}>
-              <Button
-                kind={KIND.secondary}
-                onClick={() => {
-                  removeHandler(file);
-                }}
-              >
-                Zrusit
-              </Button>
-            </div>
-          </StyledAction>
-        </Card>
-      </div>
+                <FormControlLabel
+                  value="invoice"
+                  control={<Radio />}
+                  label="Faktúra"
+                />
+                <FormControlLabel
+                  value="internal"
+                  control={<Radio />}
+                  label="Interný doklad"
+                />
+                <FormControlLabel
+                  value="other"
+                  control={<Radio />}
+                  label="Iné.."
+                />
+
+              </RadioGroup>
+              <TextField id="descinput" label="Popis" variant="outlined" />
+            </FormControl>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              uploadFileToS3(file);
+            }}
+          >
+            Odoslať na spracovanie
+          </Button>
+          <Button
+            size="small"
+            color="secondary"
+            onClick={() => {
+              removeHandler(file);
+            }}
+          >
+            Zrušiť
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
   );
 }
 
