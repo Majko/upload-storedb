@@ -19,7 +19,9 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
+import { CardHeader, IconButton } from "@material-ui/core";
+import { DeleteOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
@@ -101,21 +103,36 @@ function UploadImageCard({ userData, file, removeHandler }) {
   };
 
   return (
-    <div>
-      <Card className={classes.root}>
-        <CardActionArea>
+    <Card>
+      <CardHeader
+        action={
+          <IconButton onClick={() => {
+            removeHandler(file);
+          }}>
+            <DeleteOutlined />
+          </IconButton>
+        }
+        title={file.name}
+      />
+
+      <CardActionArea>
+        <CardMedia>
           <VisDocument
             className={classes.media}
             fileName={file.name}
             fileUrl={URL.createObjectURL(file)}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Lizard
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Zadajte použitie dokumentu a popis, ktorý Vám pomúče s jeho ďalšou identifikáciou
-            </Typography>
+        </CardMedia>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            Detaily súboru
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Zadajte použitie dokumentu a popis, ktorý Vám pomúče s jeho ďalšou
+            identifikáciou
+          </Typography>
+          <br/>
+          <form>
             <FormControl component="fieldset">
               <FormLabel component="legend">Použitie</FormLabel>
               <RadioGroup
@@ -139,12 +156,18 @@ function UploadImageCard({ userData, file, removeHandler }) {
                   control={<Radio />}
                   label="Iné.."
                 />
-
               </RadioGroup>
-              <TextField id="descinput" label="Popis" variant="outlined" />
+              <TextField
+                id="descinput"
+                label="Popis"
+                variant="outlined"
+                onChange={(e) => {
+                  setDescription(e.target);
+                }}
+              />
             </FormControl>
-          </CardContent>
-        </CardActionArea>
+          </form>
+        </CardContent>
         <CardActions>
           <Button
             size="small"
@@ -165,8 +188,8 @@ function UploadImageCard({ userData, file, removeHandler }) {
             Zrušiť
           </Button>
         </CardActions>
-      </Card>
-    </div>
+      </CardActionArea>
+    </Card>
   );
 }
 
