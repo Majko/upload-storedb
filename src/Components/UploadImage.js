@@ -1,12 +1,24 @@
 import { useState } from "react";
-// import { FileUploader } from "baseui/file-uploader";
-import { useStyletron } from "baseui";
 import UploadImageCard from "./UploadImageCard";
-// import { Label4, Paragraph4 } from "baseui/typography";
 import Typography from "@material-ui/core/Typography";
+import {
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  Tooltip,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import { PhotoCamera } from "@material-ui/icons";
 
-import { Button } from "@material-ui/core";
-
+const useStyles = makeStyles({
+  camera: {
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    padding: 40,
+  },
+});
 /**
  * @description Component uploading file to AWS
  * @param {Object} props userData - data needed to identification, here we need: tenant, IdentityID
@@ -15,14 +27,7 @@ import { Button } from "@material-ui/core";
 function UploadImage({ userData }) {
   // const userData = props.userData;
   const [files, setFiles] = useState(null);
-  const [css, theme] = useStyletron();
-
-  const acceptedFileHandler = (files) => {
-    setFiles(files);
-    // files.map(async (file) => {
-    //   uploadFileToS3(file)
-    // });
-  };
+  const classes = useStyles();
 
   const removeFileFromFiles = (file) => {
     const indexToRemove = files.findIndex((element) => {
@@ -35,46 +40,54 @@ function UploadImage({ userData }) {
     }
   };
 
+  const onUpload = (e) => {
+    setFiles([...e.target.files]);
+  };
+
   return (
-    <div className={css({ padding: theme.sizing.scale500 })}>
-      <Typography variant="h6" >Upload súboru</Typography>
-      <Typography variant="body2" >
+    <div>
+      <Typography variant="h6">Upload súboru</Typography>
+      <Typography variant="body2">
         Potiahni súbory sem, alebo vyber pomocou tlačítka, pripadne odfoť
       </Typography>
-
-      <input
-        style={{ display: "none" }}
-        id="contained-button-file"
-        type="file"
-        accept="image/*"
-        multiple
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" color="primary" component="span" >
-          Upload
-        </Button>
-      </label>
-      {/* <FileUploader
-        accept="image/*"
-        multiple
-        // errorMessage="Chyba pri uploade"
-        onDrop={(acceptedFiles, rejectedFiles) => {
-          acceptedFileHandler(acceptedFiles);
-        }}
-      /> */}
-
-      {files &&
-        files.map((file) => {
-          return (
-            <div key={file.name}>
-              <UploadImageCard
-                userData={userData}
-                file={file}
-                removeHandler={removeFileFromFiles}
-              />
-            </div>
-          );
-        })}
+      <form noValidate>
+        <input
+          accept="image/*, application/pdf"
+          style={{ display: "none" }}
+          id="contained-button-file"
+          type="file"
+          multiple
+          onChange={onUpload}
+        />
+        <Tooltip title="Vyber súbor">
+          <label htmlFor="contained-button-file">
+            <IconButton
+              className={classes.camera}
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera fontSize="large" />
+            </IconButton>
+          </label>
+        </Tooltip>
+      </form>
+      <Container>
+        <Grid container spacing={3}>
+          {files &&
+            files.map((file) => {
+              return (
+                <Grid item key={file.name} xs={12} md={6}>
+                  <UploadImageCard
+                    userData={userData}
+                    file={file}
+                    removeHandler={removeFileFromFiles}
+                  />
+                </Grid>
+              );
+            })}
+        </Grid>
+      </Container>
     </div>
   );
 }
