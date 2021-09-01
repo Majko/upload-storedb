@@ -95,6 +95,7 @@ function UploadImageCard({ userData, file, removeHandler }) {
           key: myname,
         },
       };
+      console.log(image);
       addImageToDB(image);
       removeHandler(file);
     } catch (error) {
@@ -164,7 +165,7 @@ function UploadImageCard({ userData, file, removeHandler }) {
                 label="Popis"
                 variant="outlined"
                 onChange={(e) => {
-                  setDescription(e.target);
+                  setDescription(e.target.value);
                 }}
               />
             </FormControl>
