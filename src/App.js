@@ -63,7 +63,7 @@ function App() {
       tenant,
       myGroups,
     });
-  }, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
+}, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
 
 
   

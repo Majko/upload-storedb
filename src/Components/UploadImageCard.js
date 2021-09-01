@@ -106,9 +106,11 @@ function UploadImageCard({ userData, file, removeHandler }) {
     <Card>
       <CardHeader
         action={
-          <IconButton onClick={() => {
-            removeHandler(file);
-          }}>
+          <IconButton
+            onClick={() => {
+              removeHandler(file);
+            }}
+          >
             <DeleteOutlined />
           </IconButton>
         }
@@ -131,7 +133,7 @@ function UploadImageCard({ userData, file, removeHandler }) {
             Zadajte použitie dokumentu a popis, ktorý Vám pomúče s jeho ďalšou
             identifikáciou
           </Typography>
-          <br/>
+          <br />
           <form>
             <FormControl component="fieldset">
               <FormLabel component="legend">Použitie</FormLabel>
@@ -168,27 +170,27 @@ function UploadImageCard({ userData, file, removeHandler }) {
             </FormControl>
           </form>
         </CardContent>
-        <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => {
-              uploadFileToS3(file);
-            }}
-          >
-            Odoslať na spracovanie
-          </Button>
-          <Button
-            size="small"
-            color="secondary"
-            onClick={() => {
-              removeHandler(file);
-            }}
-          >
-            Zrušiť
-          </Button>
-        </CardActions>
       </CardActionArea>
+      <CardActions>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            uploadFileToS3(file);
+          }}
+        >
+          Odoslať na spracovanie
+        </Button>
+        <Button
+          size="small"
+          color="secondary"
+          onClick={() => {
+            removeHandler(file);
+          }}
+        >
+          Zrušiť
+        </Button>
+      </CardActions>
     </Card>
   );
 }

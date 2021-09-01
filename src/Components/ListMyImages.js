@@ -3,7 +3,7 @@ import { Storage } from "aws-amplify";
 import VisDocument from "./Visualize/VisDocument";
 import { useRemoveFile } from "./AWS/removeFile";
 import { useFetchFile } from "./AWS/useFetchFile";
-import { Button } from "baseui/button";
+import { Button } from "@material-ui/core";
 
 /**
  * @description Shows all my files on my bucket
@@ -42,7 +42,6 @@ function ListMyImages(props) {
       file.fileName
     );
     setFileprops({ signedUrl, key });
-    console.log({ signedUrl, key });
   };
 
   const onRemove = async (filename) => {

@@ -7,8 +7,7 @@ import VisDocument from "./Visualize/VisDocument";
  * @param {Object} props UserData - data needed for identification, here we need:groupIdentityIds
  * @returns None
  */
-function ListAllImages(props) {
-  const userData = props.userData;
+function ListAllImages({userData}) {
   const [images, setImages] = useState([]);
 
   // function returns list of all SignedUrls for given IdentityID
@@ -42,14 +41,12 @@ function ListAllImages(props) {
       finalKeyArray = finalKeyArray.concat(keyArray);
     });
     setImages(finalKeyArray);
-    console.log("Merged List output: ", finalKeyArray);
   };
 
   return (
     <div className="Nieco">
       <h1>Group's Images :</h1>
       {images.map((image) => {
-        console.log(image);
         return (
           <VisDocument
             fileUrl={image.fileUrl}
