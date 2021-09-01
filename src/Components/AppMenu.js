@@ -1,8 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { Fragment, useState } from "react";
 
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
@@ -79,7 +77,11 @@ function AppMenu({ userData, signedOut }) {
     >
       <List>
         {menuItems.map((item, index) => (
-          <ListItem button key={item.label} onClick={()=>handleRouting(item.route)}>
+          <ListItem
+            button
+            key={item.label}
+            onClick={() => handleRouting(item.route)}
+          >
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
@@ -96,12 +98,13 @@ function AppMenu({ userData, signedOut }) {
       <AppBar position="static">
         <Toolbar>
           <IconButton
+            edge="start"
+            color="inherit"
             aria-label="menu"
             onClick={toggleDrawer(true)}
-            // onClick={handleClick}
             className={classes.menuButton}
           >
-            <MenuIcon color="secondary" />
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Ucto.online
