@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -11,6 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Button } from "@material-ui/core";
+
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,24 +35,31 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     width: 150,
   },
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: "auto",
+  },
 }));
 
 function AppMenu({ userData, signedOut }) {
   let history = useHistory();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerState, setDrawerState] = useState(false);
   const classes = useStyles();
 
   const handleRouting = (route) => {
     history.push(route);
-    setAnchorEl(null);
   };
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setDrawerState(open);
   };
 
   const menuItems = [
@@ -55,13 +71,34 @@ function AppMenu({ userData, signedOut }) {
     { label: "List my Images", route: "/listmyimgs" },
   ];
 
+  const list = () => (
+    <div
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        {menuItems.map((item, index) => (
+          <ListItem button key={item.label} onClick={()=>handleRouting(item.route)}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+    </div>
+  );
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
             aria-label="menu"
-            onClick={handleClick}
+            onClick={toggleDrawer(true)}
+            // onClick={handleClick}
             className={classes.menuButton}
           >
             <MenuIcon color="secondary" />
@@ -80,25 +117,18 @@ function AppMenu({ userData, signedOut }) {
           <Button onClick={signedOut} color="inherit">
             Odhlás sa
           </Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            {menuItems.map((item, index) => {
-              return (
-                <MenuItem onClick={() => handleRouting(item.route)} key={index}>
-                  {item.label}
-                </MenuItem>
-              );
-            })}
-          </Menu>
+          <Fragment key="left">
+            <Drawer
+              anchor="left"
+              open={drawerState}
+              onClose={toggleDrawer(false)}
+            >
+              {list()}
+            </Drawer>
+          </Fragment>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 export default AppMenu;
-
