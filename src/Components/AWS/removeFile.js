@@ -11,7 +11,6 @@ export const useRemoveFile = () => {
 
   const removeFile = async (key) => {
     try {
-      console.log(key);
       await Storage.remove(key);
     } catch (error) {
       throw error;
