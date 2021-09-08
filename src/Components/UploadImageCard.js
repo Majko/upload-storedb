@@ -121,7 +121,6 @@ function UploadImageCard({ userData, file, removeHandler }) {
       <CardActionArea>
         <CardMedia>
           <VisDocument
-            className={classes.media}
             fileName={file.name}
             fileUrl={URL.createObjectURL(file)}
           />

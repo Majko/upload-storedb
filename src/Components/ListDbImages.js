@@ -6,11 +6,40 @@ import { deletePicture } from "../graphql/mutations";
 import { useFetchFile } from "./AWS/useFetchFile";
 import VisDocument from "./Visualize/VisDocument";
 
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { Container } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { Container, Fab } from "@material-ui/core";
+import DbFileCard from "./common/DbFileCard";
+import List from "@material-ui/core/List";
+import { makeStyles } from "@material-ui/core/styles";
+import { PhotoCamera } from "@material-ui/icons";
+import AddIcon from "@material-ui/icons/Add";
+import { useHistory } from "react-router";
 
-// import { useRemoveFile } from "./AWS/removeFile";
+import { useEffect } from "react";
+
+import { useRemoveFile } from "./AWS/removeFile";
+import DbFileListItem from "./common/DbFIleListItem";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+    width: '100%',
+    height:'100%',
+    position: 'relative',
+    minHeight: '100%',
+  },
+  listRoot: {
+    width: '100%',
+    maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
 
 /**
  * @description Shows list of all tenants image names from db and renders image for a selected one
@@ -18,10 +47,17 @@ import { Container } from "@material-ui/core";
  * @returns None
  */
 function ListDbImages(props) {
+  const classes = useStyles();
   const [dbFiles, setDbFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [fileprops, setFileprops] = useState(null);
   const { fetchFile } = useFetchFile();
-  // const { removeFile } = useRemoveFile();
+  const { removeFile } = useRemoveFile();
+  const history = useHistory();
+
+  useEffect(() => {
+    getDbFiles();
+  }, []);
 
   // Get list of all tenant files from DB
   const getDbFiles = async () => {
@@ -50,11 +86,7 @@ function ListDbImages(props) {
   const onRemove = async (filename, id) => {
     try {
       setFileprops(null);
-      // try {
-      //   removeFile(filename);
-      // } catch (error) {
-      //     throw Error('Error deleting file'  )
-      // }
+      removeFile(filename);
       deleteImageFromDB(id);
       const indexToRemove = dbFiles.findIndex((element) => {
         return element.id === id;
@@ -69,38 +101,67 @@ function ListDbImages(props) {
     }
   };
 
-  return (
-    <Container>
-      {/* show list of all files as link */}
-      <Typography variant="subtitle2" color="primary" gutterBottom>Group's Images from Db :</Typography>
-
-      {dbFiles.map((file) => {
-        return (
-          <ul key={file.id}>
-            <li>
-              <a href={file.id} onClick={(e) => selectImage(e, file)}>
-                <Typography variant="body2">
-                  {file.file.key} : {file.name}
-                </Typography>
-              </a>
-              <Button variant="contained" onClick={(e) => onRemove(file.file.key, file.id)}>
-                Delete from DB
-              </Button>
-            </li>
-          </ul>
-        );
-      })}
-      {/* if a select a file, renders the picture */}
-      {fileprops && (
-        <VisDocument fileName={fileprops.key} fileUrl={fileprops.signedUrl} />
-      )}
-      <Button variant="contained" onClick={getDbFiles} >
-        Nacitaj moje files from db
-      </Button>
-    </Container>
-  );
+  if (selectedFile) {
+    return (
+      <DbFileCard
+        file={selectedFile}
+        handleRemove={onRemove}
+        setFile={setSelectedFile}
+      />
+    );
+  } else {
+    return (
+      <Container>
+        {/* show list of all files as link */}
+        <Typography variant="subtitle2" color="primary" gutterBottom>
+          Group's Images from Db :
+        </Typography>
+        {dbFiles.map((file) => {
+          console.log(file);
+          return (
+            <div key={file.id}>
+              <List className={classes.listRoot}>
+                <DbFileListItem
+                  file={file}
+                  handleRemove={onRemove}
+                  selectFile={setSelectedFile}
+                />
+              </List>
+              {/* <DbFileCard file={file} handleRemove={onRemove} /> */}
+            </div>
+          );
+        })}
+        {/* if a select a file, renders the picture */}
+        {fileprops && (
+          <>
+            <VisDocument
+              fileName={fileprops.key}
+              fileUrl={fileprops.signedUrl}
+            />
+          </>
+        )}
+        <div className={classes.root}>
+          <label htmlFor="upload-photo">
+            <input
+              style={{ display: "none" }}
+              id="upload-photo"
+              name="upload-photo"
+              type="file"
+            />
+            <Fab
+              color="primary"
+              size="large"
+              component="span"
+              aria-label="add"
+              className={classes.fab}
+            >
+              <AddIcon fontSize="large" />
+            </Fab>
+          </label>
+        </div>
+      </Container>
+    );
+  }
 }
 
 export default ListDbImages;
-
-

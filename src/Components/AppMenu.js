@@ -67,7 +67,10 @@ function AppMenu({ userData, signedOut }) {
     { label: "Show whole groups Images", route: "/showallimgs" },
     { label: "Show my Images", route: "/showmyimgs" },
     { label: "List my Images", route: "/listmyimgs" },
+    { label: "Test list", route: "/newlist" },
   ];
+
+  
 
   const list = () => (
     <div
@@ -95,7 +98,7 @@ function AppMenu({ userData, signedOut }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             edge="start"
@@ -131,6 +134,8 @@ function AppMenu({ userData, signedOut }) {
           </Fragment>
         </Toolbar>
       </AppBar>
+      {/* aby sme mali spravne formatovanie prida prazdny toolbar */}
+      <Toolbar />
     </div>
   );
 }

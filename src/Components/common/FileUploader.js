@@ -1,63 +1,59 @@
 import Typography from "@material-ui/core/Typography";
-import { PhotoCamera } from "@material-ui/icons";
-import {
-  IconButton,
-  Tooltip,
-} from "@material-ui/core";
+import { IconButton, Tooltip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 const useStyles = makeStyles({
-  camera: {
-    display: "block",
+  upload: {
     marginLeft: "auto",
     marginRight: "auto",
-    padding: 40,
+    width:'50%'
   },
 });
+
 /**
- * 
+ *
  * @description Component for picking up files
- * @param {function} setFiles calls funtion provided from upper component with Array of file argument 
+ * @param {function} setFiles calls funtion provided from upper component with Array of file argument
  * @returns Component
  */
- const FileUploader = ({setFiles}) => {
-    const classes = useStyles();
-  
-    const onUpload = (e) => {
-      setFiles([...e.target.files]);
-    };
-  
-    return (
-      <>
-        <Typography variant="h6">Upload súboru</Typography>
-        <Typography variant="body2">
-          Potiahni súbory sem, alebo vyber pomocou tlačítka, pripadne odfoť
-        </Typography>
-        <form noValidate>
-          <input
-            accept="image/*, application/pdf"
-            style={{ display: "none" }}
-            id="contained-button-file"
-            type="file"
-            multiple
-            onChange={onUpload}
-          />
-          <Tooltip title="Vyber súbor">
-            <label htmlFor="contained-button-file">
-              <IconButton
-                className={classes.camera}
-                color="primary"
-                aria-label="upload picture"
-                component="span"
-              >
-                <PhotoCamera fontSize="large" />
-              </IconButton>
-            </label>
-          </Tooltip>
-        </form>
-      </>
-    );
+const FileUploader = ({ setFiles }) => {
+  const onUpload = (e) => {
+    setFiles([...e.target.files]);
   };
 
-  export default FileUploader
-  
+  const classes = useStyles();
+
+  return (
+    <div>
+      <Typography variant="h6">Upload súboru</Typography>
+      <Typography variant="body2">
+        Vyber pomocou tlačítka, pripadne odfoť
+      </Typography>
+      <form noValidate>
+        <input
+          accept="image/*, application/pdf"
+          style={{ display: "none" }}
+          id="contained-button-file"
+          type="file"
+          multiple
+          onChange={onUpload}
+        />
+        <Tooltip title="Vyber súbor">
+          <label htmlFor="contained-button-file">
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              className={classes.upload} 
+            >
+              <CloudUploadIcon fontSize="large" />
+            </IconButton>
+          </label>
+        </Tooltip>
+      </form>
+    </div>
+  );
+};
+
+export default FileUploader;

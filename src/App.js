@@ -6,6 +6,9 @@ import ListDbImages from "./Components/ListDbImages";
 import ShowMyImages from "./Components/ShowMyImages";
 import ListMyImages from "./Components/ListMyImages";
 import MultiPageImage from "./Components/MultiPageImage";
+// import ListVarItems from './Components/ListVarItems'
+import TestDocsList from "./Components/new/TestDocsList";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Amplify from "aws-amplify";
@@ -117,6 +120,9 @@ function App() {
               </Route>
               <Route path="/listmyimgs">
                 <ListMyImages />
+              </Route>
+              <Route path="/newlist">
+                <TestDocsList />
               </Route>
             </Switch>
           </Router>
