@@ -25,6 +25,9 @@ import {
     date: {
       padding: 1,
     },
+    description: {
+      textAlign: 'left',
+    },
     orange: {
       color: theme.palette.getContrastText(deepOrange[500]),
       backgroundColor: deepOrange[500],
@@ -77,8 +80,8 @@ const DocumentItem = ({ data, setDetail }) => {
                       VAT:{data.VAT},- Eur
                     </Typography>
                   </Grid>
-                  <Grid item xs={10}>
-                    <Typography variant="caption">{data.description}</Typography>
+                  <Grid item xs={12}>
+                    <Typography  className={classes.description}  variant="caption">{data.description}</Typography>
                   </Grid>
                 </Grid>
               </Grid>
