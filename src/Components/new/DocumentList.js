@@ -1,12 +1,20 @@
 import { makeStyles } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import DocItem from "./DocumentItem";
+import DocumentListItem from "./DocumentListItem";
 import DocumentDetail from "./DocumentDetail";
+import DocumentAddDialog from "./DocumentAddDialog";
+import DocumentDialogChildren from "./DocumentDialogChildren";
+import DocumentListItemChildren from "./DocumentListItemChildren";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: 5,
     position: "relative",
+  },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
 }));
 
@@ -25,6 +33,23 @@ const DocumentList = ({ dataArray }) => {
     setData([...newData]);
   };
 
+  const listOfItems = data.map((item, index) => {
+    return (
+      <>
+        <DocumentListItem
+          key={index}
+          data={item}
+          setDetail={setDetail}
+          // avatarname={item.name.substring(0, 2).toUpperCase()}
+          avatarname={null}
+          className={classes.root}
+        >
+          <DocumentListItemChildren data={item} setDetail={setDetail}/>
+        </DocumentListItem>
+      </>
+    );
+  });
+
   return (
     <div className={classes.root}>
       {detail ? (
@@ -34,16 +59,12 @@ const DocumentList = ({ dataArray }) => {
           removeData={removeData}
         />
       ) : (
-        data.map((item, index) => {
-          return (
-            <DocItem
-              key={index}
-              data={item}
-              setDetail={setDetail}
-              className={classes.root}
-            />
-          );
-        })
+        <div>
+          {listOfItems}
+          <DocumentAddDialog>
+            <DocumentDialogChildren />
+          </DocumentAddDialog>
+        </div>
       )}
     </div>
   );
