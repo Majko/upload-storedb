@@ -8,6 +8,7 @@ import ListMyImages from "./Components/ListMyImages";
 import MultiPageImage from "./Components/MultiPageImage";
 // import ListVarItems from './Components/ListVarItems'
 import TestDocsList from "./Components/new/TestDocsList";
+import CompositeList from "./Components/composition/CompositeList";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -123,6 +124,9 @@ function App() {
               </Route>
               <Route path="/newlist">
                 <TestDocsList />
+              </Route>
+              <Route path="/compositelist">
+                <CompositeList />
               </Route>
             </Switch>
           </Router>

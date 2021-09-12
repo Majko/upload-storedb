@@ -70,6 +70,7 @@ function AppMenu({ userData, signedOut }) {
     { label: "Show my Images", route: "/showmyimgs" },
     { label: "List my Images", route: "/listmyimgs" },
     { label: "Test list", route: "/newlist" },
+    { label: "Composite list", route: "/compositelist" },
   ];
 
   const list = () => (
