@@ -18,6 +18,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   logininfo: {
+    padding:10,
     right: 0,
     width: 150,
   },
@@ -69,8 +71,6 @@ function AppMenu({ userData, signedOut }) {
     { label: "List my Images", route: "/listmyimgs" },
     { label: "Test list", route: "/newlist" },
   ];
-
-  
 
   const list = () => (
     <div
@@ -112,23 +112,34 @@ function AppMenu({ userData, signedOut }) {
           <Typography variant="h6" className={classes.title}>
             Ucto.online
           </Typography>
-          <Typography variant="body2" className={classes.logininfo}>
-            User:
-            <b>
-              {userData.tenant
-                ? userData.username + "(" + userData.tenant.substring(8) + ")"
-                : "Loading..."}
-            </b>
-          </Typography>
-          <Button onClick={signedOut} color="inherit">
-            Odhlás sa
-          </Button>
+
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={signedOut}
+            className={classes.menuButton}
+          >
+            <ExitToAppIcon />
+          </IconButton>
           <Fragment key="left">
             <Drawer
               anchor="left"
               open={drawerState}
               onClose={toggleDrawer(false)}
             >
+              <Typography variant="body2" className={classes.logininfo}>
+                User:  {" "}
+                <b>
+                  {userData.tenant
+                    ? userData.username +
+                      " (" +
+                      userData.tenant.substring(8) +
+                      ")"
+                    : "Loading..."}
+                </b>
+              </Typography>
+              <Divider/>
               {list()}
             </Drawer>
           </Fragment>
