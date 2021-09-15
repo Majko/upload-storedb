@@ -19,16 +19,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DocListAddDialog = ({ add, children, title }) => {
-  const [open, setOpen] = useState(false);
+const DocListAddDialog = ({ children , setDialogOpen , dialogOpen}) => {
   const classes = useStyles();
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setDialogOpen(true)
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setDialogOpen(false)
   };
 
   return (
@@ -45,7 +44,7 @@ const DocListAddDialog = ({ add, children, title }) => {
       </Fab>
       <Dialog
         fullScreen
-        open={open}
+        open={dialogOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >

@@ -4,9 +4,11 @@ import ItemShortDetail from "./ItemShortDetail";
 import ItemFullDetail from "./ItemFullDetail";
 import ItemAddDialogContent from "./ItemAddDialogContent";
 import DocListAddDialog from "./DocListAddDialog";
+import { useState } from "react";
 
 const CompositeList = () => {
   //   const [mydata, addDataItem, modifyDataItem, removeDataItem] = useDataTest();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <>
@@ -20,8 +22,10 @@ const CompositeList = () => {
             </>
           );
         })}
+        <DocListAddDialog setDialogOpen={setDialogOpen} dialogOpen={dialogOpen}>
+          {<ItemAddDialogContent setDialogOpen={setDialogOpen}  />}
+        </DocListAddDialog>
       </DocList>
-      <DocListAddDialog>{<ItemAddDialogContent />}</DocListAddDialog>
     </>
   );
 };
