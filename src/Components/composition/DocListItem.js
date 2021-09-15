@@ -9,18 +9,18 @@ import {
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import { Assignment } from "@material-ui/icons";
 import { useState } from "react";
+
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import DocListItemFullDialog from "./DocListItemFullDialog";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
-    padding: 2,
-    margin: 3,
+    padding: 1,
+    margin: 10,
   },
   orange: {
     color: theme.palette.getContrastText(deepOrange[500]),
@@ -30,71 +30,66 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
   },
+  item: {
+    padding: 3,
+  },
 }));
 
-const DocListItem = ({ children, item, avatarname, details }) => {
+// const DocListItem = ({ children, item, avatarname, detailcomponent }) => {
+const DocListItem = ({ children, avatarname, detail }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [detail, setDetail] = useState(false);
-  const Element = details; //element v ktorom je dtail biew
-
-  const openDetail = (item) => {
-    console.log("Clicked: ", item.name);
-    setDetail(true);
-  };
 
   const handleClickOpen = () => {
+    console.log("click open");
     setOpen(true);
   };
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className={classes.item}>
+      {/* this part is only used for long description */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here.
+            We will send updates occasionally.
+          </DialogContentText>
+          {detail}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* this part is only used for short description */}
       <Container maxWidth="lg">
-        <ButtonBase onClick={() => handleClickOpen(item)}>
+        <ButtonBase onClick={handleClickOpen}>
           <Grid container>
-            <Grid item xs={2}>
+            <Grid item xs={2} >
               <Avatar className={`${classes.purple} ${classes.avatar}`}>
                 {avatarname ? avatarname : <Assignment />}
               </Avatar>
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={10} className={classes.item}>
               {children}
             </Grid>
           </Grid>
         </ButtonBase>
         <Divider />
       </Container>
-
-      <DocListItemFullDialog open={open} setOpen={setOpen} details={details} />
-
-      {/* <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Novy dokument</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Prosm vlozte vsetky hodnoty, minimalne tie , ktore su oznacene
-            hviezdickou
-          </DialogContentText>
-          <Element />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Zrus
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Odosli
-          </Button>
-        </DialogActions>
-      </Dialog> */}
-
     </div>
   );
 };

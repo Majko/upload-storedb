@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -7,6 +6,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Fab, makeStyles } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DocListAddDialog = ({ children }) => {
-  const [open, setOpen] = React.useState(false);
+const DocListAddDialog = ({ add, children, title }) => {
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
 
   const handleClickOpen = () => {
