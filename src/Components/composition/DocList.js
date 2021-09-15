@@ -1,14 +1,20 @@
-import DocListAddDialog from "./DocListAddDialog";
+import { Container, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 0,
+  },
+}));
 
 const DocList = ({ children, title }) => {
+  const classes = useStyles();
   return (
-    <>
-      <h2>{title}</h2>
-      {children}
-      <DocListAddDialog>
-        <p>moj dialoooog</p>
-      </DocListAddDialog>
-    </>
+    <div className={classes.root}>
+      <Container maxWidth="lg">
+        <h2>{title}</h2>
+        {children}
+      </Container>
+    </div>
   );
 };
 
