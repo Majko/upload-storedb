@@ -2,25 +2,27 @@ import DocList from "./DocList";
 import DocListItem from "./DocListItem";
 import ItemShortDetail from "./ItemShortDetail";
 import ItemFullDetail from "./ItemFullDetail";
+import ItemAddDialogContent from "./ItemAddDialogContent";
+import DocListAddDialog from "./DocListAddDialog";
 
 const CompositeList = () => {
   //   const [mydata, addDataItem, modifyDataItem, removeDataItem] = useDataTest();
 
   return (
-    // <DocList data={data} add={addDataItem} details={<DocDetails />}>
-    <DocList data={data} title="Vydane FA">
-      {data.map((item, index) => {
-        return (
-          <DocListItem
-            item={item}
-            key={index}
-            details={ItemFullDetail }
-          >
-            <ItemShortDetail item={item} />
-          </DocListItem>
-        );
-      })}
-    </DocList>
+    <>
+      <DocList data={data} title="Vydane FA">
+        {data.map((item, index) => {
+          return (
+            <>
+              <DocListItem key={index} detail={<ItemFullDetail item={item} />}>
+                <ItemShortDetail item={item} />
+              </DocListItem>
+            </>
+          );
+        })}
+      </DocList>
+      <DocListAddDialog>{<ItemAddDialogContent />}</DocListAddDialog>
+    </>
   );
 };
 
