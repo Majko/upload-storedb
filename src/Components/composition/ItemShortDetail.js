@@ -1,18 +1,30 @@
-import { Card, Grid } from "@material-ui/core";
+import { Card, Container, Grid, Typography } from "@material-ui/core";
 
 const ItemShortDetail = ({ item }) => {
   return (
-      <Grid container spacing={0}>
+    <Container>
+      <Grid container spacing={1}>
         <Grid item xs={10}>
-          <h3>itemized detail for: </h3>
+          <Typography variant="caption">itemized detail for:</Typography>
         </Grid>
         <Grid item xs={2}>
-          <h3>{item.name}</h3>
+          <Typography variant="subtitle1">
+            <b>{item.name}</b>
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <p>{item.content}</p>
+          <Typography variant="caption">{item.content}</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="caption">{item.status}</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="caption">
+            <b>{item.date}</b>
+          </Typography>
         </Grid>
       </Grid>
+    </Container>
   );
 };
 

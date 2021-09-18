@@ -1,16 +1,19 @@
 import { Button } from "@material-ui/core";
+import { useContext } from "react";
+import { AddDialogContext } from "./DocList"; //musime naimportovat Context na otvor/close Dialog
 
-const ItemAddDialogContent = ({setDialogOpen}) => {
+const ItemAddDialogContent = () => {
+  const {addDialogOpen, setAddDialogOpen} = useContext(AddDialogContext) // vyziadaj funkciu na zatvorenie
 
 const handleSave = ()=>{
   //save item
-  setDialogOpen(false)
+  setAddDialogOpen(false)
 }
 
   return (
     <>
       <h3>Pridavam nieco</h3>
-      <Button onClick={handleSave}>Uloz</Button>
+      <Button variant="contained" color="primary" onClick={handleSave}>Uloz</Button>
     </>
   );
 };
