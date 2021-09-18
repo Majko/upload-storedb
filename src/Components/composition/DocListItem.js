@@ -8,14 +8,12 @@ import {
 } from "@material-ui/core";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import { Assignment } from "@material-ui/icons";
-import { useState } from "react";
+import { createContext, useState } from "react";
 
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -27,69 +25,72 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: deepOrange[500],
   },
   purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+    color: theme.palette.getContrastText(deepPurple[200]),
+    backgroundColor: deepPurple[300],
   },
   item: {
-    padding: 3,
+    padding: 1,
+  },
+  buttonbase: {
+    width: "100%",
+    textAlign: "left",
   },
 }));
 
-// const DocListItem = ({ children, item, avatarname, detailcomponent }) => {
+export const DetailDialogContext = createContext();
+
 const DocListItem = ({ children, avatarname, detail }) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  // THe children will have to call
+  // const { detailDialogOpen, setDetailDialogOpen } = useContext(DetailDialogContext);
+  // in order to be able to close the dialog and teh to call setDetailDialogOpen(false)
+  const [detailDialogOpen, setDetailDialogOpen] = useState(false);
 
   const handleClickOpen = () => {
-    console.log("click open");
-    setOpen(true);
+    setDetailDialogOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setDetailDialogOpen(false);
   };
 
   return (
     <div className={classes.item}>
-      {/* this part is only used for long description */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
+      <DetailDialogContext.Provider
+        value={{ detailDialogOpen, setDetailDialogOpen }}
       >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          {detail}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
-      </Dialog>
-      {/* this part is only used for short description */}
-      <Container maxWidth="lg">
-        <ButtonBase onClick={handleClickOpen}>
-          <Grid container>
-            <Grid item xs={2} >
-              <Avatar className={`${classes.purple} ${classes.avatar}`}>
-                {avatarname ? avatarname : <Assignment />}
-              </Avatar>
+        {/* this part is only used for long description */}
+        <Dialog
+          open={detailDialogOpen}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To subscribe to this website, please enter your email address
+              here. We will send updates occasionally.
+            </DialogContentText>
+            {detail}
+          </DialogContent>
+        </Dialog>
+        {/* this part is only used for short description */}
+        <Container maxWidth="lg">
+          <ButtonBase className={classes.buttonbase} onClick={handleClickOpen}>
+            <Grid container>
+              <Grid item xs={2}>
+                <Avatar className={`${classes.purple} ${classes.avatar}`}>
+                  {avatarname ? avatarname : <Assignment />}
+                </Avatar>
+              </Grid>
+              <Grid item xs={10} className={classes.item}>
+                {children}
+              </Grid>
             </Grid>
-            <Grid item xs={10} className={classes.item}>
-              {children}
-            </Grid>
-          </Grid>
-        </ButtonBase>
-        <Divider />
-      </Container>
+          </ButtonBase>
+          <Divider />
+        </Container>
+      </DetailDialogContext.Provider>
     </div>
   );
 };

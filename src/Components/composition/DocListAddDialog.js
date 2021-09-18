@@ -1,12 +1,11 @@
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Fab, makeStyles } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import { useState } from "react";
+import { AddDialogContext } from "./DocList";
+import { useContext } from "react";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -19,15 +18,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DocListAddDialog = ({ children , setDialogOpen , dialogOpen}) => {
+const DocListAddDialog = ({ children }) => {
   const classes = useStyles();
+  const { addDialogOpen, setAddDialogOpen } = useContext(AddDialogContext);
 
   const handleClickOpen = () => {
-    setDialogOpen(true)
+    setAddDialogOpen(true);
   };
 
   const handleClose = () => {
-    setDialogOpen(false)
+    setAddDialogOpen(false);
   };
 
   return (
@@ -44,7 +44,7 @@ const DocListAddDialog = ({ children , setDialogOpen , dialogOpen}) => {
       </Fab>
       <Dialog
         fullScreen
-        open={dialogOpen}
+        open={addDialogOpen}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
@@ -56,14 +56,6 @@ const DocListAddDialog = ({ children , setDialogOpen , dialogOpen}) => {
           </DialogContentText>
           {children}
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Zrus
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Odosli
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
