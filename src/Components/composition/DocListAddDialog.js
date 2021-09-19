@@ -18,11 +18,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * @description Component adding "PLUS" icon to the list. Its children will form
+ * the  Content for Dialog when clicking on Add icon
+ * The children will use:  const { addDialogOpen, setAddDialogOpen } = useContext(AddDialogContext) 
+ * to reach the state of the dialog as weel as method used to open/close the dialog
+ * @param {Object} children - all children
+ * @returns Component
+ */
 const DocListAddDialog = ({ children }) => {
   const classes = useStyles();
   const { addDialogOpen, setAddDialogOpen } = useContext(AddDialogContext);
 
-  const handleClickOpen = () => {
+  const handleClickOpenAdd = () => {
     setAddDialogOpen(true);
   };
 
@@ -33,7 +41,7 @@ const DocListAddDialog = ({ children }) => {
   return (
     <div>
       <Fab
-        onClick={handleClickOpen}
+        onClick={handleClickOpenAdd}
         color="primary"
         size="medium"
         component="span"
