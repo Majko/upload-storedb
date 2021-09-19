@@ -6,25 +6,37 @@ import ItemAddDialogContent from "./ItemAddDialogContent";
 import DocListAddDialog from "./DocListAddDialog";
 import { useState } from "react";
 import { Button } from "@material-ui/core";
+import DocListDetailDialog from "./DocListDetailDialog";
+
+import { datasource } from "./testdata";
 
 const CompositeList = () => {
-  // const [dataArray, addDataItem, modifyDataItem, removeDataItem] = useDataTest();
-  const [mydata, nextPage] = useDataTest(5);
+  const {dataArray, nextPage, addItem, modifyItem, deleteItem} = useDataTest(5);
 
   return (
     <>
-      <DocList data={data} title="Vydane FA">
-        {mydata.map((item, index) => {
+      <DocList title="Vydane FA">
+        {dataArray.map((item, index) => {
           return (
-            <>
-              <DocListItem key={index} detail={<ItemFullDetail item={item} />}>
-                <ItemShortDetail key={index} item={item} />
+            <div key={index}>
+              <DocListItem item={item}>
+                <ItemShortDetail item={item} />
               </DocListItem>
-            </>
+            </div>
           );
         })}
-        <Button color="secondary" onClick={nextPage}> Dalsia strana</Button>
-        <DocListAddDialog>{<ItemAddDialogContent />}</DocListAddDialog>
+
+        <DocListAddDialog>
+          <ItemAddDialogContent addItem={addItem} />
+        </DocListAddDialog>
+        <DocListDetailDialog>
+          <ItemFullDetail deleteItem={deleteItem} modifyItem={modifyItem}/>
+        </DocListDetailDialog>
+
+        <Button color="secondary" onClick={nextPage}>
+          {" "}
+          Dalsia strana
+        </Button>
       </DocList>
     </>
   );
@@ -35,149 +47,41 @@ export default CompositeList;
 const useDataTest = (pageNum) => {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(pageNum);
-  const [dataArray, setDataArray] = useState(data.slice(start, end));
+  const [dataArray, setDataArray] = useState(datasource.slice(start, end));
 
   const nextPage = () => {
-    if ((dataArray.length ) < pageNum) return null;
-    const newStart = start + pageNum
-    const newEnd = end + pageNum
+    // if (dataArray.length < pageNum) return null;
+    const newStart = start + pageNum;
+    const newEnd = end + pageNum;
     console.log("nastavujem data:", newStart, " ", newEnd);
-    setDataArray((prevArray) => [...prevArray, ...data.slice(newStart, newEnd)]);
+    setDataArray((prevArray) => [
+      ...prevArray,
+      ...datasource.slice(newStart, newEnd),
+    ]);
     setStart(newStart);
     setEnd(newEnd);
   };
 
-  return [dataArray, nextPage];
-};
+  const addItem = (item) => {
+    setDataArray((previous) => [...previous, item]);
+  };
 
-const data = [
-  {
-    name: "A",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "open",
-  },
-  { name: "B", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  { name: "C", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "D",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  { name: "E", content: "eeeeeeeeeeeeeeee", date: "30.9.2021", status: "open" },
-  { name: "F", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "G",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "open",
-  },
-  { name: "H", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  { name: "I", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "J",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  { name: "K", content: "eeeeeeeeeeeeeeee", date: "30.9.2021", status: "open" },
-  { name: "L", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "M",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "open",
-  },
-  { name: "N", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "O",
-    content: "eeeeeeeeeeeeeeee",
-    date: "30.9.2021",
-    status: "closed",
-  },
-  {
-    name: "P",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "open",
-  },
-  { name: "R", content: "eeeeeeeeeeeeeeee", date: "30.9.2021", status: "open" },
-  { name: "S", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "T",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  { name: "U", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  { name: "V", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "Z",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "open",
-  },
-  { name: "B", content: "eeeeeeeeeeeeeeee", date: "30.9.2021", status: "open" },
-  { name: "C", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "A",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  {
-    name: "B",
-    content: "eeeeeeeeeeeeeeee",
-    date: "30.9.2021",
-    status: "closed",
-  },
-  { name: "C", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "A",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "open",
-  },
-  {
-    name: "B",
-    content: "eeeeeeeeeeeeeeee",
-    date: "30.9.2021",
-    status: "closed",
-  },
-  { name: "C", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "A",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  { name: "B", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "C",
-    content: "eeeeeeeeeeeeeeee",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  {
-    name: "A",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "open",
-  },
-  {
-    name: "B",
-    content: "eeeeeeeeeeeeeeee",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  { name: "C", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  {
-    name: "A",
-    content: "ssssssssssssssssss",
-    date: "12.9.2021",
-    status: "closed",
-  },
-  { name: "B", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-  { name: "C", content: "eeeeeeeeeeeeeeee", date: "12.9.2021", status: "open" },
-];
+  const modifyItem = (id, item) => {
+    const newArray = dataArray.map((elem) => {
+      return elem.id === id ? item : elem;
+    });
+    setDataArray(newArray);
+  };
+
+  const deleteItem = (id) => {
+    
+    let newArray = []
+    dataArray.forEach((elem) => {
+      if (elem.id !== id)
+       newArray.push(elem)
+    });
+    setDataArray(newArray);
+  };
+
+  return {dataArray, nextPage, addItem, modifyItem, deleteItem};
+};
