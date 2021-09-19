@@ -8,12 +8,9 @@ import {
 } from "@material-ui/core";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import { Assignment } from "@material-ui/icons";
-import { createContext, useState } from "react";
+import { useContext } from "react";
 
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import { DetailDialogContext } from "./DocList";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -29,68 +26,54 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: deepPurple[300],
   },
   item: {
-    padding: 1,
+    padding: 2,
   },
   buttonbase: {
-    width: "100%",
+    width: "90%",
     textAlign: "left",
   },
 }));
 
-export const DetailDialogContext = createContext();
 
-const DocListItem = ({ children, avatarname, detail }) => {
+/**
+ * @description A component of a DOcList item oth avatar and free space fpor a short Item description
+ * It will provide space for short description af an item within a DocList
+ * @param {Object} children All components children
+ * @param {String} avatarname A name we want to use for the avatar, first 2 leeters will be presented within the avatar 
+ * @param {Object} item A database Item we want to show
+ * @returns Component
+ */
+const DocListItem = ({ children, avatarname, item }) => {
   const classes = useStyles();
-  // THe children will have to call
-  // const { detailDialogOpen, setDetailDialogOpen } = useContext(DetailDialogContext);
-  // in order to be able to close the dialog and teh to call setDetailDialogOpen(false)
-  const [detailDialogOpen, setDetailDialogOpen] = useState(false);
+  const { setDetailDialogOpen, setDetailDialogItem } = useContext(
+    DetailDialogContext
+  );
 
   const handleClickOpen = () => {
     setDetailDialogOpen(true);
-  };
-
-  const handleClose = () => {
-    setDetailDialogOpen(false);
+    setDetailDialogItem(item);
   };
 
   return (
     <div className={classes.item}>
-      <DetailDialogContext.Provider
-        value={{ detailDialogOpen, setDetailDialogOpen }}
-      >
-        {/* this part is only used for long description */}
-        <Dialog
-          open={detailDialogOpen}
-          onClose={handleClose}
-          aria-labelledby="form-dialog-title"
+      <Container maxWidth="lg">
+        <ButtonBase
+          className={classes.buttonbase}
+          onClick={() => handleClickOpen()}
         >
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
-            </DialogContentText>
-            {detail}
-          </DialogContent>
-        </Dialog>
-        {/* this part is only used for short description */}
-        <Container maxWidth="lg">
-          <ButtonBase className={classes.buttonbase} onClick={handleClickOpen}>
-            <Grid container>
-              <Grid item xs={2}>
-                <Avatar className={`${classes.purple} ${classes.avatar}`}>
-                  {avatarname ? avatarname : <Assignment />}
-                </Avatar>
-              </Grid>
-              <Grid item xs={10} className={classes.item}>
-                {children}
-              </Grid>
+          <Grid container>
+            <Grid item xs={2}>
+              <Avatar className={`${classes.purple} ${classes.avatar}`}>
+                {avatarname ? avatarname : <Assignment />}
+              </Avatar>
             </Grid>
-          </ButtonBase>
-          <Divider />
-        </Container>
-      </DetailDialogContext.Provider>
+            <Grid item xs={10} className={classes.item}>
+              {children}
+            </Grid>
+          </Grid>
+        </ButtonBase>
+        <Divider />
+      </Container>
     </div>
   );
 };
