@@ -3,22 +3,18 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listPictures } from "../graphql/queries";
 import { deletePicture } from "../graphql/mutations";
 
-import { useFetchFile } from "./AWS/useFetchFile";
-import VisDocument from "./Visualize/VisDocument";
+import VisDocument from "../lib/visualize/VisDocument";
 
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Container, Fab } from "@material-ui/core";
 import DbFileCard from "./common/DbFileCard";
 import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
-import { PhotoCamera } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
-import { useHistory } from "react-router";
 
 import { useEffect } from "react";
 
-import { useRemoveFile } from "./AWS/removeFile";
+import { useRemoveFile } from "../lib/aws/removeFile";
 import DbFileListItem from "./common/DbFIleListItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -51,9 +47,7 @@ function ListDbImages(props) {
   const [dbFiles, setDbFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileprops, setFileprops] = useState(null);
-  const { fetchFile } = useFetchFile();
   const { removeFile } = useRemoveFile();
-  const history = useHistory();
 
   useEffect(() => {
     getDbFiles();
@@ -74,14 +68,14 @@ function ListDbImages(props) {
     }
   };
 
-  const selectImage = async (e, file) => {
-    e.preventDefault();
-    const { signedUrl, key } = await fetchFile(
-      file.file.identityID,
-      file.file.key
-    );
-    setFileprops({ signedUrl, key });
-  };
+  // const selectImage = async (e, file) => {
+  //   e.preventDefault();
+  //   const { signedUrl, key } = await fetchFile(
+  //     file.file.identityID,
+  //     file.file.key
+  //   );
+  //   setFileprops({ signedUrl, key });
+  // };
 
   const onRemove = async (filename, id) => {
     try {

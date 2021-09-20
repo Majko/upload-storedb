@@ -2,9 +2,9 @@ import { API, graphqlOperation } from "aws-amplify";
 import { createPicture } from "../graphql/mutations";
 import awsconfig from "../aws-exports";
 import { useState } from "react";
-import VisDocument from "./Visualize/VisDocument";
-import { useUploadFile } from "./AWS/useUploadFile";
-import useDocumentType from "./Visualize/useDocumentType";
+import VisDocument from "../lib/visualize/VisDocument";
+import { useUploadFile } from "../lib/aws/useUploadFile";
+import useDocumentType from "../lib/visualize/useDocumentType";
 
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -23,14 +23,6 @@ import TextField from "@material-ui/core/TextField";
 import { CardHeader, IconButton } from "@material-ui/core";
 import { DeleteOutlined } from "@material-ui/icons";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-});
 
 /**
  * @description Component uploading file to AWS
@@ -42,8 +34,6 @@ function UploadImageCard({ userData, file, removeHandler }) {
   const { uploadFile } = useUploadFile();
   const [docPurpose, setDocPurpose] = useState("1");
   const [description, setDescription] = useState("");
-
-  const classes = useStyles();
 
   const docType = useDocumentType();
 

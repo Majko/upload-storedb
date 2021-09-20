@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@material-ui/core";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
+import { deepOrange } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
 const DocumentItemChildren = ({ data, setDetail }) => {
   const classes = useStyles();
 
-  const handleClick = (item) => {
-    setDetail(data);
-  };
+  // const handleClick = (item) => {
+  //   setDetail(data);
+  // };
 
   return (
     <Grid container>

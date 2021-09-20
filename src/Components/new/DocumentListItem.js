@@ -4,7 +4,6 @@ import {
   Container,
   Divider,
   Grid,
-  Typography,
 } from "@material-ui/core";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core";

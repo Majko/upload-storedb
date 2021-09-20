@@ -3,12 +3,14 @@ import { useContext, useState } from "react";
 import { AddDialogContext } from "./DocList"; //musime naimportovat Context na otvor/close Dialog
 
 const ItemAddDialogContent = ({ addItem }) => {
-  const { addDialogOpen, setAddDialogOpen } = useContext(AddDialogContext); // vyziadaj funkciu na zatvorenie
+  const { setAddDialogOpen } = useContext(AddDialogContext); // vyziadaj funkciu na zatvorenie
   const [formstate, setFormstate] = useState({});
 
   const handleSave = (e) => {
-    addItem(formstate);
-    setAddDialogOpen(false);
+    if (formstate !== {}) {
+      addItem(formstate);
+      setAddDialogOpen(false);
+    }
   };
 
   const handleChange = (e) => {

@@ -1,4 +1,4 @@
-import { Card, Container, Grid, Typography } from "@material-ui/core";
+import {  Container, Grid, Typography } from "@material-ui/core";
 
 const ItemShortDetail = ({ item }) => {
   return (

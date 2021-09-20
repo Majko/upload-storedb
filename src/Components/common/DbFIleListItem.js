@@ -8,7 +8,7 @@ import WorkIcon from "@material-ui/icons/Work";
 import Typography from "@material-ui/core/Typography";
 import { Fragment } from "react";
 import { Badge } from "@material-ui/core";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
+import { deepOrange } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   inline: {
@@ -52,7 +52,7 @@ const DbFileListItem = ({ file, handleRemove, selectFile }) => {
           />
         </Badge>
       </ListItem>
-      <Divider variant="insdet" component="li" />
+      <Divider variant="inset" component="li" />
     </div>
   );
 };

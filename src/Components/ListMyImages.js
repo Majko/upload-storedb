@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Storage } from "aws-amplify";
-import VisDocument from "./Visualize/VisDocument";
-import { useRemoveFile } from "./AWS/removeFile";
-import { useFetchFile } from "./AWS/useFetchFile";
+import VisDocument from "../lib/visualize/VisDocument";
+import { useRemoveFile } from "../lib/aws/removeFile";
+import { useFetchFile } from "../lib/aws/useFetchFile";
 import { Button } from "@material-ui/core";
 
 /**

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import AppMenu from "./Components/AppMenu";
+import AppMenu from "./lib/menu/AppMenu";
 import UploadImage from "./Components/UploadImage";
 import ListAllImages from "./Components/ListAllImages";
 import ListDbImages from "./Components/ListDbImages";
@@ -8,7 +8,7 @@ import ListMyImages from "./Components/ListMyImages";
 import MultiPageImage from "./Components/MultiPageImage";
 // import ListVarItems from './Components/ListVarItems'
 import TestDocsList from "./Components/new/TestDocsList";
-import CompositeList from "./Components/composition/CompositeList";
+import CompositeList from "./lib/list/CompositeList";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -22,6 +22,7 @@ import useRegisterMyIdentityID from "./useRegisterMyIdentityID";
 
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Switcher from "./lib/menu/Switcher";
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
@@ -67,15 +68,12 @@ function App() {
       tenant,
       myGroups,
     });
-}, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
-
-
-  
+  }, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
 
   const signedOut = async () => {
     try {
       await Auth.signOut();
-    setUserData(null)
+      setUserData(null);
     } catch (error) {
       console.log("error signing out: ", error);
     }
@@ -86,7 +84,7 @@ function App() {
       <header className="App-header">
         <Container>
           <Router>
-            <AppMenu userData={userData} signedOut={signedOut} className={classes.menu} />
+          <AppMenu userData={userData} signedOut={signedOut} className={classes.menu} />
             <Switch>
               <Route path="/upload">
                 {userData ? (
@@ -132,9 +130,7 @@ function App() {
           </Router>
         </Container>
       </header>
-      <div className={classes.footer}>
-        {/* <AmplifySignOut /> */}
-      </div>
+      <div className={classes.footer}>{/* <AmplifySignOut /> */}</div>
     </div>
   );
 }
