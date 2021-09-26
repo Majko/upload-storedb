@@ -1,6 +1,6 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { useEffect } from "react";
-import { createUserIdentity } from "./graphql/mutations";
+import { createUserIdentity } from "../../graphql/mutations";
 
 /**
  * @description Function checks upon an appalication start whether I am already register in a DB, if not,

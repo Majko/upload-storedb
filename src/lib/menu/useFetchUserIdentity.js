@@ -1,7 +1,7 @@
 import { Auth } from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 import { useEffect, useState } from "react";
-import { listUserIdentitys } from "./graphql/queries";
+import { listUserIdentitys } from "../../graphql/queries";
 
 /**
  * @description Fetches all user identification details needed for other elements
