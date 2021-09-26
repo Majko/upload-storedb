@@ -94,3 +94,42 @@ export const onDeleteUserIdentity = /* GraphQL */ `
     }
   }
 `;
+export const onCreateClanok = /* GraphQL */ `
+  subscription OnCreateClanok($owner: String!) {
+    onCreateClanok(owner: $owner) {
+      id
+      name
+      content
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateClanok = /* GraphQL */ `
+  subscription OnUpdateClanok($owner: String!) {
+    onUpdateClanok(owner: $owner) {
+      id
+      name
+      content
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteClanok = /* GraphQL */ `
+  subscription OnDeleteClanok($owner: String!) {
+    onDeleteClanok(owner: $owner) {
+      id
+      name
+      content
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

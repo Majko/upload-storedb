@@ -112,3 +112,51 @@ export const deleteUserIdentity = /* GraphQL */ `
     }
   }
 `;
+export const createClanok = /* GraphQL */ `
+  mutation CreateClanok(
+    $input: CreateClanokInput!
+    $condition: ModelClanokConditionInput
+  ) {
+    createClanok(input: $input, condition: $condition) {
+      id
+      name
+      content
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateClanok = /* GraphQL */ `
+  mutation UpdateClanok(
+    $input: UpdateClanokInput!
+    $condition: ModelClanokConditionInput
+  ) {
+    updateClanok(input: $input, condition: $condition) {
+      id
+      name
+      content
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteClanok = /* GraphQL */ `
+  mutation DeleteClanok(
+    $input: DeleteClanokInput!
+    $condition: ModelClanokConditionInput
+  ) {
+    deleteClanok(input: $input, condition: $condition) {
+      id
+      name
+      content
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

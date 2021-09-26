@@ -77,3 +77,36 @@ export const listUserIdentitys = /* GraphQL */ `
     }
   }
 `;
+export const getClanok = /* GraphQL */ `
+  query GetClanok($id: ID!) {
+    getClanok(id: $id) {
+      id
+      name
+      content
+      status
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listClanoks = /* GraphQL */ `
+  query ListClanoks(
+    $filter: ModelClanokFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClanoks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        content
+        status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
