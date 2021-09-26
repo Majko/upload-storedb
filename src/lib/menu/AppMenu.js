@@ -17,7 +17,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-import { menuItems } from "./menuitems";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AppMenu({ userData, signedOut }) {
+function AppMenu({ userData, signedOut , routesConfig, title}) {
   let history = useHistory();
   const [drawerState, setDrawerState] = useState(false);
   const classes = useStyles();
@@ -69,7 +68,7 @@ function AppMenu({ userData, signedOut }) {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {menuItems.map((item, index) => {
+        {routesConfig.map((item, index) => {
           let MyIcon = item.icon;
           return (
             <ListItem
@@ -103,7 +102,7 @@ function AppMenu({ userData, signedOut }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Ucto.online
+            {title}
           </Typography>
 
           <IconButton
