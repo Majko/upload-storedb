@@ -30,15 +30,7 @@ const ItemAddDialogContent = ({ addItem }) => {
         autoComplete="off"
       >
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              id="id"
-              label="Id"
-              variant="standard"
-              name="id"
-              onChange={handleChange}
-            />
-          </Grid>
+
           <Grid item xs={12} md={6}>
             <TextField
               id="name"
@@ -63,15 +55,6 @@ const ItemAddDialogContent = ({ addItem }) => {
               label="Status"
               variant="standard"
               name="status"
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              id="date"
-              label="Date"
-              variant="standard"
-              name="date"
               onChange={handleChange}
             />
           </Grid>

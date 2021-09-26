@@ -25,7 +25,7 @@ const DocumentList = ({ dataArray }) => {
 
   useEffect(() => {
     setData(dataArray);
-  }, []);
+  }, [dataArray]);
 
   const removeData = (item) => {
     // TODO vymaz z DB
