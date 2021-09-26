@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Storage } from "aws-amplify";
-import VisDocument from "../lib/visualize/VisDocument";
+import VisDocument from "../../lib/visualize/VisDocument";
 
 /**
  * @description Shows all my files on my bucket

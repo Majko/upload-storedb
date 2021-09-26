@@ -1,10 +1,10 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { createPicture } from "../graphql/mutations";
-import awsconfig from "../aws-exports";
+import { createPicture } from "../../graphql/mutations";
+import awsconfig from "../../aws-exports";
 import { useState } from "react";
-import VisDocument from "../lib/visualize/VisDocument";
-import { useUploadFile } from "../lib/aws/useUploadFile";
-import useDocumentType from "../lib/visualize/useDocumentType";
+import VisDocument from "../../lib/visualize/VisDocument";
+import { useUploadFile } from "../../lib/aws/useUploadFile";
+import useDocumentType from "../../lib/visualize/useDocumentType";
 
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";

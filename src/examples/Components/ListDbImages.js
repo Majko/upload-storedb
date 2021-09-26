@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
-import { listPictures } from "../graphql/queries";
-import { deletePicture } from "../graphql/mutations";
+import { listPictures } from "../../graphql/queries";
+import { deletePicture } from "../../graphql/mutations";
 
-import VisDocument from "../lib/visualize/VisDocument";
+import VisDocument from "../../lib/visualize/VisDocument";
 
 import Typography from "@material-ui/core/Typography";
 import { Container, Fab } from "@material-ui/core";
@@ -14,7 +14,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import { useEffect } from "react";
 
-import { useRemoveFile } from "../lib/aws/removeFile";
+import { useRemoveFile } from "../../lib/aws/removeFile";
 import DbFileListItem from "./common/DbFIleListItem";
 
 const useStyles = makeStyles((theme) => ({

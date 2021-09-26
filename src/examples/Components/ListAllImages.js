@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Storage } from "aws-amplify";
-import VisDocument from "../lib/visualize/VisDocument";
+import VisDocument from "../../lib/visualize/VisDocument";
 
 /**
  * @description Reads lists of all identity IDs under surrent tenant, shows all images

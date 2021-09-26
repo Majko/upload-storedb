@@ -4,6 +4,16 @@ import { API } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
 
+// PRE MODEL: v schema.graphQL
+// type Clanok @model @auth(rules:[
+//   {allow:owner},
+//   ]) {
+//     id:ID!
+//     name: String!
+//     content: String
+//     status: String
+//   }
+
 /**
  *
  * @param {Integer} initialPageItems number of page items that will be loaded at the begining

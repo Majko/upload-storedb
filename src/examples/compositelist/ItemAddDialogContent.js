@@ -1,6 +1,7 @@
 import { Box, Button, Grid, TextField } from "@material-ui/core";
 import { useContext, useState } from "react";
-import { AddDialogContext } from "./DocList"; //musime naimportovat Context na otvor/close Dialog
+
+import { AddDialogContext }from "../../lib/list/DocList"; //musime naimportovat Context na otvor/close Dialog
 
 const ItemAddDialogContent = ({ addItem }) => {
   const { setAddDialogOpen } = useContext(AddDialogContext); // vyziadaj funkciu na zatvorenie

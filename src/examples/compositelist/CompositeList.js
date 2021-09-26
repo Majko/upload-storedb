@@ -1,11 +1,11 @@
-import DocList from "./DocList";
-import DocListItem from "./DocListItem";
+import DocList from "../../lib/list/DocList";
+import DocListItem from "../../lib/list/DocListItem";
 import ItemShortDetail from "./ItemShortDetail";
 import ItemFullDetail from "./ItemFullDetail";
 import ItemAddDialogContent from "./ItemAddDialogContent";
-import DocListAddDialog from "./DocListAddDialog";
+import DocListAddDialog from "../../lib/list/DocListAddDialog";
 import { Button } from "@material-ui/core";
-import DocListDetailDialog from "./DocListDetailDialog";
+import DocListDetailDialog from "../../lib/list/DocListDetailDialog";
 
 import useDataTest from "./useDataTest";
 

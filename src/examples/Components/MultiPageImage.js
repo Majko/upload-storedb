@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toPng } from "html-to-image";
-import VisDocument from "../lib/visualize/VisDocument";
+import VisDocument from "../../lib/visualize/VisDocument";
 
 /**
  * @description Component that reds image files one by one, after which 

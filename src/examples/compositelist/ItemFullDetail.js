@@ -1,5 +1,5 @@
 import { Button, Container, Grid } from "@material-ui/core";
-import { DetailDialogContext } from "./DocList";
+import { DetailDialogContext } from "../../lib/list/DocList";
 import { useContext } from "react";
 
 const ItemFullDetail = ({ item , deleteItem}) => {
@@ -23,9 +23,6 @@ const ItemFullDetail = ({ item , deleteItem}) => {
             <h3>FULL detail for item</h3>
           </Grid>
           <Grid item xs={2}>
-            <p>{detailDialogItem.id}</p>
-          </Grid>
-          <Grid item xs={2}>
             <p>{detailDialogItem.name}</p>
           </Grid>
           <Grid item xs={10}>
@@ -35,6 +32,7 @@ const ItemFullDetail = ({ item , deleteItem}) => {
             <p>{detailDialogItem.date}</p>
           </Grid>
           <Grid item xs={2}>
+            <p>Status:</p>
             <p>{detailDialogItem.status}</p>
           </Grid>
           <Grid item xs={12}>
