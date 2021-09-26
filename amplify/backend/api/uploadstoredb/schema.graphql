@@ -26,3 +26,12 @@ type UserIdentity @model @auth(rules:[
   tenant: String
   identityID: String
 }
+
+type Clanok @model @auth(rules:[
+{allow:owner},
+]) {
+  id:ID!
+  name: String!
+  content: String
+  status: String
+}
