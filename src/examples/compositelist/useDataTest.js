@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { API } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
+import { SearchContext } from "../../lib/list/DocList";
 
 // PRE MODEL: v schema.graphQL
 // type Clanok @model @auth(rules:[
@@ -19,13 +20,21 @@ import * as mutations from "../../graphql/mutations";
  * @param {Integer} initialPageItems number of page items that will be loaded at the begining
  * @returns {Object}  { dataArray, nextPage, addItem, modifyItem, deleteItem }
  */
-const useDataTest = (initialPageItems) => {
+const useDataTest = (initialPageItems, searchField) => {
   const [dataArray, setDataArray] = useState([]);
+  // const [searchField, setSearchField] = useState('');
   const [nextToken, setNextToken] = useState(null);
+
 
   useEffect(() => {
     nextPage(initialPageItems);
   }, []);
+
+  let myfilter = {
+    name: {
+      contains: searchField,
+    },
+  };
 
   const nextPage = async (pageItems) => {
     //   in case of previous nextToken was null => no new item to paginate, we end
@@ -33,15 +42,18 @@ const useDataTest = (initialPageItems) => {
     const list = await API.graphql({
       query: queries.listClanoks,
       variables: {
+        filter: myfilter,
         limit: pageItems,
         nextToken: nextToken,
       },
     });
-    const items = list.data.listClanoks.items;
-    const newNextToken = list.data.listClanoks.nextToken;
-    // if no new items available, set the nexToken to 'END'
-    newNextToken === null ? setNextToken("END") : setNextToken(newNextToken);
-    setDataArray((prevList) => [...prevList, ...items]);
+    if (list.data.listClanoks !== null) {
+      const items = list.data.listClanoks.items;
+      const newNextToken = list.data.listClanoks.nextToken;
+      // if no new items available, set the nexToken to 'END'
+      newNextToken === null ? setNextToken("END") : setNextToken(newNextToken);
+      setDataArray((prevList) => [...prevList, ...items]);
+    }
   };
 
   const addItem = async (item) => {
