@@ -78,8 +78,8 @@ export const listUserIdentitys = /* GraphQL */ `
   }
 `;
 export const getClanok = /* GraphQL */ `
-  query GetClanok($id: ID!) {
-    getClanok(id: $id) {
+  query GetClanok($name: String!) {
+    getClanok(name: $name) {
       id
       name
       content
@@ -92,11 +92,19 @@ export const getClanok = /* GraphQL */ `
 `;
 export const listClanoks = /* GraphQL */ `
   query ListClanoks(
+    $name: String
     $filter: ModelClanokFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listClanoks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listClanoks(
+      name: $name
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         name

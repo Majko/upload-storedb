@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import { Assignment } from "@material-ui/icons";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import { DetailDialogContext } from "./DocList";
 
@@ -34,12 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 /**
  * @description A component of a DOcList item oth avatar and free space fpor a short Item description
  * It will provide space for short description af an item within a DocList
  * @param {Object} children All components children
- * @param {String} avatarname A name we want to use for the avatar, first 2 leeters will be presented within the avatar 
+ * @param {String} avatarname A name we want to use for the avatar, first 2 leeters will be presented within the avatar
  * @param {Object} item A database Item we want to show
  * @returns Component
  */
@@ -56,7 +55,6 @@ const DocListItem = ({ children, avatarname, item }) => {
 
   return (
     <div className={classes.item}>
-      <Container maxWidth="lg">
         <ButtonBase
           className={classes.buttonbase}
           onClick={() => handleClickOpen()}
@@ -68,12 +66,15 @@ const DocListItem = ({ children, avatarname, item }) => {
               </Avatar>
             </Grid>
             <Grid item xs={10} className={classes.item}>
-              {children}
+              {React.Children.map(children, (child) =>
+                React.cloneElement(child, {
+                  item: item,
+                })
+              )}
             </Grid>
           </Grid>
         </ButtonBase>
         <Divider />
-      </Container>
     </div>
   );
 };

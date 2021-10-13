@@ -25,27 +25,46 @@ const useDataTest = (initialPageItems, searchField) => {
   // const [searchField, setSearchField] = useState('');
   const [nextToken, setNextToken] = useState(null);
 
-
   useEffect(() => {
-    nextPage(initialPageItems);
-  }, []);
+    setDataArray([]);
+    setNextToken(null);
+    nextPage();
+    console.log("userData useEffect volany:", searchField);
+  }, [initialPageItems]);
 
-  let myfilter = {
-    name: {
-      contains: searchField,
-    },
+  console.log("usreDAta dataArray:", dataArray);
+
+  const searchItems = async (searchTerm) => {
+    const options = {
+      filter: {
+        name: {
+          contains: searchTerm,
+        },
+      },
+    };
+
+    const list = await API.graphql({
+      query: queries.listClanoks,
+      variables: options,
+    });
+    if (list.data.listClanoks !== null) {
+      const items = list.data.listClanoks.items;
+      setNextToken("END");
+      setDataArray(items);
+      console.log("useData items:", items);
+    }
   };
 
-  const nextPage = async (pageItems) => {
+  const nextPage = async () => {
+    const options = {
+      limit: initialPageItems,
+      nextToken: nextToken,
+    };
     //   in case of previous nextToken was null => no new item to paginate, we end
     if (nextToken === "END") return;
     const list = await API.graphql({
       query: queries.listClanoks,
-      variables: {
-        filter: myfilter,
-        limit: pageItems,
-        nextToken: nextToken,
-      },
+      variables: options,
     });
     if (list.data.listClanoks !== null) {
       const items = list.data.listClanoks.items;
@@ -53,6 +72,7 @@ const useDataTest = (initialPageItems, searchField) => {
       // if no new items available, set the nexToken to 'END'
       newNextToken === null ? setNextToken("END") : setNextToken(newNextToken);
       setDataArray((prevList) => [...prevList, ...items]);
+      console.log("useData items:", items);
     }
   };
 
@@ -106,7 +126,7 @@ const useDataTest = (initialPageItems, searchField) => {
     setDataArray(newArray);
   };
 
-  return { dataArray, nextPage, addItem, modifyItem, deleteItem };
+  return { dataArray, nextPage, addItem, modifyItem, deleteItem, searchItems };
 };
 
 export default useDataTest;
