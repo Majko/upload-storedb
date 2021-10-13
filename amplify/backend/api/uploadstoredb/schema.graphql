@@ -29,7 +29,7 @@ type UserIdentity @model @auth(rules:[
 
 type Clanok @model @auth(rules:[
 {allow:owner},
-]) {
+]) @key(fields:["name"]) {
   id:ID!
   name: String!
   content: String
