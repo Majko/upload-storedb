@@ -10,14 +10,18 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "baseui": "^10.1.0",
+    "chart.js": "^3.6.0",
     "html-to-image": "^1.7.0",
     "react": "^17.0.0",
+    "react-chartjs-2": "^3.3.0",
     "react-dom": "^17.0.0",
     "react-pdf": "^5.3.2",
+    "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "styletron-engine-atomic": "^1.4.8",
     "styletron-react": "^6.0.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
