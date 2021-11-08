@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { API } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
-import { SearchContext } from "../../lib/list/DocList";
 
 // PRE MODEL: v schema.graphQL
 // type Clanok @model @auth(rules:[
@@ -20,19 +19,16 @@ import { SearchContext } from "../../lib/list/DocList";
  * @param {Integer} initialPageItems number of page items that will be loaded at the begining
  * @returns {Object}  { dataArray, nextPage, addItem, modifyItem, deleteItem }
  */
-const useDataTest = (initialPageItems, searchField) => {
+const useDataTest = (initialPageItems) => {
   const [dataArray, setDataArray] = useState([]);
-  // const [searchField, setSearchField] = useState('');
   const [nextToken, setNextToken] = useState(null);
 
   useEffect(() => {
     setDataArray([]);
     setNextToken(null);
     nextPage();
-    console.log("userData useEffect volany:", searchField);
   }, [initialPageItems]);
 
-  console.log("usreDAta dataArray:", dataArray);
 
   const searchItems = async (searchTerm) => {
     const options = {
@@ -51,7 +47,6 @@ const useDataTest = (initialPageItems, searchField) => {
       const items = list.data.listClanoks.items;
       setNextToken("END");
       setDataArray(items);
-      console.log("useData items:", items);
     }
   };
 
@@ -72,7 +67,6 @@ const useDataTest = (initialPageItems, searchField) => {
       // if no new items available, set the nexToken to 'END'
       newNextToken === null ? setNextToken("END") : setNextToken(newNextToken);
       setDataArray((prevList) => [...prevList, ...items]);
-      console.log("useData items:", items);
     }
   };
 
