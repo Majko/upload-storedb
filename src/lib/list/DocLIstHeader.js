@@ -1,5 +1,4 @@
 import {
-  Container,
   Grid,
   makeStyles,
   InputBase,
@@ -15,14 +14,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: grey[200],
     margin: 3,
   },
+  title:{
+    margin:8
+  },
   searchbox: {
     display: "flex",
-    alignItems: "right",
-    width: '100%',
-    marginTop:10
+    marginTop:10,
+    marginRight:10
   },
   inbox:{
       margin:3,
+      width:"100%",
   }
 }));
 
@@ -41,7 +43,9 @@ const DocListHeader = ({ title, setSearchField }) => {
     <div className={classes.root}>
       <Grid container>
         <Grid item xs={6}>
+          <div className={classes.title}>
           <h2>{title}</h2>
+          </div>
         </Grid>
         <Grid item xs={6}>
           <Paper component="form" className={classes.searchbox}>

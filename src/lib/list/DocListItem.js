@@ -1,35 +1,14 @@
-import {
-  ButtonBase,
-  Divider,
-  Container,
-  Grid,
-  Avatar,
-  makeStyles,
-} from "@material-ui/core";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
-import { Assignment } from "@material-ui/icons";
+import { ButtonBase, makeStyles } from "@material-ui/core";
 import React, { useContext } from "react";
 
 import { DetailDialogContext } from "./DocList";
 
 const useStyles = makeStyles((theme) => ({
-  avatar: {
-    padding: 1,
-    margin: 10,
-  },
-  orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: deepOrange[500],
-  },
-  purple: {
-    color: theme.palette.getContrastText(deepPurple[200]),
-    backgroundColor: deepPurple[300],
-  },
   item: {
     padding: 2,
   },
   buttonbase: {
-    width: "90%",
+    width: "100%",
     textAlign: "left",
   },
 }));
@@ -55,26 +34,16 @@ const DocListItem = ({ children, avatarname, item }) => {
 
   return (
     <div className={classes.item}>
-        <ButtonBase
-          className={classes.buttonbase}
-          onClick={() => handleClickOpen()}
-        >
-          <Grid container>
-            <Grid item xs={2}>
-              <Avatar className={`${classes.purple} ${classes.avatar}`}>
-                {avatarname ? avatarname : <Assignment />}
-              </Avatar>
-            </Grid>
-            <Grid item xs={10} className={classes.item}>
-              {React.Children.map(children, (child) =>
-                React.cloneElement(child, {
-                  item: item,
-                })
-              )}
-            </Grid>
-          </Grid>
-        </ButtonBase>
-        <Divider />
+      <ButtonBase
+        className={classes.buttonbase}
+        onClick={() => handleClickOpen()}
+      >
+        {React.Children.map(children, (child) =>
+          React.cloneElement(child, {
+            item: item,
+          })
+        )}
+      </ButtonBase>
     </div>
   );
 };

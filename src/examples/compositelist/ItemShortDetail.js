@@ -1,30 +1,75 @@
-import {  Container, Grid, Typography } from "@material-ui/core";
+import { green, grey, red } from "@material-ui/core/colors";
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+import { ArrowDownward, AttachMoney } from "@material-ui/icons";
 
-const ItemShortDetail = ({ item }) => {
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: grey[0],
+    marginTop: 10,
+    width:"100%" ,
+    },
+  increase: {
+    color: red[900],
+    mr: 1,
+    marginRight: 10,
+  },
+  avater: {
+    backgroundColor: green[300],
+    height: 56,
+    width: 56,
+  },
+  grid: {
+    justifyContent: "space-between",
+  },
+  box: {
+    pt: 2,
+    display: "flex",
+    alignItems: "center",
+  },
+});
+
+const ItemShortDetail = ({item}) => {
+  const classes = useStyles();
   return (
-    <Container>
-      <Grid container spacing={1}>
-        <Grid item xs={10}>
-          <Typography variant="caption">itemized detail for:</Typography>
+    <Card className={classes.root}>
+      <CardContent>
+        <Grid container spacing={3} className={classes.grid}>
+          <Grid item>
+            <Typography color="textSecondary" gutterBottom variant="h6">
+              {item.name}
+            </Typography>
+            <Typography color="textPrimary" variant="h4">
+              $2,000
+            </Typography>
+            <Typography color="textSecondary" gutterBottom variant="h6">
+              {item.content}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Avatar className={classes.avater}>
+              <AttachMoney />
+            </Avatar>
+          </Grid>
         </Grid>
-        <Grid item xs={2}>
-          <Typography variant="subtitle1">
-            <b>{item.name}</b>
+        <Box className={classes.box}>
+          <ArrowDownward className={classes.increase} />
+          <Typography className={classes.increase} variant="body2">
+            12%
           </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="caption">{item.content}</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="caption">{item.status}</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="caption">
-            <b>{item.date}</b>
+          <Typography color="textSecondary" variant="caption">
+            {item.status}
           </Typography>
-        </Grid>
-      </Grid>
-    </Container>
+        </Box>
+      </CardContent>
+    </Card>
   );
 };
 
