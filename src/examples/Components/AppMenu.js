@@ -63,6 +63,7 @@ function AppMenu({ userData, signedOut }) {
   };
 
   const menuItems = [
+    { label: "Home", route: "/home" },
     { label: "Upload image", route: "/upload" },
     { label: "DB List", route: "/listdb" },
     { label: "Multipage picture", route: "/multipage" },
