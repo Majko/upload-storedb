@@ -6,11 +6,18 @@ import ListMyImages from "../examples/Components/ListMyImages";
 import MultiPageImage from "../examples/Components/MultiPageImage";
 import TestDocsList from "../examples/Components/new/TestDocsList";
 import CompositeList from "./compositelist/CompositeList";
+import Home from "../lib/home/Home";
 
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 
 export const routesConfig = [
+  {
+    label: "Home",
+    route: "/",
+    component: Home,
+    icon: MailIcon,
+  },
   {
     label: "Upload image",
     route: "/upload",
