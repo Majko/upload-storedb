@@ -1,10 +1,9 @@
 import { Container, makeStyles } from "@material-ui/core";
-import { Route,  Switch } from "react-router";
+import { Route, Switch } from "react-router";
 
 import { Auth } from "aws-amplify";
 import AppMenu from "./AppMenu";
 import { useEffect, useState } from "react";
-
 
 import useFetchUserIdentity from "./useFetchUserIdentity";
 import useRegisterMyIdentityID from "./useRegisterMyIdentityID";
@@ -23,35 +22,36 @@ const useStyles = makeStyles({
   },
 });
 
-const MainApp = ({   routesConfig }) => {
+const MainApp = ({ routesConfig }) => {
   const classes = useStyles();
   const [userData, setUserData] = useState({});
 
+  // fetch all necessary user data
+  const {
+    username,
+    myIdentityId,
+    groupIdentityIds,
+    tenant,
+    myGroups,
+  } = useFetchUserIdentity();
 
-    // fetch all necessary user data
-    const {
-        username,
-        myIdentityId,
-        groupIdentityIds,
-        tenant,
-        myGroups,
-      } = useFetchUserIdentity();
-      // Make sure my ID is registered in DB
-      useRegisterMyIdentityID(
-        userData.myIdentityId,
-        userData.groupIdentityIds,
-        userData.tenant
-      );
-    
-      useEffect(() => {
-        setUserData({
-          username,
-          myIdentityId,
-          groupIdentityIds,
-          tenant,
-          myGroups,
-        });
-      }, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
+  
+  // Make sure my ID is registered in DB
+  useRegisterMyIdentityID(
+    userData.myIdentityId,
+    userData.groupIdentityIds,
+    userData.tenant
+  );
+
+  useEffect(() => {
+    setUserData({
+      username,
+      myIdentityId,
+      groupIdentityIds,
+      tenant,
+      myGroups,
+    });
+  }, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
 
   const signedOut = async () => {
     try {
@@ -64,12 +64,12 @@ const MainApp = ({   routesConfig }) => {
 
   return (
     <>
-      <Container>
+      <Container maxWidth="xl">
         <AppMenu
           userData={userData}
           signedOut={signedOut}
           routesConfig={routesConfig}
-          title='Ucto.online'
+          title="Ucto.online"
           className={classes.menu}
         />
         <Switch>
