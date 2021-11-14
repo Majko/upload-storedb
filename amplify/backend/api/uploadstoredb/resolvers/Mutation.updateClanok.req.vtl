@@ -83,12 +83,6 @@
 #end
 ## [End] Check authMode and execute owner/group checks **
 
-## [Start] Set the primary @key. **
-#set( $modelObjectKey = {
-  "name": $util.dynamodb.toDynamoDB($ctx.args.input.name)
-} )
-## [End] Set the primary @key. **
-
 #set( $optionalNonNullableFields = ["name"] )
 #foreach( $field in $optionalNonNullableFields )
   #if( $context.arguments.input.keySet().contains($field) && $util.isNull($context.args.input.get($field)) )

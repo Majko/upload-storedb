@@ -16,7 +16,23 @@ $util.qr($context.args.input.put("updatedAt", $util.defaultIfNull($ctx.args.inpu
   ## No Static Group Authorization Rules **
 
 
-  ## No Dynamic Group Authorization Rules **
+  ## [Start] Dynamic Group Authorization Checks **
+  ## Authorization rule: { allow: groups, groupsField: "tenant", groupClaim: "cognito:groups" **
+  #set( $userGroups = $util.defaultIfNull($ctx.identity.claims.get("cognito:groups"), []) )
+  #set( $isDynamicGroupAuthorized = $util.defaultIfNull($isDynamicGroupAuthorized, false) )
+  #foreach( $userGroup in $userGroups )
+    #if( $util.isList($ctx.args.input.tenant) )
+      #if( $ctx.args.input.tenant.contains($userGroup) )
+        #set( $isDynamicGroupAuthorized = true )
+      #end
+    #end
+    #if( $util.isString($ctx.args.input.tenant) )
+      #if( $ctx.args.input.tenant == $userGroup )
+        #set( $isDynamicGroupAuthorized = true )
+      #end
+    #end
+  #end
+  ## [End] Dynamic Group Authorization Checks **
 
 
   ## [Start] Owner Authorization Checks **
@@ -52,7 +68,7 @@ $util.qr($context.args.input.put("updatedAt", $util.defaultIfNull($ctx.args.inpu
 ## [End] Check authMode and execute owner/group checks **
 
 ## [Start] Prepare DynamoDB PutItem Request. **
-$util.qr($context.args.input.put("__typename", "Clanok"))
+$util.qr($context.args.input.put("__typename", "InvoiceIssued"))
 #if( $modelObjectKey )
   #set( $condition = {
   "expression": "",

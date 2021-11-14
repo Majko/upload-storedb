@@ -29,9 +29,78 @@ type UserIdentity @model @auth(rules:[
 
 type Clanok @model @auth(rules:[
 {allow:owner},
-]) @key(fields:["name"]) {
+]){
   id:ID!
   name: String!
   content: String
   status: String
+}
+
+
+
+type UserInvoiceIssued @model @auth(rules:[
+{allow:owner},
+{allow: groups, groupsField: "tenant", operations: [read, update, create]}
+]){
+  id:ID!
+  symVar: String!
+  dateTax: String
+  dateAccounting: String
+  dateDue: String!
+  text: String!
+  PartnerIdentitys: [PartnerIdentity] @connection(keyName:"byInvoiceIssued", fields:["id"])
+  accountNo: String
+  bank: String!
+  priceNone: Int
+  priceLow: Int
+  priceHigh: Int
+ }
+
+
+enum ClassificationVAT {
+  inland
+  nonSubsume
+}
+
+enum Accounting {
+  a3FV
+  a4FV
+  Bez
+  Nevim
+}
+
+type InvoiceIssued @model @auth(rules:[
+{allow:owner},
+{allow: groups, groupsField: "tenant", operations: [read, update, create]}
+]){
+  id:ID!
+  symVar: String!
+  dateTax: String
+  dateAccounting: String
+  dateDue: String!
+  accounting: Accounting!
+  classificationVAT: ClassificationVAT!
+  text: String!
+  PartnerIdentitys: [PartnerIdentity] @connection(keyName:"byInvoiceIssued", fields:["id"])
+  accountNo: String
+  bank: String!
+  priceNone: Int
+  priceLow: Int
+  priceHigh: Int
+ }
+
+type PartnerIdentity @model @auth(rules:[
+{allow:owner},
+{allow: groups, groupsField: "tenant", operations: [read]}
+])
+  @key(name:"byInvoiceIssued", fields:["id"]) {
+  id:ID!
+  company: String!
+  division: String
+  name: String
+  city: String!
+  street: String!
+  zip: String!
+  ico: String!
+  dic: String!
 }
