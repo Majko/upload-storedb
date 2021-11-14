@@ -160,3 +160,312 @@ export const deleteClanok = /* GraphQL */ `
     }
   }
 `;
+export const createUserInvoiceIssued = /* GraphQL */ `
+  mutation CreateUserInvoiceIssued(
+    $input: CreateUserInvoiceIssuedInput!
+    $condition: ModelUserInvoiceIssuedConditionInput
+  ) {
+    createUserInvoiceIssued(input: $input, condition: $condition) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateUserInvoiceIssued = /* GraphQL */ `
+  mutation UpdateUserInvoiceIssued(
+    $input: UpdateUserInvoiceIssuedInput!
+    $condition: ModelUserInvoiceIssuedConditionInput
+  ) {
+    updateUserInvoiceIssued(input: $input, condition: $condition) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteUserInvoiceIssued = /* GraphQL */ `
+  mutation DeleteUserInvoiceIssued(
+    $input: DeleteUserInvoiceIssuedInput!
+    $condition: ModelUserInvoiceIssuedConditionInput
+  ) {
+    deleteUserInvoiceIssued(input: $input, condition: $condition) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createInvoiceIssued = /* GraphQL */ `
+  mutation CreateInvoiceIssued(
+    $input: CreateInvoiceIssuedInput!
+    $condition: ModelInvoiceIssuedConditionInput
+  ) {
+    createInvoiceIssued(input: $input, condition: $condition) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      accounting
+      classificationVAT
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateInvoiceIssued = /* GraphQL */ `
+  mutation UpdateInvoiceIssued(
+    $input: UpdateInvoiceIssuedInput!
+    $condition: ModelInvoiceIssuedConditionInput
+  ) {
+    updateInvoiceIssued(input: $input, condition: $condition) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      accounting
+      classificationVAT
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteInvoiceIssued = /* GraphQL */ `
+  mutation DeleteInvoiceIssued(
+    $input: DeleteInvoiceIssuedInput!
+    $condition: ModelInvoiceIssuedConditionInput
+  ) {
+    deleteInvoiceIssued(input: $input, condition: $condition) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      accounting
+      classificationVAT
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createPartnerIdentity = /* GraphQL */ `
+  mutation CreatePartnerIdentity(
+    $input: CreatePartnerIdentityInput!
+    $condition: ModelPartnerIdentityConditionInput
+  ) {
+    createPartnerIdentity(input: $input, condition: $condition) {
+      id
+      company
+      division
+      name
+      city
+      street
+      zip
+      ico
+      dic
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updatePartnerIdentity = /* GraphQL */ `
+  mutation UpdatePartnerIdentity(
+    $input: UpdatePartnerIdentityInput!
+    $condition: ModelPartnerIdentityConditionInput
+  ) {
+    updatePartnerIdentity(input: $input, condition: $condition) {
+      id
+      company
+      division
+      name
+      city
+      street
+      zip
+      ico
+      dic
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deletePartnerIdentity = /* GraphQL */ `
+  mutation DeletePartnerIdentity(
+    $input: DeletePartnerIdentityInput!
+    $condition: ModelPartnerIdentityConditionInput
+  ) {
+    deletePartnerIdentity(input: $input, condition: $condition) {
+      id
+      company
+      division
+      name
+      city
+      street
+      zip
+      ico
+      dic
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

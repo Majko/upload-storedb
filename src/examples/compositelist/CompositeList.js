@@ -20,7 +20,7 @@ const CompositeList = () => {
     modifyItem,
     deleteItem,
     searchItems,
-  } = useDataTest(2, searchField);
+  } = useDataTest(5, searchField);
 
   const handleNextPage = async () => {
     await nextPage();

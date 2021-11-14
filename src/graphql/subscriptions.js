@@ -133,3 +133,285 @@ export const onDeleteClanok = /* GraphQL */ `
     }
   }
 `;
+export const onCreateUserInvoiceIssued = /* GraphQL */ `
+  subscription OnCreateUserInvoiceIssued($owner: String!) {
+    onCreateUserInvoiceIssued(owner: $owner) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateUserInvoiceIssued = /* GraphQL */ `
+  subscription OnUpdateUserInvoiceIssued($owner: String!) {
+    onUpdateUserInvoiceIssued(owner: $owner) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteUserInvoiceIssued = /* GraphQL */ `
+  subscription OnDeleteUserInvoiceIssued($owner: String!) {
+    onDeleteUserInvoiceIssued(owner: $owner) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateInvoiceIssued = /* GraphQL */ `
+  subscription OnCreateInvoiceIssued($owner: String!) {
+    onCreateInvoiceIssued(owner: $owner) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      accounting
+      classificationVAT
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateInvoiceIssued = /* GraphQL */ `
+  subscription OnUpdateInvoiceIssued($owner: String!) {
+    onUpdateInvoiceIssued(owner: $owner) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      accounting
+      classificationVAT
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteInvoiceIssued = /* GraphQL */ `
+  subscription OnDeleteInvoiceIssued($owner: String!) {
+    onDeleteInvoiceIssued(owner: $owner) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      accounting
+      classificationVAT
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreatePartnerIdentity = /* GraphQL */ `
+  subscription OnCreatePartnerIdentity($owner: String!) {
+    onCreatePartnerIdentity(owner: $owner) {
+      id
+      company
+      division
+      name
+      city
+      street
+      zip
+      ico
+      dic
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdatePartnerIdentity = /* GraphQL */ `
+  subscription OnUpdatePartnerIdentity($owner: String!) {
+    onUpdatePartnerIdentity(owner: $owner) {
+      id
+      company
+      division
+      name
+      city
+      street
+      zip
+      ico
+      dic
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeletePartnerIdentity = /* GraphQL */ `
+  subscription OnDeletePartnerIdentity($owner: String!) {
+    onDeletePartnerIdentity(owner: $owner) {
+      id
+      company
+      division
+      name
+      city
+      street
+      zip
+      ico
+      dic
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

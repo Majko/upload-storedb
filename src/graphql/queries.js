@@ -78,8 +78,8 @@ export const listUserIdentitys = /* GraphQL */ `
   }
 `;
 export const getClanok = /* GraphQL */ `
-  query GetClanok($name: String!) {
-    getClanok(name: $name) {
+  query GetClanok($id: ID!) {
+    getClanok(id: $id) {
       id
       name
       content
@@ -92,24 +92,205 @@ export const getClanok = /* GraphQL */ `
 `;
 export const listClanoks = /* GraphQL */ `
   query ListClanoks(
-    $name: String
     $filter: ModelClanokFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listClanoks(
-      name: $name
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listClanoks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
         content
         status
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getUserInvoiceIssued = /* GraphQL */ `
+  query GetUserInvoiceIssued($id: ID!) {
+    getUserInvoiceIssued(id: $id) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listUserInvoiceIssueds = /* GraphQL */ `
+  query ListUserInvoiceIssueds(
+    $filter: ModelUserInvoiceIssuedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserInvoiceIssueds(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        symVar
+        dateTax
+        dateAccounting
+        dateDue
+        text
+        PartnerIdentitys {
+          nextToken
+        }
+        accountNo
+        bank
+        priceNone
+        priceLow
+        priceHigh
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getInvoiceIssued = /* GraphQL */ `
+  query GetInvoiceIssued($id: ID!) {
+    getInvoiceIssued(id: $id) {
+      id
+      symVar
+      dateTax
+      dateAccounting
+      dateDue
+      accounting
+      classificationVAT
+      text
+      PartnerIdentitys {
+        items {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      accountNo
+      bank
+      priceNone
+      priceLow
+      priceHigh
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listInvoiceIssueds = /* GraphQL */ `
+  query ListInvoiceIssueds(
+    $filter: ModelInvoiceIssuedFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInvoiceIssueds(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        symVar
+        dateTax
+        dateAccounting
+        dateDue
+        accounting
+        classificationVAT
+        text
+        PartnerIdentitys {
+          nextToken
+        }
+        accountNo
+        bank
+        priceNone
+        priceLow
+        priceHigh
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getPartnerIdentity = /* GraphQL */ `
+  query GetPartnerIdentity($id: ID!) {
+    getPartnerIdentity(id: $id) {
+      id
+      company
+      division
+      name
+      city
+      street
+      zip
+      ico
+      dic
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listPartnerIdentitys = /* GraphQL */ `
+  query ListPartnerIdentitys(
+    $filter: ModelPartnerIdentityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPartnerIdentitys(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        company
+        division
+        name
+        city
+        street
+        zip
+        ico
+        dic
         createdAt
         updatedAt
         owner

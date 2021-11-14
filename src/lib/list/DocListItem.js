@@ -37,7 +37,8 @@ const DocListItem = ({ children, avatarname, item }) => {
       <ButtonBase
         className={classes.buttonbase}
         onClick={() => handleClickOpen()}
-      >
+      > 
+      {/* Children with injected item */}
         {React.Children.map(children, (child) =>
           React.cloneElement(child, {
             item: item,

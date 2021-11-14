@@ -1,15 +1,16 @@
-import { Button, Container, Grid } from "@material-ui/core";
+import { Button, Container, Grid, Typography } from "@material-ui/core";
 import { DetailDialogContext } from "../../lib/list/DocList";
 import { useContext } from "react";
 
-const ItemFullDetail = ({ item , deleteItem}) => {
+const ItemFullDetail = ({ item, deleteItem }) => {
   const { setDetailDialogOpen, detailDialogItem } = useContext(
     DetailDialogContext
   );
 
   const handleDelete = () => {
-    deleteItem(detailDialogItem.id)
-    setDetailDialogOpen(false)
+    // deleteItem(detailDialogItem.name);
+    deleteItem(detailDialogItem.id);
+    setDetailDialogOpen(false);
   };
 
   return (
@@ -17,23 +18,20 @@ const ItemFullDetail = ({ item , deleteItem}) => {
       <Container>
         <Grid container spacing={0}>
           <Grid item xs={12}>
-            <Button onClick={handleDelete}>Zmaz</Button>
-          </Grid>
-          <Grid item xs={12}>
-            <h3>FULL detail for item</h3>
-          </Grid>
-          <Grid item xs={2}>
-            <p>{detailDialogItem.name}</p>
+            <Typography variant="h6">Name: {detailDialogItem.name}</Typography>
           </Grid>
           <Grid item xs={10}>
-            <p>{detailDialogItem.content}</p>
+            <Typography variant="h6">
+              Content: {detailDialogItem.content}
+            </Typography>
           </Grid>
           <Grid item xs={2}>
-            <p>{detailDialogItem.date}</p>
+            <Typography variant="h6">Date: {detailDialogItem.date}</Typography>
           </Grid>
           <Grid item xs={2}>
-            <p>Status:</p>
-            <p>{detailDialogItem.status}</p>
+            <Typography variant="h6">
+              Status: {detailDialogItem.status}
+            </Typography>
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -42,6 +40,10 @@ const ItemFullDetail = ({ item , deleteItem}) => {
               onClick={() => setDetailDialogOpen(false)}
             >
               Zavri
+            </Button>
+
+            <Button onClick={handleDelete} color="secondary">
+              Zmaz
             </Button>
           </Grid>
         </Grid>

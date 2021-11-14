@@ -3,10 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Amplify from "aws-amplify";
 import { Auth } from "aws-amplify";
 import awsconfig from "../../src/aws-exports";
-import { withAuthenticator } from "@aws-amplify/ui-react";
-// import { AmplifySignOut } from "@aws-amplify/ui-react";
-
-import { makeStyles } from "@material-ui/core/styles";
+import {  withAuthenticator } from "@aws-amplify/ui-react";
 
 import { routesConfig } from "./routesConfig";
 import MainApp from "../lib/menu/MainApp"
@@ -14,16 +11,7 @@ import MainApp from "../lib/menu/MainApp"
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
-const useStyles = makeStyles({
-  footer: {
-    position: "fixed",
-    bottom: 0,
-    width: "100%",
-  },
-});
-
 function TopApp() {
-  const classes = useStyles();
 
   // vyzaduje a konfiguracia routes v tvare:
   // 
@@ -42,7 +30,6 @@ function TopApp() {
           <MainApp routesConfig={routesConfig} />
         </Router>
       </header>
-      <div className={classes.footer}>{/* <AmplifySignOut /> */}</div>
     </div>
   );
 }
