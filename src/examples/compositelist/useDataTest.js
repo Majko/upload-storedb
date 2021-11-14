@@ -21,6 +21,8 @@ import * as mutations from "../../graphql/mutations";
  */
 const useDataTest = (initialPageItems) => {
   const [dataArray, setDataArray] = useState([]);
+  //TODO, tu bude komplet list , po nacitavani jednotlivych pages
+  const [fullDataArray, setFullDataArray] = useState([]); 
   const [nextToken, setNextToken] = useState(null);
 
   useEffect(() => {
@@ -66,7 +68,8 @@ const useDataTest = (initialPageItems) => {
       const newNextToken = list.data.listClanoks.nextToken;
       // if no new items available, set the nexToken to 'END'
       newNextToken === null ? setNextToken("END") : setNextToken(newNextToken);
-      setDataArray((prevList) => [...prevList, ...items]);
+      setFullDataArray((prevList) => [...prevList, ...items]);
+      setDataArray((prevList) => [...items]);
     }
   };
 
@@ -81,6 +84,7 @@ const useDataTest = (initialPageItems) => {
         },
       },
     });
+    setFullDataArray((previous) => [...previous, newItem.data.createClanok]);
     setDataArray((previous) => [...previous, newItem.data.createClanok]);
   };
 
@@ -100,6 +104,7 @@ const useDataTest = (initialPageItems) => {
     const newArray = dataArray.map((elem) => {
       return elem.id === id ? item : elem;
     });
+    setFullDataArray(newArray);
     setDataArray(newArray);
   };
 
@@ -117,6 +122,7 @@ const useDataTest = (initialPageItems) => {
     dataArray.forEach((elem) => {
       if (elem.id !== id) newArray.push(elem);
     });
+    setFullDataArray(newArray);
     setDataArray(newArray);
   };
 
