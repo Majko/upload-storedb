@@ -1,5 +1,6 @@
 import { Container, makeStyles } from "@material-ui/core";
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
 
 import { Auth } from "aws-amplify";
 import AppMenu from "./AppMenu";
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
 const MainApp = ({ routesConfig }) => {
   const classes = useStyles();
   const [userData, setUserData] = useState({});
+  let history = useHistory();
 
   // fetch all necessary user data
   const {
@@ -35,7 +37,6 @@ const MainApp = ({ routesConfig }) => {
     myGroups,
   } = useFetchUserIdentity();
 
-  
   // Make sure my ID is registered in DB
   useRegisterMyIdentityID(
     userData.myIdentityId,
@@ -56,7 +57,9 @@ const MainApp = ({ routesConfig }) => {
   const signedOut = async () => {
     try {
       await Auth.signOut();
-      setUserData(null);
+      setUserData({ username: null });
+      // reload the page
+      history.go(0)
     } catch (error) {
       console.log("error signing out: ", error);
     }
@@ -73,7 +76,7 @@ const MainApp = ({ routesConfig }) => {
           className={classes.menu}
         />
         <Switch>
-          {userData &&
+          {userData.username &&
             routesConfig.map((route) => (
               <Route
                 key={route.route}
