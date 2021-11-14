@@ -16,7 +16,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-
+import { AmplifySignOut } from "@aws-amplify/ui-react";
+import { blue, red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,15 +34,13 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     width: 150,
   },
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: "auto",
+  amplifySignIn: {
+    backgroundColor: red[400],
+    color: blue[500],
   },
 }));
 
-function AppMenu({ userData, signedOut , routesConfig, title}) {
+function AppMenu({ userData, signedOut, routesConfig, title }) {
   let history = useHistory();
   const [drawerState, setDrawerState] = useState(false);
   const classes = useStyles();
@@ -59,6 +58,12 @@ function AppMenu({ userData, signedOut , routesConfig, title}) {
     }
     setDrawerState(open);
   };
+
+  const handleRedirect =()=>{
+    return (
+      history.go(0)
+    )
+  }
 
   // menuItems is imported from external file
   const list = () => (
@@ -101,10 +106,10 @@ function AppMenu({ userData, signedOut , routesConfig, title}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} onClick={handleRedirect}>
             {title}
           </Typography>
-
+          {/* <AmplifySignOut className={classes.signout}>"Odhlas sa"</AmplifySignOut> */}
           <IconButton
             edge="start"
             color="inherit"
