@@ -160,126 +160,6 @@ export const deleteClanok = /* GraphQL */ `
     }
   }
 `;
-export const createUserInvoiceIssued = /* GraphQL */ `
-  mutation CreateUserInvoiceIssued(
-    $input: CreateUserInvoiceIssuedInput!
-    $condition: ModelUserInvoiceIssuedConditionInput
-  ) {
-    createUserInvoiceIssued(input: $input, condition: $condition) {
-      id
-      symVar
-      dateTax
-      dateAccounting
-      dateDue
-      text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      accountNo
-      bank
-      priceNone
-      priceLow
-      priceHigh
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateUserInvoiceIssued = /* GraphQL */ `
-  mutation UpdateUserInvoiceIssued(
-    $input: UpdateUserInvoiceIssuedInput!
-    $condition: ModelUserInvoiceIssuedConditionInput
-  ) {
-    updateUserInvoiceIssued(input: $input, condition: $condition) {
-      id
-      symVar
-      dateTax
-      dateAccounting
-      dateDue
-      text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      accountNo
-      bank
-      priceNone
-      priceLow
-      priceHigh
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteUserInvoiceIssued = /* GraphQL */ `
-  mutation DeleteUserInvoiceIssued(
-    $input: DeleteUserInvoiceIssuedInput!
-    $condition: ModelUserInvoiceIssuedConditionInput
-  ) {
-    deleteUserInvoiceIssued(input: $input, condition: $condition) {
-      id
-      symVar
-      dateTax
-      dateAccounting
-      dateDue
-      text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      accountNo
-      bank
-      priceNone
-      priceLow
-      priceHigh
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
 export const createInvoiceIssued = /* GraphQL */ `
   mutation CreateInvoiceIssued(
     $input: CreateInvoiceIssuedInput!
@@ -291,31 +171,30 @@ export const createInvoiceIssued = /* GraphQL */ `
       dateTax
       dateAccounting
       dateDue
-      accounting
-      classificationVAT
       text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
+      Partner {
+        id
+        company
+        division
+        name
+        city
+        street
+        zip
+        ico
+        dic
+        email
+        tenant
+        createdAt
+        updatedAt
+        owner
       }
       accountNo
       bank
       priceNone
       priceLow
       priceHigh
+      status
+      tenant
       createdAt
       updatedAt
       owner
@@ -333,31 +212,30 @@ export const updateInvoiceIssued = /* GraphQL */ `
       dateTax
       dateAccounting
       dateDue
-      accounting
-      classificationVAT
       text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
+      Partner {
+        id
+        company
+        division
+        name
+        city
+        street
+        zip
+        ico
+        dic
+        email
+        tenant
+        createdAt
+        updatedAt
+        owner
       }
       accountNo
       bank
       priceNone
       priceLow
       priceHigh
+      status
+      tenant
       createdAt
       updatedAt
       owner
@@ -375,31 +253,30 @@ export const deleteInvoiceIssued = /* GraphQL */ `
       dateTax
       dateAccounting
       dateDue
-      accounting
-      classificationVAT
       text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
+      Partner {
+        id
+        company
+        division
+        name
+        city
+        street
+        zip
+        ico
+        dic
+        email
+        tenant
+        createdAt
+        updatedAt
+        owner
       }
       accountNo
       bank
       priceNone
       priceLow
       priceHigh
+      status
+      tenant
       createdAt
       updatedAt
       owner
@@ -421,6 +298,8 @@ export const createPartnerIdentity = /* GraphQL */ `
       zip
       ico
       dic
+      email
+      tenant
       createdAt
       updatedAt
       owner
@@ -442,6 +321,8 @@ export const updatePartnerIdentity = /* GraphQL */ `
       zip
       ico
       dic
+      email
+      tenant
       createdAt
       updatedAt
       owner
@@ -463,6 +344,8 @@ export const deletePartnerIdentity = /* GraphQL */ `
       zip
       ico
       dic
+      email
+      tenant
       createdAt
       updatedAt
       owner

@@ -110,77 +110,6 @@ export const listClanoks = /* GraphQL */ `
     }
   }
 `;
-export const getUserInvoiceIssued = /* GraphQL */ `
-  query GetUserInvoiceIssued($id: ID!) {
-    getUserInvoiceIssued(id: $id) {
-      id
-      symVar
-      dateTax
-      dateAccounting
-      dateDue
-      text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      accountNo
-      bank
-      priceNone
-      priceLow
-      priceHigh
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listUserInvoiceIssueds = /* GraphQL */ `
-  query ListUserInvoiceIssueds(
-    $filter: ModelUserInvoiceIssuedFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserInvoiceIssueds(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        symVar
-        dateTax
-        dateAccounting
-        dateDue
-        text
-        PartnerIdentitys {
-          nextToken
-        }
-        accountNo
-        bank
-        priceNone
-        priceLow
-        priceHigh
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
 export const getInvoiceIssued = /* GraphQL */ `
   query GetInvoiceIssued($id: ID!) {
     getInvoiceIssued(id: $id) {
@@ -189,31 +118,30 @@ export const getInvoiceIssued = /* GraphQL */ `
       dateTax
       dateAccounting
       dateDue
-      accounting
-      classificationVAT
       text
-      PartnerIdentitys {
-        items {
-          id
-          company
-          division
-          name
-          city
-          street
-          zip
-          ico
-          dic
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
+      Partner {
+        id
+        company
+        division
+        name
+        city
+        street
+        zip
+        ico
+        dic
+        email
+        tenant
+        createdAt
+        updatedAt
+        owner
       }
       accountNo
       bank
       priceNone
       priceLow
       priceHigh
+      status
+      tenant
       createdAt
       updatedAt
       owner
@@ -233,17 +161,30 @@ export const listInvoiceIssueds = /* GraphQL */ `
         dateTax
         dateAccounting
         dateDue
-        accounting
-        classificationVAT
         text
-        PartnerIdentitys {
-          nextToken
+        Partner {
+          id
+          company
+          division
+          name
+          city
+          street
+          zip
+          ico
+          dic
+          email
+          tenant
+          createdAt
+          updatedAt
+          owner
         }
         accountNo
         bank
         priceNone
         priceLow
         priceHigh
+        status
+        tenant
         createdAt
         updatedAt
         owner
@@ -264,6 +205,8 @@ export const getPartnerIdentity = /* GraphQL */ `
       zip
       ico
       dic
+      email
+      tenant
       createdAt
       updatedAt
       owner
@@ -291,6 +234,8 @@ export const listPartnerIdentitys = /* GraphQL */ `
         zip
         ico
         dic
+        email
+        tenant
         createdAt
         updatedAt
         owner
