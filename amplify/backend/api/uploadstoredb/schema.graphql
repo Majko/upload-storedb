@@ -5,57 +5,91 @@ type S3Object {
   key: String!
 }
 
-type Picture @model @auth(rules:[
-{allow:owner},
-{allow: groups, groupsField: "tenant", operations: [read]}
-]) {
+type Picture
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "tenant", operations: [read] }
+    ]
+  ) {
   id: ID!
   name: String
   owner: String
   tenant: String
-  description:String
+  description: String
   file: S3Object
 }
 
-type UserIdentity @model @auth(rules:[
-{allow:owner},
-{allow: groups, groupsField: "tenant", operations: [read]}
-]) {
+type UserIdentity
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "tenant", operations: [read] }
+    ]
+  ) {
   id: ID!
   owner: String
   tenant: String
   identityID: String
 }
 
-type Clanok @model @auth(rules:[
-{allow:owner},
-]){
-  id:ID!
+type Clanok @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
   name: String!
   content: String
   status: String
 }
 
-
-
-type UserInvoiceIssued @model @auth(rules:[
-{allow:owner},
-{allow: groups, groupsField: "tenant", operations: [read, update, create]}
-]){
-  id:ID!
+type InvoiceIssued
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      {
+        allow: groups
+        groupsField: "tenant"
+        operations: [read, update, create]
+      }
+    ]
+  ) {
+  id: ID!
   symVar: String!
   dateTax: String
   dateAccounting: String
   dateDue: String!
   text: String!
-  PartnerIdentitys: [PartnerIdentity] @connection(keyName:"byInvoiceIssued", fields:["id"])
+  Partner: PartnerIdentity @connection
   accountNo: String
   bank: String!
   priceNone: Int
   priceLow: Int
   priceHigh: Int
- }
+  status: InvoiceStatus!
+  tenant: String
+}
 
+type PartnerIdentity
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: groups, groupsField: "tenant", operations: [read] }
+    ]
+  ) {
+  id: ID!
+  company: String!
+  division: String
+  name: String
+  city: String!
+  street: String!
+  zip: String!
+  ico: String!
+  dic: String!
+  email: AWSEmail
+  tenant: String
+}
 
 enum ClassificationVAT {
   inland
@@ -69,38 +103,7 @@ enum Accounting {
   Nevim
 }
 
-type InvoiceIssued @model @auth(rules:[
-{allow:owner},
-{allow: groups, groupsField: "tenant", operations: [read, update, create]}
-]){
-  id:ID!
-  symVar: String!
-  dateTax: String
-  dateAccounting: String
-  dateDue: String!
-  accounting: Accounting!
-  classificationVAT: ClassificationVAT!
-  text: String!
-  PartnerIdentitys: [PartnerIdentity] @connection(keyName:"byInvoiceIssued", fields:["id"])
-  accountNo: String
-  bank: String!
-  priceNone: Int
-  priceLow: Int
-  priceHigh: Int
- }
-
-type PartnerIdentity @model @auth(rules:[
-{allow:owner},
-{allow: groups, groupsField: "tenant", operations: [read]}
-])
-  @key(name:"byInvoiceIssued", fields:["id"]) {
-  id:ID!
-  company: String!
-  division: String
-  name: String
-  city: String!
-  street: String!
-  zip: String!
-  ico: String!
-  dic: String!
+enum InvoiceStatus {
+  new
+  processed
 }
