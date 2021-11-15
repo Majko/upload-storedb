@@ -1,9 +1,9 @@
 import { Box, Button, Grid, TextField } from "@material-ui/core";
 import { useContext, useState } from "react";
 
-import { AddDialogContext } from "../../lib/list/DocList"; //musime naimportovat Context na otvor/close Dialog
+import { AddDialogContext }from "../../lib/list/DocList"; //musime naimportovat Context na otvor/close Dialog
 
-const AddPartner = ({ addItem }) => {
+const ItemAddDialogContent = ({ addItem }) => {
   const { setAddDialogOpen } = useContext(AddDialogContext); // vyziadaj funkciu na zatvorenie
   const [formstate, setFormstate] = useState({});
 
@@ -21,7 +21,7 @@ const AddPartner = ({ addItem }) => {
 
   return (
     <>
-      <h3>Novy partner</h3>
+      <h3>Pridavam nieco</h3>
       <Box
         component="form"
         sx={{
@@ -31,30 +31,31 @@ const AddPartner = ({ addItem }) => {
         autoComplete="off"
       >
         <Grid container spacing={3}>
+
           <Grid item xs={12} md={6}>
             <TextField
-              id="company"
-              label="company"
+              id="symVar"
+              label="Variabinlny symbol"
               variant="standard"
-              name="company"
+              name="symVar"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="division"
-              label="division"
+              id="dateTax"
+              label="dateTax"
               variant="standard"
-              name="division"
+              name="dateTax"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="name"
-              label="name"
+              id="dateDue"
+              label="dateDue"
               variant="standard"
-              name="name"
+              name="dateDue"
               onChange={handleChange}
             />
           </Grid>
@@ -69,46 +70,55 @@ const AddPartner = ({ addItem }) => {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="city"
-              label="city"
+              id="partner"
+              label="partner"
               variant="standard"
-              name="city"
+              name="partner"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="street"
-              label="street"
+              id="accountNo"
+              label="accountNo"
               variant="standard"
-              name="street"
+              name="accountNo"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="zip"
-              label="zip"
+              id="priceNone"
+              label="priceNone"
               variant="standard"
-              name="zip"
+              name="priceNone"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="ico"
-              label="ico"
+              id="priceLow"
+              label="priceLow"
               variant="standard"
-              name="ico"
+              name="priceLow"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="dic"
-              label="dic"
+              id="priceHigh"
+              label="priceHigh"
               variant="standard"
-              name="dic"
+              name="priceHigh"
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <TextField
+              id="status"
+              label="Status"
+              variant="standard"
+              name="status"
               onChange={handleChange}
             />
           </Grid>
@@ -123,4 +133,4 @@ const AddPartner = ({ addItem }) => {
   );
 };
 
-export default AddPartner;
+export default ItemAddDialogContent;

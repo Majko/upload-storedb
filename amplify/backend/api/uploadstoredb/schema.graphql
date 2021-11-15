@@ -88,7 +88,7 @@ type PartnerIdentity
   ico: String!
   dic: String!
   email: AWSEmail
-  tenant: String
+  tenant: String!
 }
 
 enum ClassificationVAT {
