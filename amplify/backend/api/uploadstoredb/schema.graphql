@@ -60,7 +60,7 @@ type InvoiceIssued
   dateAccounting: String
   dateDue: String!
   text: String!
-  Partner: PartnerIdentity @connection
+  Partner: PartnerIdentity @connection 
   accountNo: String
   bank: String!
   priceNone: Int
@@ -77,7 +77,8 @@ type PartnerIdentity
       { allow: owner }
       { allow: groups, groupsField: "tenant", operations: [read] }
     ]
-  ) {
+  )
+  @key(name:"byInvoiceIssued", fields:["id"]) {
   id: ID!
   company: String!
   division: String
