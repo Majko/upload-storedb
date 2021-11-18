@@ -16,5 +16,23 @@
         "uploadstoredb5ce5bad7": {}
       }
     }
+  },
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uploadstoredb-test-225019-authRole",
+      "UnauthRoleArn": "arn:aws:iam::515270216214:role/amplify-uploadstoredb-test-225019-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::515270216214:role/amplify-uploadstoredb-test-225019-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-uploadstoredb-test-225019-deployment",
+      "UnauthRoleName": "amplify-uploadstoredb-test-225019-unauthRole",
+      "StackName": "amplify-uploadstoredb-test-225019",
+      "StackId": "arn:aws:cloudformation:eu-central-1:515270216214:stack/amplify-uploadstoredb-test-225019/31b69a30-4727-11ec-bb64-0297c1c5a944",
+      "AmplifyAppId": "d1xp0dooqurr4b"
+    },
+    "categories": {
+      "auth": {
+        "uploadstoredb5ce5bad7": {}
+      }
+    }
   }
 }
