@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import UserContext from "../../lib/menu/MainApp";
 
 import { API } from "aws-amplify";
 import * as queries from "../../graphql/queries";
@@ -20,17 +22,18 @@ import * as mutations from "../../graphql/mutations";
 //     zip: String!
 //     ico: String!
 //     dic: String!
+//     tenant: String
 //   }
-  
+
 /**
  *
  * @param {Integer} initialPageItems number of page items that will be loaded at the begining
  * @returns {Object}  { dataArray, nextPage, addItem, modifyItem, deleteItem }
  */
-const useDataTest = (initialPageItems) => {
+const useDataPartnerIdentity = (initialPageItems, searchfild, user) => {
   const [dataArray, setDataArray] = useState([]);
   //TODO, tu bude komplet list , po nacitavani jednotlivych pages
-  const [fullDataArray, setFullDataArray] = useState([]); 
+  const [fullDataArray, setFullDataArray] = useState([]);
   const [nextToken, setNextToken] = useState(null);
 
   useEffect(() => {
@@ -38,7 +41,6 @@ const useDataTest = (initialPageItems) => {
     setNextToken(null);
     nextPage();
   }, [initialPageItems]);
-
 
   const searchItems = async (searchTerm) => {
     const options = {
@@ -82,14 +84,22 @@ const useDataTest = (initialPageItems) => {
   };
 
   const addItem = async (item) => {
+    let itemWithTenant = item
+    itemWithTenant.tenant=user.tenant
     const newItem = await API.graphql({
       query: mutations.createPartnerIdentity,
       variables: {
-        input: item,
+        input: itemWithTenant,
       },
     });
-    setFullDataArray((previous) => [...previous, newItem.data.createPartnerIdentity]);
-    setDataArray((previous) => [...previous, newItem.data.createPartnerIdentity]);
+    setFullDataArray((previous) => [
+      ...previous,
+      newItem.data.createPartnerIdentity,
+    ]);
+    setDataArray((previous) => [
+      ...previous,
+      newItem.data.createPartnerIdentity,
+    ]);
   };
 
   const modifyItem = async (id, item) => {
@@ -133,4 +143,4 @@ const useDataTest = (initialPageItems) => {
   return { dataArray, nextPage, addItem, modifyItem, deleteItem, searchItems };
 };
 
-export default useDataTest;
+export default useDataPartnerIdentity;

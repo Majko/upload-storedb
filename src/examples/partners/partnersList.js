@@ -7,12 +7,16 @@ import DocListAddDialog from "../../lib/list/DocListAddDialog";
 import { Button } from "@material-ui/core";
 import DocListDetailDialog from "../../lib/list/DocListDetailDialog";
 
-import useDataInvoiceIssued from "./useDataInvoiceIssued";
-import { useState } from "react";
+import useDataPartnerIdentity from "./useDataPartnerIdentity";
+import { useContext, useState } from "react";
 import DocListHeader from "../../lib/list/DocLIstHeader";
+import { UserContext } from "../../lib/menu/MainApp";
 
 const CompositeList = () => {
   const [searchField, setSearchField] = useState("");
+  //ziskaj user context
+  const user = useContext(UserContext);
+  
   const {
     dataArray,
     nextPage,
@@ -20,7 +24,7 @@ const CompositeList = () => {
     modifyItem,
     deleteItem,
     searchItems,
-  } = useDataInvoiceIssued(5, searchField);
+  } = useDataPartnerIdentity(5, searchField, user);
 
   const handleNextPage = async () => {
     await nextPage();
@@ -30,6 +34,7 @@ const CompositeList = () => {
     setSearchField(field);
     await searchItems(field);
   };
+
 
   return (
     <>

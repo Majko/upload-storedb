@@ -7,6 +7,7 @@ import MultiPageImage from "../examples/Components/MultiPageImage";
 import TestDocsList from "../examples/Components/new/TestDocsList";
 import CompositeList from "./compositelist/CompositeList";
 import InvoiceIssuedList from "./invoiceIssued/InvoiceIssuedList";
+import PartnerList from "./partners/partnersList";
 import Home from "../lib/home/Home";
 
 import InboxIcon from "@material-ui/icons/MoveToInbox";
@@ -71,6 +72,12 @@ export const routesConfig = [
     label: "Issued invoices",
     route: "/invoiceIssuedList",
     component: InvoiceIssuedList,
+    icon: MailIcon,
+  },
+  {
+    label: "Partners",
+    route: "/PartnesList",
+    component: PartnerList,
     icon: MailIcon,
   },
 ];

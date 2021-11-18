@@ -21,7 +21,7 @@ const ItemAddDialogContent = ({ addItem }) => {
 
   return (
     <>
-      <h3>Pridavam nieco</h3>
+      <h3>Pridavam Partnera</h3>
       <Box
         component="form"
         sx={{
@@ -31,97 +31,98 @@ const ItemAddDialogContent = ({ addItem }) => {
         autoComplete="off"
       >
         <Grid container spacing={3}>
+        {/* company: String!
+        division: String
+        name: String
+        city: String!
+        street: String!
+        zip: String!
+        ico: String!
+        dic: String!
+        email: AWSEmail
+        tenant: String! */}
 
           <Grid item xs={12} md={6}>
             <TextField
-              id="symVar"
-              label="Variabinlny symbol"
+              id="company"
+              label="company"
               variant="standard"
-              name="symVar"
+              name="company"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="dateTax"
-              label="dateTax"
+              id="division"
+              label="division"
               variant="standard"
-              name="dateTax"
+              name="division"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="dateDue"
-              label="dateDue"
+              id="city"
+              label="city"
               variant="standard"
-              name="dateDue"
+              name="city"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="text"
-              label="text"
+              id="street"
+              label="street"
               variant="standard"
-              name="text"
+              name="street"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="partner"
-              label="partner"
+              id="zip"
+              label="zip"
               variant="standard"
-              name="partner"
+              name="zip"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="accountNo"
-              label="accountNo"
+              id="ico"
+              label="ico"
               variant="standard"
-              name="accountNo"
+              name="ico"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="priceNone"
-              label="priceNone"
+              id="dic"
+              label="dic"
               variant="standard"
-              name="priceNone"
+              name="dic"
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              id="priceLow"
-              label="priceLow"
+              id="email"
+              label="email"
               variant="standard"
-              name="priceLow"
+              name="email"
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          {/* <Grid item xs={12} md={6}>
             <TextField
-              id="priceHigh"
-              label="priceHigh"
+              id="tenant"
+              label="tenant"
               variant="standard"
-              name="priceHigh"
+              name="tenant"
               onChange={handleChange}
             />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              id="status"
-              label="Status"
-              variant="standard"
-              name="status"
-              onChange={handleChange}
-            />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <Button variant="contained" color="primary" onClick={handleSave}>
               Uloz

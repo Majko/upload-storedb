@@ -17,20 +17,49 @@ const ItemFullDetail = ({ item, deleteItem }) => {
     <div>
       <Container>
         <Grid container spacing={0}>
-          <Grid item xs={12}>
-            <Typography variant="h6">Name: {detailDialogItem.name}</Typography>
-          </Grid>
-          <Grid item xs={10}>
-            <Typography variant="h6">
-              Content: {detailDialogItem.content}
+          <Grid item xs={12} md={12}>
+            <Typography color="textPrimary" variant="h4">
+              {detailDialogItem.company}
             </Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Typography variant="h6">Date: {detailDialogItem.date}</Typography>
+          <Grid item xs={12} md={12}>
+            <Typography color="textSecondary" gutterBottom variant="h6">
+              Mesto: {detailDialogItem.city}
+            </Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Typography variant="h6">
-              Status: {detailDialogItem.status}
+          <Grid item xs={12} md={6}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              Ulica: {detailDialogItem.street}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              PSČ: {detailDialogItem.zip}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              Meno: {detailDialogItem.name}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              Divizia: {detailDialogItem.division}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              IČO: {detailDialogItem.ico}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              DIČ: {detailDialogItem.dic}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              Email: {detailDialogItem.email}
             </Typography>
           </Grid>
           <Grid item xs={12}>

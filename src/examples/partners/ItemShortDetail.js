@@ -1,28 +1,29 @@
-import { green, grey, red } from "@material-ui/core/colors";
+import { blue, green, grey, red } from "@material-ui/core/colors";
 import {
   Avatar,
   Box,
   Card,
   CardContent,
-  Grid,
+  // Grid,
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { ArrowDownward, AttachMoney } from "@material-ui/icons";
+import Grid from '@mui/material/Grid'
+import BusinessIcon from "@mui/icons-material/Business";
 
 const useStyles = makeStyles({
   root: {
     backgroundColor: grey[0],
     marginTop: 10,
-    width:"100%" ,
-    },
+    width: "100%",
+  },
   increase: {
     color: red[900],
     mr: 1,
     marginRight: 10,
   },
-  avater: {
-    backgroundColor: green[300],
+  avatar: {
+    backgroundColor: blue[600],
     height: 56,
     width: 56,
   },
@@ -36,38 +37,30 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemShortDetail = ({item}) => {
+const ItemShortDetail = ({ item }) => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <CardContent>
         <Grid container spacing={3} className={classes.grid}>
-          <Grid item>
-            <Typography color="textSecondary" gutterBottom variant="h6">
-              {item.name}
-            </Typography>
-            <Typography color="textPrimary" variant="h4">
-              $2,000
-            </Typography>
-            <Typography color="textSecondary" gutterBottom variant="h6">
-              {item.content}
-            </Typography>
+          <Grid item xs={9} sm={10} md={11}>
+            <Grid item xs={6} md={3}>
+              <Typography color="textPrimary" variant="h6">
+                {item.company}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} md={3}>
+              <Typography color="textSecondary" gutterBottom variant="caption">
+                Mesto: {item.city}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Avatar className={classes.avater}>
-              <AttachMoney />
+          <Grid item xs={3} sm={2} md={1}>
+            <Avatar className={classes.avatar}>
+              <BusinessIcon />
             </Avatar>
           </Grid>
         </Grid>
-        <Box className={classes.box}>
-          <ArrowDownward className={classes.increase} />
-          <Typography className={classes.increase} variant="body2">
-            12%
-          </Typography>
-          <Typography color="textSecondary" variant="caption">
-            {item.status}
-          </Typography>
-        </Box>
       </CardContent>
     </Card>
   );
