@@ -1,13 +1,15 @@
 import { Container, makeStyles } from "@material-ui/core";
-import { Route, Switch, Redirect } from "react-router";
+import { Route, Switch } from "react-router";
 import { useHistory } from "react-router-dom";
 
 import { Auth } from "aws-amplify";
 import AppMenu from "./AppMenu";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import useFetchUserIdentity from "./useFetchUserIdentity";
 import useRegisterMyIdentityID from "./useRegisterMyIdentityID";
+
+export const UserContext = createContext();
 
 const useStyles = makeStyles({
   menu: {
@@ -59,7 +61,7 @@ const MainApp = ({ routesConfig }) => {
       await Auth.signOut();
       setUserData({ username: null });
       // reload the page
-      history.go(0)
+      history.go(0);
     } catch (error) {
       console.log("error signing out: ", error);
     }
@@ -67,26 +69,32 @@ const MainApp = ({ routesConfig }) => {
 
   return (
     <>
-      <Container maxWidth="xl">
-        <AppMenu
-          userData={userData}
-          signedOut={signedOut}
-          routesConfig={routesConfig}
-          title="Ucto.online"
-          className={classes.menu}
-        />
-        <Switch>
-          {userData.username &&
-            routesConfig.map((route) => (
-              <Route
-                key={route.route}
-                path={route.route}
-                exact
-                component={route.component}
-              />
-            ))}
-        </Switch>
-      </Container>
+      {/* MainApp provides context for all children
+        THe children will have to call  const user = useContext(UserContext);
+        in order to get all user relevant data (in value below) */}
+      <UserContext.Provider
+        value={userData}
+      >
+        <Container maxWidth="xl">
+          <AppMenu
+            signedOut={signedOut}
+            routesConfig={routesConfig}
+            title="Ucto.online"
+            className={classes.menu}
+          />
+          <Switch>
+            {userData.username &&
+              routesConfig.map((route) => (
+                <Route
+                  key={route.route}
+                  path={route.route}
+                  exact
+                  component={route.component}
+                />
+              ))}
+          </Switch>
+        </Container>
+      </UserContext.Provider>
     </>
   );
 };

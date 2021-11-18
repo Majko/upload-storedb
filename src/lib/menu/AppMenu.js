@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -18,6 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { blue, red } from "@material-ui/core/colors";
+import { UserContext } from "./MainApp";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AppMenu({ userData, signedOut, routesConfig, title }) {
+function AppMenu({ signedOut, routesConfig, title }) {
   let history = useHistory();
   const [drawerState, setDrawerState] = useState(false);
   const classes = useStyles();
@@ -64,6 +65,10 @@ function AppMenu({ userData, signedOut, routesConfig, title }) {
       history.go(0)
     )
   }
+
+    //ziskaj user context
+    const user = useContext(UserContext);
+    console.log("User data:", user);
 
   // menuItems is imported from external file
   const list = () => (
@@ -128,10 +133,10 @@ function AppMenu({ userData, signedOut, routesConfig, title }) {
               <Typography variant="body2" className={classes.logininfo}>
                 User:{" "}
                 <b>
-                  {userData.tenant
-                    ? userData.username +
+                  {user.tenant
+                    ? user.username +
                       " (" +
-                      userData.tenant.substring(8) +
+                      user.tenant.substring(8) +
                       ")"
                     : "Loading..."}
                 </b>
