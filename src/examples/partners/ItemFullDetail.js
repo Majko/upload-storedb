@@ -12,7 +12,7 @@ const ItemFullDetail = ({ item, deleteItem }) => {
     deleteItem(detailDialogItem.id);
     setDetailDialogOpen(false);
   };
-
+//zmena pre novy branch
   return (
     <div>
       <Container>
