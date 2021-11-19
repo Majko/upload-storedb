@@ -62,7 +62,9 @@ const ItemFullDetail = ({ item, deleteItem }) => {
               Email: {detailDialogItem.email}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
             <Button
               variant="contained"
               color="primary"
@@ -70,7 +72,8 @@ const ItemFullDetail = ({ item, deleteItem }) => {
             >
               Zavri
             </Button>
-
+          </Grid>
+          <Grid item xs={6}>
             <Button onClick={handleDelete} color="secondary">
               Zmaz
             </Button>
