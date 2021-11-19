@@ -12,6 +12,9 @@ import { useContext, useState } from "react";
 import DocListHeader from "../../lib/list/DocLIstHeader";
 import { UserContext } from "../../lib/menu/MainApp";
 
+import ViewComponent  from "./ItemFullDetailView"
+import ModifyComponent  from "./ItemFullDetailModify"
+
 const CompositeList = () => {
   const [searchField, setSearchField] = useState("");
   //ziskaj user context
@@ -39,7 +42,7 @@ const CompositeList = () => {
   return (
     <>
       <DocList>
-        <DocListHeader title="Vydane FA" setSearchField={handleSearch} />
+        <DocListHeader title="Partneri:" setSearchField={handleSearch} />
 
         {dataArray &&
           dataArray.map((item, index) => {
@@ -57,7 +60,7 @@ const CompositeList = () => {
           <ItemAddDialogContent addItem={addItem} />
         </DocListAddDialog>
         <DocListDetailDialog>
-          <ItemFullDetail deleteItem={deleteItem} modifyItem={modifyItem} />
+          <ItemFullDetail ViewComponent={ViewComponent} ModifyComponent={ModifyComponent} deleteItem={deleteItem} modifyItem={modifyItem} />
         </DocListDetailDialog>
 
         <Button color="secondary" onClick={handleNextPage}>
