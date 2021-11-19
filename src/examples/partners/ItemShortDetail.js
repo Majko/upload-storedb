@@ -1,15 +1,6 @@
-import { blue, green, grey, red } from "@material-ui/core/colors";
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  // Grid,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
-import Grid from '@mui/material/Grid'
-import BusinessIcon from "@mui/icons-material/Business";
+import { grey, red } from "@material-ui/core/colors";
+import { makeStyles, Typography } from "@material-ui/core";
+import Grid from "@mui/material/Grid";
 
 const useStyles = makeStyles({
   root: {
@@ -21,11 +12,6 @@ const useStyles = makeStyles({
     color: red[900],
     mr: 1,
     marginRight: 10,
-  },
-  avatar: {
-    backgroundColor: blue[600],
-    height: 56,
-    width: 56,
   },
   grid: {
     justifyContent: "space-between",
@@ -40,29 +26,22 @@ const useStyles = makeStyles({
 const ItemShortDetail = ({ item }) => {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Grid container spacing={3} className={classes.grid}>
-          <Grid item xs={9} sm={10} md={11}>
-            <Grid item xs={6} md={3}>
-              <Typography color="textPrimary" variant="h6">
-                {item.company}
-              </Typography>
-            </Grid>
-            <Grid item xs={6} md={3}>
-              <Typography color="textSecondary" gutterBottom variant="caption">
-                Mesto: {item.city}
-              </Typography>
-            </Grid>
+    <>
+      <Grid container spacing={3} className={classes.grid}>
+        <Grid item xs={9} sm={10} md={11}>
+          <Grid item xs={6} md={3}>
+            <Typography color="textPrimary" variant="h6">
+              {item.company}
+            </Typography>
           </Grid>
-          <Grid item xs={3} sm={2} md={1}>
-            <Avatar className={classes.avatar}>
-              <BusinessIcon />
-            </Avatar>
+          <Grid item xs={6} md={3}>
+            <Typography color="textSecondary" gutterBottom variant="caption">
+              Mesto: {item.city}
+            </Typography>
           </Grid>
         </Grid>
-      </CardContent>
-    </Card>
+      </Grid>
+    </>
   );
 };
 

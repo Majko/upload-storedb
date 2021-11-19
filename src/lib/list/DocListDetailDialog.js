@@ -34,11 +34,9 @@ const DocListDetailDialog = ({ children }) => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Detailny pohlad na  dokument</DialogTitle>
+        <DialogTitle id="form-dialog-title">Detailny pohlad</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Detialne hopdnoty jednotlivych atributov:
-          </DialogContentText>
+          <div>nieco</div>
           {children}
         </DialogContent>
       </Dialog>

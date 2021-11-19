@@ -1,7 +1,10 @@
 import { ButtonBase, makeStyles } from "@material-ui/core";
+import { Card, CardContent, Avatar, Grid } from "@mui/material";
+import { ChangeCircle } from "@mui/icons-material";
 import React, { useContext } from "react";
 
 import { DetailDialogContext } from "./DocList";
+import { orange } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -10,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
   buttonbase: {
     width: "100%",
     textAlign: "left",
+  },
+  avatar: {
+    backgroundColor: orange[300],
+    height: 56,
+    width: 56,
   },
 }));
 
@@ -21,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
  * @param {Object} item A database Item we want to show
  * @returns Component
  */
-const DocListItem = ({ children, avatarname, item }) => {
+const DocListItem = ({ children, item }) => {
   const classes = useStyles();
   const { setDetailDialogOpen, setDetailDialogItem } = useContext(
     DetailDialogContext
@@ -34,17 +42,21 @@ const DocListItem = ({ children, avatarname, item }) => {
 
   return (
     <div className={classes.item}>
-      <ButtonBase
-        className={classes.buttonbase}
-        onClick={() => handleClickOpen()}
-      > 
-      {/* Children with injected item */}
-        {React.Children.map(children, (child) =>
-          React.cloneElement(child, {
-            item: item,
-          })
-        )}
-      </ButtonBase>
+      <Card>
+        <CardContent>
+          <ButtonBase
+            className={classes.buttonbase}
+            onClick={() => handleClickOpen()}
+          >
+            {/* Children with injected item */}
+            {React.Children.map(children, (child) =>
+              React.cloneElement(child, {
+                item: item,
+              })
+            )}
+          </ButtonBase>
+        </CardContent>
+      </Card>
     </div>
   );
 };

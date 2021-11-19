@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField } from "@material-ui/core";
+import {  Button, Grid, TextField } from "@material-ui/core";
 import { useContext, useState } from "react";
 
 import { AddDialogContext } from "../../lib/list/DocList"; //musime naimportovat Context na otvor/close Dialog
@@ -109,17 +109,17 @@ const ItemAddDialogContent = ({ addItem }) => {
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <Button variant="contained" color="secondary" onClick={handleSave}>
-            Uloz
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
           <Button
             variant="contained"
             color="primary"
             onClick={() => setAddDialogOpen(false)}
           >
             Zavri
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button variant="contained" color="secondary" onClick={handleSave}>
+            Uloz
           </Button>
         </Grid>
       </Grid>
