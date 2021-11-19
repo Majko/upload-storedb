@@ -64,6 +64,15 @@ const ItemFullDetail = ({ item, deleteItem }) => {
           </Grid>
         </Grid>
         <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <Button
+              onClick={handleDelete}
+              variant="contained"
+              color="secondary"
+            >
+              Zmaz
+            </Button>
+          </Grid>
           <Grid item xs={3}>
             <Button
               variant="contained"
@@ -71,11 +80,6 @@ const ItemFullDetail = ({ item, deleteItem }) => {
               onClick={() => setDetailDialogOpen(false)}
             >
               Zavri
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button onClick={handleDelete} color="secondary">
-              Zmaz
             </Button>
           </Grid>
         </Grid>
