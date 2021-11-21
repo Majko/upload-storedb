@@ -26,6 +26,7 @@ const PartnerList = () => {
     nextPage,
     addItem,
     modifyItem,
+    deleteItem,
     searchItems,
   } = useDataPartnerIdentity(5, searchField, user);
 
@@ -61,7 +62,7 @@ const PartnerList = () => {
         <DocListDetailDialog>
           <DocListDetailDialogView>
             {/* item isautomatically added */}
-            <ViewComponent />
+            <ViewComponent deleteItem={deleteItem} />
           </DocListDetailDialogView>
           <DocListDetailDialogModify>
             {/* item isautomatically added */}

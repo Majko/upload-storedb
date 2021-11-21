@@ -1,5 +1,4 @@
-import { Button, Container, Grid } from "@material-ui/core";
-import { TextField } from "@mui/material";
+import { TextField, Button, Container, Grid  } from "@mui/material";
 import { useContext, useState } from "react";
 
 import { DetailDialogContext } from "../../lib/list/DocList"; //musime naimportovat Context na otvor/close Dialog

@@ -1,6 +1,17 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@mui/material";
+import { useContext } from "react";
+
+import { DetailDialogContext } from "../../lib/list/DocList";
 
 const ItemFullDetailView = ({ item, deleteItem }) => {
+  const { setDetailDialogOpen } = useContext(DetailDialogContext); // vyziadaj funkciu na zatvorenie
+
+const handleDelete = ()=>{
+  console.log('deleting:', item.id);
+  deleteItem(item.id)
+  setDetailDialogOpen(false)
+}
+
   return (
     <div>
       <Grid container spacing={0}>
@@ -55,7 +66,7 @@ const ItemFullDetailView = ({ item, deleteItem }) => {
           </Typography>
         </Grid>
       </Grid>
-      <Button onClick={deleteItem} variant="contained" color="secondary">
+      <Button onClick={handleDelete} variant="contained" color="secondary">
         Zmaž
       </Button>
     </div>

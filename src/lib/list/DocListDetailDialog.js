@@ -3,7 +3,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { DetailDialogContext } from "./DocList";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Avatar, IconButton } from "@material-ui/core";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Close } from "@material-ui/icons";
@@ -40,16 +40,20 @@ const DocListDetailDialog = ({ children }) => {
     detailDialogItem,
   } = useContext(DetailDialogContext);
 
+  useEffect(() => {
+    if (detailDialogOpen === false)
+      // Set to false, so that always after dialog opening the first view is
+      // view and not modify.
+      // We need to  wrap to timeout to prevent short flashig of Viem comeponent
+      setTimeout(() => {
+        setModifyActive(false);
+      }, 1000);
+  }, [detailDialogOpen]);
+
   const classes = useStyles();
 
   const handleClose = () => {
     setDetailDialogOpen(false);
-    // Set to false, so that always after dialog opening the first view is 
-    // view and not modify.
-    // We need to  wrap to timeout to prevent short flashig of Viem comeponent
-    setTimeout(() => {
-      setModifyActive(false);
-    }, 1000);
   };
 
   const toggleModify = () => {
