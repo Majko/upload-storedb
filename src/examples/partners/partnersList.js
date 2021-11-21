@@ -1,28 +1,31 @@
 import DocList from "../../lib/list/DocList";
 import DocListItem from "../../lib/list/DocListItem";
 import ItemShortDetail from "./ItemShortDetail";
-import ItemFullDetail from "./ItemFullDetail";
 import ItemAddDialogContent from "./ItemAddDialogContent";
-import DocListAddDialog from "../../lib/list/DocListAddDialog";
-import { Button } from "@material-ui/core";
-import DocListDetailDialog from "../../lib/list/DocListDetailDialog";
-
-import useDataPartnerIdentity from "./useDataPartnerIdentity";
-import { useContext, useState } from "react";
 import DocListHeader from "../../lib/list/DocLIstHeader";
+import DocListAddDialog from "../../lib/list/DocListAddDialog";
+import DocListDetailDialog from "../../lib/list/DocListDetailDialog";
+import DocListDetailDialogView from "../../lib/list/DocListDetailDialogView";
+import DocListDetailDialogModify from "../../lib/list/DocListDetailDialogModify";
+import useDataPartnerIdentity from "./useDataPartnerIdentity";
+
+import { Button } from "@material-ui/core";
+import { useContext, useState } from "react";
 import { UserContext } from "../../lib/menu/MainApp";
 
-const CompositeList = () => {
+import ViewComponent from "./ItemFullDetailView";
+import ModifyComponent from "./ItemFullDetailModify";
+
+const PartnerList = () => {
   const [searchField, setSearchField] = useState("");
   //ziskaj user context
   const user = useContext(UserContext);
-  
+
   const {
     dataArray,
     nextPage,
     addItem,
     modifyItem,
-    deleteItem,
     searchItems,
   } = useDataPartnerIdentity(5, searchField, user);
 
@@ -35,11 +38,10 @@ const CompositeList = () => {
     await searchItems(field);
   };
 
-
   return (
     <>
       <DocList>
-        <DocListHeader title="Vydane FA" setSearchField={handleSearch} />
+        <DocListHeader title="Partneri:" setSearchField={handleSearch} />
 
         {dataArray &&
           dataArray.map((item, index) => {
@@ -57,7 +59,15 @@ const CompositeList = () => {
           <ItemAddDialogContent addItem={addItem} />
         </DocListAddDialog>
         <DocListDetailDialog>
-          <ItemFullDetail deleteItem={deleteItem} modifyItem={modifyItem} />
+          <DocListDetailDialogView>
+            {/* item isautomatically added */}
+            <ViewComponent />
+          </DocListDetailDialogView>
+          <DocListDetailDialogModify>
+            {/* item isautomatically added */}
+            <ModifyComponent modifyItem={modifyItem}/>
+          </DocListDetailDialogModify>
+          {/* <ItemFullDetail ViewComponent={ViewComponent} ModifyComponent={ModifyComponent} deleteItem={deleteItem} modifyItem={modifyItem} /> */}
         </DocListDetailDialog>
 
         <Button color="secondary" onClick={handleNextPage}>
@@ -69,4 +79,4 @@ const CompositeList = () => {
   );
 };
 
-export default CompositeList;
+export default PartnerList;

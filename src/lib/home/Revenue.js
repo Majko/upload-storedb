@@ -1,4 +1,4 @@
-import { green, grey, orange, red } from "@material-ui/core/colors";
+import { green, grey, red } from "@material-ui/core/colors";
 import {
   Avatar,
   Box,
@@ -13,12 +13,12 @@ import { ArrowUpward, MoneyOutlined } from "@material-ui/icons";
 const useStyles = makeStyles({
   root: {
     backgroundColor: grey[0],
-    marginTop:10,
+    marginTop: 10,
   },
   increase: {
     color: green[500],
     mr: 1,
-    marginRight:10,
+    marginRight: 10,
   },
   avater: {
     backgroundColor: red[300],
@@ -57,9 +57,7 @@ const Revenue = () => {
         </Grid>
         <Box className={classes.box}>
           <ArrowUpward className={classes.increase} />
-          <Typography className={classes.increase}
-            variant="body2"
-          >
+          <Typography className={classes.increase} variant="body2">
             12%
           </Typography>
           <Typography color="textSecondary" variant="caption">

@@ -1,79 +1,57 @@
 import { Button, Container, Grid, Typography } from "@material-ui/core";
-import { DetailDialogContext } from "../../lib/list/DocList";
-import { useContext } from "react";
 
-const ItemFullDetail = ({ item, deleteItem }) => {
-  const { setDetailDialogOpen, detailDialogItem } = useContext(
-    DetailDialogContext
-  );
-
-  const handleDelete = () => {
-    // deleteItem(detailDialogItem.name);
-    deleteItem(detailDialogItem.id);
-    setDetailDialogOpen(false);
-  };
-
+const ItemFullDetailView= ({ item, deleteItem }) => {
   return (
     <div>
-      <Container>
         <Grid container spacing={0}>
           <Grid item xs={12} md={12}>
-            <Typography color="textPrimary" variant="h4">
-              {detailDialogItem.company}
+            <Typography color="textPrimary" component={'span'} variant="h5">
+              {item.company}
             </Typography>
           </Grid>
           <Grid item xs={12} md={12}>
-            <Typography color="textSecondary" gutterBottom variant="h6">
-              Mesto: {detailDialogItem.city}
+            <Typography color="textSecondary" gutterBottom component={'span'} variant="h6">
+              Mesto: {item.city}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography color="textSecondary" gutterBottom variant="caption">
-              Ulica: {detailDialogItem.street}
+              Ulica: {item.street}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography color="textSecondary" gutterBottom variant="caption">
-              PSČ: {detailDialogItem.zip}
+              PSČ: {item.zip}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography color="textSecondary" gutterBottom variant="caption">
-              Meno: {detailDialogItem.name}
+              Meno: {item.name}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography color="textSecondary" gutterBottom variant="caption">
-              Divizia: {detailDialogItem.division}
+              Divizia: {item.division}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography color="textSecondary" gutterBottom variant="caption">
-              IČO: {detailDialogItem.ico}
+              IČO: {item.ico}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography color="textSecondary" gutterBottom variant="caption">
-              DIČ: {detailDialogItem.dic}
+              DIČ: {item.dic}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography color="textSecondary" gutterBottom variant="caption">
-              Email: {detailDialogItem.email}
+              Email: {item.email}
             </Typography>
           </Grid>
         </Grid>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Button
-              onClick={handleDelete}
-              variant="contained"
-              color="secondary"
-            >
-              Zmaz
-            </Button>
-          </Grid>
-          <Grid item xs={3}>
+          {/* <Grid item xs={3}>
             <Button
               variant="contained"
               color="primary"
@@ -81,11 +59,19 @@ const ItemFullDetail = ({ item, deleteItem }) => {
             >
               Zavri
             </Button>
+          </Grid> */}
+          <Grid item xs={6}>
+            <Button
+              onClick={deleteItem}
+              variant="contained"
+              color="secondary"
+            >
+              Zmaž
+            </Button>
           </Grid>
         </Grid>
-      </Container>
     </div>
   );
 };
 
-export default ItemFullDetail;
+export default ItemFullDetailView;

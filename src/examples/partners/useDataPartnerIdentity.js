@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useContext } from "react";
-import UserContext from "../../lib/menu/MainApp";
 
 import { API } from "aws-amplify";
 import * as queries from "../../graphql/queries";
@@ -84,8 +82,8 @@ const useDataPartnerIdentity = (initialPageItems, searchfild, user) => {
   };
 
   const addItem = async (item) => {
-    let itemWithTenant = item
-    itemWithTenant.tenant=user.tenant
+    let itemWithTenant = item;
+    itemWithTenant.tenant = user.tenant;
     const newItem = await API.graphql({
       query: mutations.createPartnerIdentity,
       variables: {
@@ -104,17 +102,11 @@ const useDataPartnerIdentity = (initialPageItems, searchfild, user) => {
 
   const modifyItem = async (id, item) => {
     const modifiedItem = await API.graphql({
-      query: mutations.createPartnerIdentity,
+      query: mutations.updatePartnerIdentity,
       variables: {
-        input: {
-          id: id,
-          name: item.name,
-          content: item.content,
-          status: item.status,
-        },
+        input: item,
       },
     });
-    console.log(modifiedItem);
     const newArray = dataArray.map((elem) => {
       return elem.id === id ? item : elem;
     });

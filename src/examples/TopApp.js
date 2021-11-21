@@ -1,5 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Amplify from "aws-amplify";
 import { Auth } from "aws-amplify";
@@ -14,12 +14,7 @@ Auth.configure(awsconfig);
 
 const theme = createMuiTheme();
 
-const useStyles = makeStyles((theme) => {
-
-});
-
 function TopApp() {
-  const classes = useStyles(); 
   // vyzaduje a konfiguracia routes v tvare:
   // 
   // export const routesConfig = [
