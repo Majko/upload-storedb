@@ -44,6 +44,12 @@ const DocListDetailDialog = ({ children }) => {
 
   const handleClose = () => {
     setDetailDialogOpen(false);
+    // Set to false, so that always after dialog opening the first view is 
+    // view and not modify.
+    // We need to  wrap to timeout to prevent short flashig of Viem comeponent
+    setTimeout(() => {
+      setModifyActive(false);
+    }, 1000);
   };
 
   const toggleModify = () => {
