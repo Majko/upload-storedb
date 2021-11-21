@@ -2,10 +2,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { Fab, makeStyles } from "@material-ui/core";
+import { Fab, IconButton, makeStyles } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { AddDialogContext } from "./DocList";
 import { useContext } from "react";
+import { Close } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -16,12 +17,17 @@ const useStyles = makeStyles((theme) => ({
     left: "auto",
     position: "fixed",
   },
+  dialogTitle: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 }));
 
 /**
  * @description Component adding "PLUS" icon to the list. Its children will form
  * the  Content for Dialog when clicking on Add icon
- * The children will use:  const { addDialogOpen, setAddDialogOpen } = useContext(AddDialogContext) 
+ * The children will use:  const { addDialogOpen, setAddDialogOpen } = useContext(AddDialogContext)
  * to reach the state of the dialog as weel as method used to open/close the dialog
  * @param {Object} children - all children
  * @returns Component
@@ -56,7 +62,12 @@ const DocListAddDialog = ({ children }) => {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Novy dokument</DialogTitle>
+        <DialogTitle disableTypography className={classes.dialogTitle}>
+          Novy dokument
+          <IconButton onClick={handleClose}>
+            <Close />
+          </IconButton>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             Prosm vlozte vsetky hodnoty, minimalne tie , ktore su oznacene

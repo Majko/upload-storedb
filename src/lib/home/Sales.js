@@ -1,4 +1,4 @@
-import { green, grey, orange, red } from "@material-ui/core/colors";
+import { green, grey, orange } from "@material-ui/core/colors";
 import {
   Avatar,
   Box,

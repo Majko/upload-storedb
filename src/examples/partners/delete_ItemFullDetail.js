@@ -1,9 +1,14 @@
-import { Avatar, Button, Container, Grid, Typography } from "@material-ui/core";
+import { Avatar, Button, Grid } from "@material-ui/core";
 import { DetailDialogContext } from "../../lib/list/DocList";
 import { useContext, useState } from "react";
 import { ChangeCircle } from "@mui/icons-material";
 
-const ItemFullDetail = ({ ViewComponent, ModifyComponent, deleteItem, modifyItem }) => {
+const ItemFullDetail = ({
+  ViewComponent,
+  ModifyComponent,
+  deleteItem,
+  modifyItem,
+}) => {
   const { setDetailDialogOpen, detailDialogItem } = useContext(
     DetailDialogContext
   );
@@ -19,7 +24,6 @@ const ItemFullDetail = ({ ViewComponent, ModifyComponent, deleteItem, modifyItem
     setDetailDialogOpen(false);
   };
 
-
   const toggleModify = () => {
     setModify(!modify);
   };
@@ -29,7 +33,10 @@ const ItemFullDetail = ({ ViewComponent, ModifyComponent, deleteItem, modifyItem
       <Grid container>
         <Grid item xs={10}>
           {modify ? (
-            <ModifyComponent item={detailDialogItem} modifyItem={handleModify}  />
+            <ModifyComponent
+              item={detailDialogItem}
+              modifyItem={handleModify}
+            />
           ) : (
             <ViewComponent item={detailDialogItem} deleteItem={handleDelete} />
           )}

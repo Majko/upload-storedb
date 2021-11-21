@@ -1,14 +1,13 @@
-import { blue, green, grey, red } from "@material-ui/core/colors";
+import { blue, grey, red } from "@material-ui/core/colors";
 import {
   Avatar,
-  Box,
   Card,
   CardContent,
   // Grid,
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import Grid from '@mui/material/Grid'
+import Grid from "@mui/material/Grid";
 import BusinessIcon from "@mui/icons-material/Business";
 
 const useStyles = makeStyles({

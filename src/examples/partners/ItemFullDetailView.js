@@ -3,15 +3,14 @@ import { Button, Container, Grid, Typography } from "@material-ui/core";
 const ItemFullDetailView= ({ item, deleteItem }) => {
   return (
     <div>
-      <Container>
         <Grid container spacing={0}>
           <Grid item xs={12} md={12}>
-            <Typography color="textPrimary" variant="h4">
+            <Typography color="textPrimary" component={'span'} variant="h5">
               {item.company}
             </Typography>
           </Grid>
           <Grid item xs={12} md={12}>
-            <Typography color="textSecondary" gutterBottom variant="h6">
+            <Typography color="textSecondary" gutterBottom component={'span'} variant="h6">
               Mesto: {item.city}
             </Typography>
           </Grid>
@@ -71,7 +70,6 @@ const ItemFullDetailView= ({ item, deleteItem }) => {
             </Button>
           </Grid>
         </Grid>
-      </Container>
     </div>
   );
 };

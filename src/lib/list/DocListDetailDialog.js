@@ -3,10 +3,26 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { DetailDialogContext } from "./DocList";
-import { useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { Avatar, IconButton } from "@material-ui/core";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Close } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/styles";
 
-// const useStyles = makeStyles((theme) => ({}));
+export const ModifyActiveContext = createContext();
 
+const useStyles = makeStyles(() => ({
+  dialogTitle: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  update: {
+    position: "fixed",
+    top: 250,
+    right: "5%",
+  },
+}));
 
 /**
  * @description Component which children will form the  Content for Dialog when clicking one of the short items
@@ -16,32 +32,54 @@ import { useContext } from "react";
  * @returns Component
  */
 const DocListDetailDialog = ({ children }) => {
-  // const classes = useStyles();
+  const [modifyActive, setModifyActive] = useState(false);
+
   const {
     detailDialogOpen,
     setDetailDialogOpen,
+    detailDialogItem,
   } = useContext(DetailDialogContext);
+
+  const classes = useStyles();
 
   const handleClose = () => {
     setDetailDialogOpen(false);
   };
 
+  const toggleModify = () => {
+    setModifyActive(!modifyActive);
+  };
+
   return (
     <div>
-      <Dialog
-        fullScreen
-        open={detailDialogOpen}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Detailny pohlad na  dokument</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Detialne hopdnoty jednotlivych atributov:
-          </DialogContentText>
-          {children}
-        </DialogContent>
-      </Dialog>
+      <ModifyActiveContext.Provider value={modifyActive}>
+        <Dialog
+          fullScreen
+          open={detailDialogOpen}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle disableTypography className={classes.dialogTitle}>
+            Detailny pohlad na dokument
+            <IconButton onClick={handleClose}>
+              <Close />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {/* Children with injected item */}
+              {React.Children.map(children, (child) =>
+                React.cloneElement(child, {
+                  item: detailDialogItem,
+                })
+              )}
+            </DialogContentText>
+            <Avatar className={classes.update} onClick={() => toggleModify()}>
+              <ArrowForwardIosIcon />
+            </Avatar>
+          </DialogContent>
+        </Dialog>
+      </ModifyActiveContext.Provider>
     </div>
   );
 };
