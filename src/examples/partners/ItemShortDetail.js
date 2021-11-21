@@ -28,17 +28,15 @@ const ItemShortDetail = ({ item }) => {
   return (
     <>
       <Grid container spacing={3} className={classes.grid}>
-        <Grid item xs={9} sm={10} md={11}>
-          <Grid item xs={6} md={3}>
-            <Typography color="textPrimary" variant="h6">
-              {item.company}
-            </Typography>
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <Typography color="textSecondary" gutterBottom variant="caption">
-              Mesto: {item.city}
-            </Typography>
-          </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography color="textPrimary" variant="h6">
+            {item.company}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography color="textSecondary" gutterBottom variant="caption">
+            Mesto: {item.city}
+          </Typography>
         </Grid>
       </Grid>
     </>
