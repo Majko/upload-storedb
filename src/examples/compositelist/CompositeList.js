@@ -4,7 +4,7 @@ import ItemShortDetail from "./ItemShortDetail";
 import ItemFullDetail from "./ItemFullDetail";
 import ItemAddDialogContent from "./ItemAddDialogContent";
 import DocListAddDialog from "../../lib/list/DocListAddDialog";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import DocListDetailDialog from "../../lib/list/DocListDetailDialog";
 
 import useDataTest from "./useDataTest";

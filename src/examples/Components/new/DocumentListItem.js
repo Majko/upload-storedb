@@ -4,10 +4,10 @@ import {
   Container,
   Divider,
   Grid,
-} from "@material-ui/core";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
-import { makeStyles } from "@material-ui/core";
-import { Assignment } from "@material-ui/icons";
+} from "@mui/material";
+import { deepOrange, deepPurple, grey } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
+import { Assignment } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -34,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "left",
   },
   orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
+    color: grey[100],
     backgroundColor: deepOrange[500],
   },
   purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
+    color: grey[100],
     backgroundColor: deepPurple[500],
   },
 }));

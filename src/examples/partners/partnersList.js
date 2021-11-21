@@ -9,7 +9,7 @@ import DocListDetailDialogView from "../../lib/list/DocListDetailDialogView";
 import DocListDetailDialogModify from "../../lib/list/DocListDetailDialogModify";
 import useDataPartnerIdentity from "./useDataPartnerIdentity";
 
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import { useContext, useState } from "react";
 import { UserContext } from "../../lib/menu/MainApp";
 

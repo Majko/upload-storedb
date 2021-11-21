@@ -1,7 +1,8 @@
-import { Box, Container, Grid, makeStyles } from "@material-ui/core";
+import { Box, Container, Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import Revenue from "./Revenue";
 import Profit from "./Profit";
-import { grey } from "@material-ui/core/colors";
+import { grey } from "@mui/material/colors";
 import Sales from "./Sales";
 import LatestOrders from "./LatestOrders";
 

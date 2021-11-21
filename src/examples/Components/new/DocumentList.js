@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
 import DocumentListItem from "./DocumentListItem";
 import DocumentDetail from "./DocumentDetail";
@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   fab: {
     position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: 5,
+    right: 5,
   },
 }));
 

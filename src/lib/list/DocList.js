@@ -1,7 +1,5 @@
-import {
-  Container,
-  makeStyles,
-} from "@material-ui/core";
+import { Container } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 import { createContext, useState } from "react";
 
@@ -54,9 +52,7 @@ const DocList = ({ children, title, setSearchField }) => {
         }}
       >
         <div className={classes.root}>
-          <Container maxWidth="lg">
-            {children}
-          </Container>
+          <Container maxWidth="lg">{children}</Container>
         </div>
       </DetailDialogContext.Provider>
     </AddDialogContext.Provider>

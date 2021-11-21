@@ -1,16 +1,16 @@
 import VisDocument from "../../../lib/visualize/VisDocument";
 
-import Card from "@material-ui/core/Card";
-import { CardHeader, IconButton } from "@material-ui/core";
-import { DeleteOutlined , ArrowBack} from "@material-ui/icons";
-import PageviewIcon from "@material-ui/icons/Pageview";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import Card from "@mui/material/Card";
+import { CardHeader, IconButton } from "@mui/material";
+import { DeleteOutlined , ArrowBack} from "@mui/icons-material";
+import PageviewIcon from "@mui/icons-material/Pageview";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 import { Fragment, useState } from "react";
 import { useFetchFile } from "../../../lib/aws/useFetchFile";
@@ -103,7 +103,7 @@ function DbFileCard({ file, handleRemove , setFile}) {
       <CardHeader
         action={
           <>
-            <IconButton onClick={toggleDrawer(true)}>
+            <IconButton onClick={toggleDrawer(true)} size="large">
               <MoreVertIcon />
             </IconButton>
           </>

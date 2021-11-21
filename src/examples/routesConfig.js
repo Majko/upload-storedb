@@ -10,8 +10,8 @@ import InvoiceIssuedList from "./invoiceIssued/InvoiceIssuedList";
 import PartnerList from "./partners/partnersList";
 import Home from "../lib/home/Home";
 
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 
 export const routesConfig = [
   {

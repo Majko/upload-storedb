@@ -1,7 +1,7 @@
-import Typography from "@material-ui/core/Typography";
-import { IconButton, Tooltip } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Typography from "@mui/material/Typography";
+import { IconButton, Tooltip } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 const useStyles = makeStyles({
   upload: {
@@ -45,8 +45,8 @@ const FileUploader = ({ setFiles }) => {
               color="primary"
               aria-label="upload picture"
               component="span"
-              className={classes.upload} 
-            >
+              className={classes.upload}
+              size="large">
               <CloudUploadIcon fontSize="large" />
             </IconButton>
           </label>

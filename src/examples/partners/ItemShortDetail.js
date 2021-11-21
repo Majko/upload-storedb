@@ -1,5 +1,6 @@
-import { grey, red } from "@material-ui/core/colors";
-import { makeStyles, Typography } from "@material-ui/core";
+import { grey, red } from "@mui/material/colors";
+import { Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid";
 
 const useStyles = makeStyles({

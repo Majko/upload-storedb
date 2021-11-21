@@ -1,7 +1,7 @@
 import { useState } from "react";
 import UploadImageCard from "./UploadImageCard";
 import FileUploader from "./common/FileUploader";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid } from "@mui/material";
 
 /**
  * @description Component uploading file to AWS

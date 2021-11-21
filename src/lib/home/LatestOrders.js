@@ -14,7 +14,7 @@ import {
   TableRow,
   TableSortLabel,
   Tooltip,
-} from "@material-ui/core";
+} from "@mui/material";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { makeStyles } from "@material-ui/styles";
 

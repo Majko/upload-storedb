@@ -1,5 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import { ThemeProvider, createMuiTheme } from '@mui/styles';
+import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 
 import Amplify from "aws-amplify";
 import { Auth } from "aws-amplify";
@@ -12,7 +13,7 @@ import MainApp from "../lib/menu/MainApp"
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
-const theme = createMuiTheme();
+const theme = createTheme();
 
 function TopApp() {
   // vyzaduje a konfiguracia routes v tvare:
@@ -27,13 +28,15 @@ function TopApp() {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
-      <header>
-        <Router>
-          <MainApp routesConfig={routesConfig} />
-        </Router>
-      </header>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+        <header>
+          <Router>
+            <MainApp routesConfig={routesConfig} />
+          </Router>
+        </header>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </div>
   );
 }

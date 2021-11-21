@@ -1,11 +1,11 @@
 import {
   Grid,
-  makeStyles,
   InputBase,
   IconButton,
   Paper,
-} from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { grey } from "@mui/material/colors";
 import { Search as SearchIcon } from "@material-ui/icons";
 import { useState } from "react";
 

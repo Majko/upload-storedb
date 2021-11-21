@@ -5,21 +5,22 @@ import { deletePicture } from "../../graphql/mutations";
 
 import VisDocument from "../../lib/visualize/VisDocument";
 
-import Typography from "@material-ui/core/Typography";
-import { Container, Fab } from "@material-ui/core";
+import Typography from "@mui/material/Typography";
+import { Container, Fab } from "@mui/material";
 import DbFileCard from "./common/DbFileCard";
-import List from "@material-ui/core/List";
-import { makeStyles } from "@material-ui/core/styles";
-import AddIcon from "@material-ui/icons/Add";
+import List from "@mui/material/List";
+import { makeStyles } from "@mui/styles";
+import AddIcon from "@mui/icons-material/Add";
 
 import { useEffect } from "react";
 
 import { useRemoveFile } from "../../lib/aws/removeFile";
 import DbFileListItem from "./common/DbFIleListItem";
+import { grey } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: grey[300],
     width: '100%',
     height:'100%',
     position: 'relative',
@@ -28,12 +29,12 @@ const useStyles = makeStyles((theme) => ({
   listRoot: {
     width: '100%',
     maxWidth: '36ch',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: grey[300],
   },
   fab: {
     position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: 5,
+    right: 5,
   },
 }));
 

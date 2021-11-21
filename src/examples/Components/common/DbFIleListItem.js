@@ -1,21 +1,21 @@
-import { makeStyles } from "@material-ui/core/styles";
-import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import WorkIcon from "@material-ui/icons/Work";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import WorkIcon from "@mui/icons-material/Work";
+import Typography from "@mui/material/Typography";
 import { Fragment } from "react";
-import { Badge } from "@material-ui/core";
-import { deepOrange } from "@material-ui/core/colors";
+import { Badge } from "@mui/material";
+import { deepOrange, grey } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   inline: {
     display: "inline",
   },
   orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
+    color: grey[100],
     backgroundColor: deepOrange[500],
   },
 }));

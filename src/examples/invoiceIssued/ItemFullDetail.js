@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+import { Button, Container, Grid, Typography } from "@mui/material";
 import { DetailDialogContext } from "../../lib/list/DocList";
 import { useContext } from "react";
 

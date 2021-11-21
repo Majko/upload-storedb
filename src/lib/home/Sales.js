@@ -1,13 +1,13 @@
-import { green, grey, orange } from "@material-ui/core/colors";
+import { green, grey, orange } from "@mui/material/colors";
 import {
   Avatar,
   Box,
   Card,
   CardContent,
   Grid,
-  makeStyles,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { ArrowUpward, MoneyOutlined } from "@material-ui/icons";
 import { Bar } from 'react-chartjs-2';
 

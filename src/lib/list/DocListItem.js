@@ -1,10 +1,9 @@
-import { ButtonBase, makeStyles } from "@material-ui/core";
-import { Card, CardContent, Avatar, Grid } from "@mui/material";
-import { ChangeCircle } from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
+import { Card, CardContent, ButtonBase } from "@mui/material";
 import React, { useContext } from "react";
 
 import { DetailDialogContext } from "./DocList";
-import { orange } from "@material-ui/core/colors";
+import { orange } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   item: {

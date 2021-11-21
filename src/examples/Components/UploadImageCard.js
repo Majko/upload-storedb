@@ -6,21 +6,21 @@ import VisDocument from "../../lib/visualize/VisDocument";
 import { useUploadFile } from "../../lib/aws/useUploadFile";
 import useDocumentType from "../../lib/visualize/useDocumentType";
 
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import TextField from "@material-ui/core/TextField";
-import { CardHeader, IconButton } from "@material-ui/core";
-import { DeleteOutlined } from "@material-ui/icons";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import TextField from "@mui/material/TextField";
+import { CardHeader, IconButton } from "@mui/material";
+import { DeleteOutlined } from "@mui/icons-material";
 
 
 /**
@@ -100,7 +100,7 @@ function UploadImageCard({ userData, file, removeHandler }) {
             onClick={() => {
               removeHandler(file);
             }}
-          >
+            size="large">
             <DeleteOutlined />
           </IconButton>
         }

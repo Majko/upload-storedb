@@ -6,10 +6,10 @@ import {
   Grid,
   IconButton,
   Typography,
-} from "@material-ui/core";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import { DeleteRounded } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core";
+} from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { DeleteRounded } from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -44,7 +44,7 @@ const DocumentDetail = ({ data, setDetail, removeData }) => {
             onClick={() => {
               setDetail(null);
             }}
-          >
+            size="large">
             <ArrowBackIosIcon />
           </IconButton>
         </Grid>
@@ -52,7 +52,7 @@ const DocumentDetail = ({ data, setDetail, removeData }) => {
           <Card>
             <CardHeader
               action={
-                <IconButton onClick={() => handleDelete(data)}>
+                <IconButton onClick={() => handleDelete(data)} size="large">
                   <DeleteRounded />
                 </IconButton>
               }

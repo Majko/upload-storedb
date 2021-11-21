@@ -1,6 +1,6 @@
-import { Grid, Typography } from "@material-ui/core";
-import { deepOrange } from "@material-ui/core/colors";
-import { makeStyles } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
+import { deepOrange, grey } from "@mui/material/colors";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   tag: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "left",
   },
   orange: {
-    color: theme.palette.getContrastText(deepOrange[500]),
+    color: grey[100],
     backgroundColor: deepOrange[500],
   },
 }));

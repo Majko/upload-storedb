@@ -1,8 +1,9 @@
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { Fab, IconButton, makeStyles } from "@material-ui/core";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Fab, IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Add } from "@material-ui/icons";
 import { AddDialogContext } from "./DocList";
 import { useContext } from "react";
@@ -12,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   fab: {
     margin: 0,
     top: "auto",
-    right: theme.spacing(2),
-    bottom: theme.spacing(2),
+    right: 5,
+    bottom: 5,
     left: "auto",
     position: "fixed",
   },

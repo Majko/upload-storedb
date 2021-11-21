@@ -3,7 +3,7 @@ import { Storage } from "aws-amplify";
 import VisDocument from "../../lib/visualize/VisDocument";
 import { useRemoveFile } from "../../lib/aws/removeFile";
 import { useFetchFile } from "../../lib/aws/useFetchFile";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 /**
  * @description Shows all my files on my bucket

@@ -1,24 +1,24 @@
 import { useHistory } from "react-router-dom";
 import { Fragment, useState } from "react";
 
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import { makeStyles } from "@mui/styles";
+import Typography from "@mui/material/Typography";
 
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Button } from "@material-ui/core";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Button } from "@mui/material";
 
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,7 +108,7 @@ function AppMenu({ userData, signedOut }) {
             aria-label="menu"
             onClick={toggleDrawer(true)}
             className={classes.menuButton}
-          >
+            size="large">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
@@ -121,7 +121,7 @@ function AppMenu({ userData, signedOut }) {
             aria-label="menu"
             onClick={signedOut}
             className={classes.menuButton}
-          >
+            size="large">
             <ExitToAppIcon />
           </IconButton>
           <Fragment key="left">
