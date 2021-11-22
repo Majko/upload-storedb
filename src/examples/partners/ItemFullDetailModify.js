@@ -1,4 +1,4 @@
-import { TextField, Button, Container, Grid  } from "@mui/material";
+import { TextField, Button, Container, Grid } from "@mui/material";
 import { useContext, useState } from "react";
 
 import { DetailDialogContext } from "../../lib/list/DocList"; //musime naimportovat Context na otvor/close Dialog
@@ -14,13 +14,18 @@ const ItemFullDetailModify = ({ item, modifyItem }) => {
 
   const handleModify = () => {
     if (formstate !== {}) {
-      // First we have to delete all properties that are inserted automatically
-      let myJson = formstate;
-      delete myJson.createdAt;
-      delete myJson.updatedAt;
-      delete myJson.owner;
-      modifyItem(myJson.id, myJson);
-      setDetailDialogOpen(false);
+      // eslint-disable-next-line no-restricted-globals
+      if (confirm("Skutočne si prajete dokumnet zmazať?")) {
+        // First we have to delete all properties that are inserted automatically
+        let myJson = formstate;
+        delete myJson.createdAt;
+        delete myJson.updatedAt;
+        delete myJson.owner;
+        modifyItem(myJson.id, myJson);
+        setDetailDialogOpen(false);
+      } else {
+        console.log('Modify canceled!');
+      }
     }
   };
 

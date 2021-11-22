@@ -6,11 +6,20 @@ import { DetailDialogContext } from "../../lib/list/DocList";
 const ItemFullDetailView = ({ item, deleteItem }) => {
   const { setDetailDialogOpen } = useContext(DetailDialogContext); // vyziadaj funkciu na zatvorenie
 
-const handleDelete = ()=>{
-  console.log('deleting:', item.id);
-  deleteItem(item.id)
-  setDetailDialogOpen(false)
-}
+  const handleDelete = () => {
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm("Skutočne si prajete dokemnet zmazať?")) {
+      console.log("deleting:", item.id);
+      try {
+        deleteItem(item.id);
+        setDetailDialogOpen(false);
+      } catch (error) {
+        alert("Vyskytla sa chyba:", error);
+      }
+    } else {
+      console.log("Delete canceled!");
+    }
+  };
 
   return (
     <div>
