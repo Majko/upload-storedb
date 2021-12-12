@@ -3,12 +3,12 @@ import { makeStyles } from "@mui/styles";
 import { Route, Switch } from "react-router";
 import { useHistory } from "react-router-dom";
 
-import { Auth } from "aws-amplify";
+import { Auth, Hub, API, graphqlOperation } from "aws-amplify";
 import AppMenu from "./AppMenu";
 import { createContext, useEffect, useState } from "react";
 
-import useFetchUserIdentity from "./useFetchUserIdentity";
 import useRegisterMyIdentityID from "./useRegisterMyIdentityID";
+import { listUserIdentitys } from "../../graphql/queries";
 
 export const UserContext = createContext();
 
@@ -31,14 +31,79 @@ const MainApp = ({ routesConfig }) => {
   const [userData, setUserData] = useState({});
   let history = useHistory();
 
-  // fetch all necessary user data
-  const {
-    username,
-    myIdentityId,
-    groupIdentityIds,
-    tenant,
-    myGroups,
-  } = useFetchUserIdentity();
+  useEffect(() => {
+    loadUserData();
+    // Hub.listen("auth", async (data) => {
+    //   console.log("Auth event: ", data.payload.event);
+    //   switch (data.payload.event) {
+    //     case "configured":
+    //       accessToken = await Auth.Auth.currentSession();
+    //       console.log('AccessToken: ', accessToken);
+    //       break;
+    //     case "auth":
+    //       accessToken = data.payload.data.signInUserSession.accessToken;
+    //       console.log('AccessToken: ', accessToken);
+    //       break;
+    //     default:
+    //       break;
+    //   }
+
+    //   const userInfo = await Auth.currentUserInfo();
+    //   // console.log("authInfo:", accessToken);
+    //   // console.log("userInfo:", userInfo);
+    //   const cognitogroups = accessToken.payload["cognito:groups"];
+    //   const tenant =
+    //     cognitogroups &&
+    //     cognitogroups.find((element) => element.startsWith("company:"));
+    //   // load all group's IdentityIDs (all having same tenant)
+    //   const groupUserIDs = await API.graphql(
+    //     graphqlOperation(listUserIdentitys),
+    //     {}
+    //   );
+    //   // check if my identiy already exists
+    //   const groupIdentityIDs = groupUserIDs.data.listUserIdentitys.items.map(
+    //     (item) => {
+    //       return item.identityID;
+    //     }
+    //   );
+    //   setUserData({
+    //     username: userInfo.username,
+    //     myIdentityId: userInfo.id,
+    //     groupIdentityIds: groupIdentityIDs,
+    //     tenant: tenant,
+    //     myGroups: cognitogroups,
+    //   });
+    // });
+  }, []);
+
+  const loadUserData = async () => {
+    const { accessToken } = await Auth.currentSession();
+    const userInfo = await Auth.currentUserInfo();
+    // console.log("authInfo:", accessToken);
+    // console.log("userInfo:", userInfo);
+    const cognitogroups = accessToken.payload["cognito:groups"];
+    const tenant = cognitogroups.find((element) =>
+      element.startsWith("company:")
+    );
+    // load all group's IdentityIDs (all having same tenant)
+    const groupUserIDs = await API.graphql(
+      graphqlOperation(listUserIdentitys),
+      {}
+    );
+    // check if my identiy already exists
+    const groupIdentityIDs = groupUserIDs.data.listUserIdentitys.items.map(
+      (item) => {
+        return item.identityID;
+      }
+    );
+    setUserData({
+      username: userInfo.username,
+      myIdentityId: userInfo.id,
+      groupIdentityIds: groupIdentityIDs,
+      tenant: tenant,
+      myGroups: cognitogroups,
+    });
+  };
 
   // Make sure my ID is registered in DB
   useRegisterMyIdentityID(
@@ -47,20 +112,10 @@ const MainApp = ({ routesConfig }) => {
     userData.tenant
   );
 
-  useEffect(() => {
-    setUserData({
-      username,
-      myIdentityId,
-      groupIdentityIds,
-      tenant,
-      myGroups,
-    });
-  }, [username, myIdentityId, groupIdentityIds, tenant, myGroups]);
-
   const signedOut = async () => {
     try {
       await Auth.signOut();
-      setUserData({ username: null });
+      setUserData(null);
       // reload the page
       history.go(0);
     } catch (error) {
@@ -73,9 +128,7 @@ const MainApp = ({ routesConfig }) => {
       {/* MainApp provides context for all children
         THe children will have to call  const user = useContext(UserContext);
         in order to get all user relevant data (in value below) */}
-      <UserContext.Provider
-        value={userData}
-      >
+      <UserContext.Provider value={userData}>
         <Container maxWidth="xl">
           <AppMenu
             signedOut={signedOut}
