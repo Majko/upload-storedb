@@ -7,7 +7,7 @@ import { createUserIdentity } from "../../graphql/mutations";
  * a new registration is made
  * @param {String} myUserIdentityId My AWS IdentityID
  * @param {String} groupIdentityIDs All group's members (tenant) IdentityIDs
- * @param {*String tenant My tenant - all comapanies users collected under a tenant
+ * @param {String} tenant My tenant - all comapanies users collected under a tenant
  */
 const useRegisterMyIdentityID = (
   myUserIdentityId,

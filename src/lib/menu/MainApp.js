@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { Route, Switch } from "react-router";
 import { useHistory } from "react-router-dom";
 
-import { Auth, Hub, API, graphqlOperation } from "aws-amplify";
+import { Auth, API, graphqlOperation } from "aws-amplify";
 import AppMenu from "./AppMenu";
 import { createContext, useEffect, useState } from "react";
 
@@ -33,54 +33,11 @@ const MainApp = ({ routesConfig }) => {
 
   useEffect(() => {
     loadUserData();
-    // Hub.listen("auth", async (data) => {
-    //   console.log("Auth event: ", data.payload.event);
-    //   switch (data.payload.event) {
-    //     case "configured":
-    //       accessToken = await Auth.Auth.currentSession();
-    //       console.log('AccessToken: ', accessToken);
-    //       break;
-    //     case "auth":
-    //       accessToken = data.payload.data.signInUserSession.accessToken;
-    //       console.log('AccessToken: ', accessToken);
-    //       break;
-    //     default:
-    //       break;
-    //   }
-
-    //   const userInfo = await Auth.currentUserInfo();
-    //   // console.log("authInfo:", accessToken);
-    //   // console.log("userInfo:", userInfo);
-    //   const cognitogroups = accessToken.payload["cognito:groups"];
-    //   const tenant =
-    //     cognitogroups &&
-    //     cognitogroups.find((element) => element.startsWith("company:"));
-    //   // load all group's IdentityIDs (all having same tenant)
-    //   const groupUserIDs = await API.graphql(
-    //     graphqlOperation(listUserIdentitys),
-    //     {}
-    //   );
-    //   // check if my identiy already exists
-    //   const groupIdentityIDs = groupUserIDs.data.listUserIdentitys.items.map(
-    //     (item) => {
-    //       return item.identityID;
-    //     }
-    //   );
-    //   setUserData({
-    //     username: userInfo.username,
-    //     myIdentityId: userInfo.id,
-    //     groupIdentityIds: groupIdentityIDs,
-    //     tenant: tenant,
-    //     myGroups: cognitogroups,
-    //   });
-    // });
   }, []);
 
   const loadUserData = async () => {
     const { accessToken } = await Auth.currentSession();
     const userInfo = await Auth.currentUserInfo();
-    // console.log("authInfo:", accessToken);
-    // console.log("userInfo:", userInfo);
     const cognitogroups = accessToken.payload["cognito:groups"];
     const tenant = cognitogroups.find((element) =>
       element.startsWith("company:")
@@ -104,8 +61,10 @@ const MainApp = ({ routesConfig }) => {
       myGroups: cognitogroups,
     });
   };
+  // TODO
+  // uloz moje data do localstore , urcit logiku
 
-  // Make sure my ID is registered in DB
+  // Make sure my ID is registered in DB (regiser me if I am not yet registered)
   useRegisterMyIdentityID(
     userData.myIdentityId,
     userData.groupIdentityIds,
@@ -118,6 +77,7 @@ const MainApp = ({ routesConfig }) => {
       setUserData(null);
       // reload the page
       history.go(0);
+      history.push('/')
     } catch (error) {
       console.log("error signing out: ", error);
     }

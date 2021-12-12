@@ -61,13 +61,13 @@ function AppMenu({ signedOut, routesConfig, title }) {
 
   const handleRedirect =()=>{
     return (
-      history.go(0)
+      // history.go(0)
+      history.push('/')
     )
   }
 
     //ziskaj user context
     const user = useContext(UserContext);
-    console.log("User data:", user);
 
   // menuItems is imported from external file
   const list = () => (
