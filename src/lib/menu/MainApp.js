@@ -36,8 +36,10 @@ const MainApp = ({ routesConfig }) => {
   }, []);
 
   const loadUserData = async () => {
-    const { accessToken } = await Auth.currentSession();
     const userInfo = await Auth.currentUserInfo();
+    console.log('User token: ', userInfo);
+    const { accessToken } = await Auth.currentSession();
+    console.log('Access token: ', accessToken);
     const cognitogroups = accessToken.payload["cognito:groups"];
     const tenant = cognitogroups.find((element) =>
       element.startsWith("company:")
